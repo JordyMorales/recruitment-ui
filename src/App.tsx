@@ -2,6 +2,9 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { createCustomTheme } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
+
+import RTL from './components/RTL';
+import SettingsDrawer from './components/SettingsDrawer';
 import useSettings from './hooks/useSettings';
 
 const App: React.FC = () => {
@@ -16,8 +19,11 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Button variant="contained">Hello World</Button>
+      <RTL direction={settings.direction}>
+        <CssBaseline />
+        <SettingsDrawer />
+        <Button variant="contained">Hello World</Button>
+      </RTL>
     </ThemeProvider>
   );
 };
