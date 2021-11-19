@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import useSettings from '../hooks/useSettings';
 import AdjustmentsIcon from '../icons/Adjustments';
-import { THEMES } from '../common';
+import { THEMES } from '../constants';
 
 const getValues = (settings) => ({
   compact: settings.compact,

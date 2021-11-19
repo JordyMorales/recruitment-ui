@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { THEMES } from '../common';
+import { THEMES } from '../constants';
 
 interface Settings {
   compact?: boolean;

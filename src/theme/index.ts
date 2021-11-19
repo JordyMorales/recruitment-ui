@@ -2,7 +2,7 @@ import { merge } from 'lodash';
 import { Theme, Direction } from '@mui/system';
 import { createTheme, ThemeOptions, responsiveFontSizes } from '@mui/material/styles';
 import { darkShadows, lightShadows } from './shadows';
-import { THEMES } from '../common';
+import { THEMES } from '../constants';
 
 interface ThemeConfig {
   direction?: Direction;
@@ -10,6 +10,7 @@ interface ThemeConfig {
   roundedCorners?: boolean;
   theme?: string;
 }
+
 
 const baseOptions: ThemeOptions = {
   direction: 'ltr',
@@ -131,6 +132,21 @@ const themesOptions: Record<string, ThemeOptions> = {
           },
         },
       },
+      MuiCssBaseline: {
+        styleOverrides: {
+          '*': {
+            '*::-webkit-scrollbar': {
+              width: '1px',
+            },
+            '*::-webkit-scrollbar-track': {
+              'background-color': '#FFFFFF',
+            },
+            '*::-webkit-scrollbar-thumb': {
+              'background-color': 'rgba(145, 158, 171, 0.24)',
+            },
+          },
+        },
+      },
     },
     palette: {
       action: {
@@ -147,7 +163,11 @@ const themesOptions: Record<string, ThemeOptions> = {
       mode: 'light',
       primary: {
         contrastText: '#ffffff',
-        main: '#01ab56',
+        main: '#4BBE86',
+      },
+      secondary: {
+        contrastText: '#ffffff',
+        main: '#d32f2f',
       },
       success: {
         contrastText: '#ffffff',
@@ -173,6 +193,21 @@ const themesOptions: Record<string, ThemeOptions> = {
           },
         },
       },
+      MuiCssBaseline: {
+        styleOverrides: {
+          '*': {
+            '*::-webkit-scrollbar': {
+              width: '1px',
+            },
+            '*::-webkit-scrollbar-track': {
+              'background-color': '#1c2531',
+            },
+            '*::-webkit-scrollbar-thumb': {
+              'background-color': 'rgba(145, 158, 171, 0.24)',
+            },
+          },
+        },
+      },
     },
     palette: {
       background: {
@@ -187,7 +222,11 @@ const themesOptions: Record<string, ThemeOptions> = {
       mode: 'dark',
       primary: {
         contrastText: '#ffffff',
-        main: '#01ab56',
+        main: '#4BBE86',
+      },
+      secondary: {
+        contrastText: '#ffffff',
+        main: '#d32f2f',
       },
       success: {
         contrastText: '#ffffff',

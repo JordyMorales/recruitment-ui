@@ -1,15 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { AuthProvider } from './contexts/FirebaseAuthContext';
 import { SettingsProvider } from './contexts/SettingsContext';
+import reportWebVitals from './reportWebVitals';
+import store from './store';
+import App from './App';
+import 'react-toastify/dist/ReactToastify.min.css';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SettingsProvider>
-      <App />
-    </SettingsProvider>
+    <HelmetProvider>
+      <SettingsProvider>
+        <BrowserRouter>
+          <AuthProvider>
+            <Provider store={store}>
+              <App />
+            </Provider>
+          </AuthProvider>
+        </BrowserRouter>
+      </SettingsProvider>
+    </HelmetProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

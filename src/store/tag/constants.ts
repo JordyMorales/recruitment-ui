@@ -1,0 +1,30 @@
+export const uiStuffTypes = {
+  SET_TAG: 'SET_TAG',
+  CLEAR_TAG: 'CLEAR_TAG',
+  SHOW_MODAL: 'SHOW_MODAL',
+  HIDE_MODAL: 'HIDE_MODAL',
+};
+
+export const createTagTypes = {
+  REQUEST: 'CREATE_TAG_REQUEST',
+  SUCCESS: 'CREATE_TAG_SUCCESS',
+  FAILURE: 'CREATE_TAG_FAILURE',
+};
+
+export const getAllTagsTypes = {
+  REQUEST: 'GET_ALL_TAGS_REQUEST',
+  SUCCESS: 'GET_ALL_TAGS_SUCCESS',
+  FAILURE: 'GET_ALL_TAGS_FAILURE',
+};
+
+export const getTagByIdTypes = {
+  REQUEST: 'GET_TAG_BY_ID_REQUEST',
+  SUCCESS: 'GET_TAG_BY_ID_SUCCESS',
+  FAILURE: 'GET_TAG_BY_ID_FAILURE',
+}
+
+export const updateTagTypes = {
+  REQUEST: 'UPDATE_TAG_REQUEST',
+  SUCCESS: 'UPDATE_TAG_SUCCESS',
+  FAILURE: 'UPDATE_TAG_FAILURE',
+};
