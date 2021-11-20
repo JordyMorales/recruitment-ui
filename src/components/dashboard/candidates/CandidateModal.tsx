@@ -18,18 +18,18 @@ import {
 } from '@mui/material';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import { RootState } from '../../../store/rootReducer';
-import { userActions } from '../../../store/user/actions';
+import { candidateActions } from '../../../store/candidate/actions';
 import { roles, states } from '../../../constants';
 
-export interface UserModalProps {
+export interface CandidateModalProps {
   isOpen: boolean;
   handleClose: any;
   updateForm: boolean;
 }
 
-const UserModal: React.FC<UserModalProps> = (props) => {
+const CandidateModal: React.FC<CandidateModalProps> = (props) => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state.user);
+  const { candidate } = useSelector((state: RootState) => state.candidate);
 
   const getRegionOptions = (country) => {
     const index = CountryRegionData.findIndex((region) => region[0] === country);
@@ -40,21 +40,21 @@ const UserModal: React.FC<UserModalProps> = (props) => {
     <Dialog fullWidth maxWidth="md" open={props.isOpen} onClose={props.handleClose}>
       <Formik
         initialValues={{
-          userId: user.userId || '',
-          firstName: user.firstName || '',
-          middleName: user.middleName || '',
-          lastName: user.lastName || '',
-          email: user.email || '',
-          phone: user.phone || '',
-          dateOfBirth: user.dateOfBirth || '',
-          country: user.country || '',
-          city: user.city || '',
-          address: user.address || '',
-          photoUrl: user.photoUrl || '',
-          resumeUrl: user.resumeUrl || '',
-          jobTitle: user.jobTitle || '',
-          role: user.role || 'CANDIDATE',
-          state: user.state || 'INACTIVE',
+          candidateId: candidate.candidateId || '',
+          firstName: candidate.firstName || '',
+          middleName: candidate.middleName || '',
+          lastName: candidate.lastName || '',
+          email: candidate.email || '',
+          phone: candidate.phone || '',
+          dateOfBirth: candidate.dateOfBirth || '',
+          country: candidate.country || '',
+          city: candidate.city || '',
+          address: candidate.address || '',
+          photoUrl: candidate.photoUrl || '',
+          resumeUrl: candidate.resumeUrl || '',
+          jobTitle: candidate.jobTitle || '',
+          role: candidate.role || 'CANDIDATE',
+          state: candidate.state || 'INACTIVE',
           submit: null,
         }}
         validationSchema={Yup.object().shape({
@@ -75,9 +75,9 @@ const UserModal: React.FC<UserModalProps> = (props) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }): Promise<void> => {
           try {
-            user.userId
-              ? dispatch(userActions.updateUserRequest(values))
-              : dispatch(userActions.createUserRequest(values));
+            candidate.candidateId
+              ? dispatch(candidateActions.updateCandidateRequest(values))
+              : dispatch(candidateActions.createCandidateRequest(values));
 
             setStatus({ success: true });
             setSubmitting(false);
@@ -102,7 +102,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
         }): JSX.Element => (
           <form onSubmit={handleSubmit}>
             <Box sx={{ p: 3 }}>
-              <DialogTitle id="form-dialog-title">User</DialogTitle>
+              <DialogTitle id="form-dialog-title">Candidate</DialogTitle>
               <DialogContent>
                 <Grid container spacing={3}>
                   <Grid item md={6} xs={12}>
@@ -298,4 +298,4 @@ const UserModal: React.FC<UserModalProps> = (props) => {
   );
 };
 
-export default UserModal;
+export default CandidateModal;

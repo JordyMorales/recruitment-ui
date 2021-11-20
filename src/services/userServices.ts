@@ -10,7 +10,6 @@ class User {
   createUser = async (payload: any): Promise<any> => {
     try {
       const res = await this.axios.post('/users', payload);
-      console.log("🚀 ~ file: userServices.ts ~ line 14 ~ User ~ createUser= ~ res.data.user", res.data.user)
       return res.data.user;
     } catch (error) {
       throw error;
@@ -20,7 +19,6 @@ class User {
   getAllUsers = async (): Promise<any> => {
     try {
       const res = await this.axios.get('/users');
-      console.log("🚀 ~ file: userServices.ts ~ line 23 ~ User ~ getAllUsers= ~ res.data.users", res.data.users)
       return res.data.users;
     } catch (error) {
       throw error;

@@ -1,3 +1,4 @@
+import { Chip } from '@mui/material';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
 const color: any = {
@@ -12,18 +13,14 @@ export const columns: GridColDef[] = [
     headerName: 'Tag',
     width: 250,
     renderCell: (params: GridRenderCellParams<any>) => (
-      <button
+      <Chip
+        size="small"
+        label={params.value}
         style={{
-          background: params.row.color,
-          color: '#fff',
-          border: 'none',
-          borderRadius: '16px',
-          height: '28px',
-          padding: '0 12px',
+          backgroundColor: params.row.color,
+          color: '#FFFFFF',
         }}
-      >
-        {params.value}
-      </button>
+      />
     ),
   },
   {
@@ -31,18 +28,14 @@ export const columns: GridColDef[] = [
     headerName: 'Active',
     width: 100,
     renderCell: (params: GridRenderCellParams<any>) => (
-      <button
+      <Chip
+        size="small"
+        label={params.value ? 'ACTIVE' : 'INACTIVE'}
         style={{
           background: color[params.value],
-          color: '#fff',
-          border: 'none',
-          borderRadius: '16px',
-          height: '28px',
-          padding: '0 12px',
+          color: '#FFFFFF',
         }}
-      >
-        {params.value ? 'ACTIVE' : 'INACTIVE'}
-      </button>
+      />
     ),
   },
 ];

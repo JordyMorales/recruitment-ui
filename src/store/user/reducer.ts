@@ -12,9 +12,9 @@ import { UserState, emptyUser } from './types';
 const initialState: UserState = {
   isOpen: false,
   shouldClose: false,
-  profile: emptyUser,
-  error: '',
   isLoading: false,
+  error: '',
+  profile: emptyUser,
   user: emptyUser,
   list: {
     isLoading: false,
@@ -49,6 +49,7 @@ const userReducer = (state = initialState, action: any) => {
         ...state,
         isOpen: false,
         shouldClose: false,
+        user: emptyUser,
       };
 
     case createUserTypes.REQUEST:

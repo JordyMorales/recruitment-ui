@@ -1,8 +1,8 @@
 export const uiStuffTypes = {
   SET_USER: 'SET_USER',
   CLEAR_USER: 'CLEAR_USER',
-  SHOW_MODAL: 'SHOW_MODAL',
-  HIDE_MODAL: 'HIDE_MODAL',
+  SHOW_MODAL: 'SHOW_USER_MODAL',
+  HIDE_MODAL: 'HIDE_USER_MODAL',
 };
 
 export const createUserTypes = {

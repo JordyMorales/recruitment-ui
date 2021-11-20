@@ -3,14 +3,14 @@ import { Helmet } from 'react-helmet-async';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Breadcrumbs, Button, Container, Grid, Link, Typography } from '@mui/material';
-import { RootState } from '../../store/rootReducer';
-import { userActions } from '../../store/user/actions';
-import { UserListTable, UserModal } from '../../components/dashboard/users';
+import { RootState } from '../../../store/rootReducer';
+import { userActions } from '../../../store/user/actions';
+import { UserListTable, UserModal } from '../../../components/dashboard/users';
 
-import useMounted from '../../hooks/useMounted';
-import useSettings from '../../hooks/useSettings';
-import ChevronRightIcon from '../../icons/ChevronRight';
-import PlusIcon from '../../icons/Plus';
+import useMounted from '../../../hooks/useMounted';
+import useSettings from '../../../hooks/useSettings';
+import ChevronRightIcon from '../../../icons/ChevronRight';
+import PlusIcon from '../../../icons/Plus';
 
 const UserList: React.FC = () => {
   const dispatch = useDispatch();
@@ -25,10 +25,10 @@ const UserList: React.FC = () => {
   } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    if (mounted) {
+    if (mounted && !users.length) {
       dispatch(userActions.getAllUsersRequest());
     }
-  }, [dispatch, mounted]);
+  }, [dispatch, mounted, users.length]);
 
   const handleClose = useCallback(() => {
     dispatch(userActions.hiModal());
@@ -80,10 +80,7 @@ const UserList: React.FC = () => {
               sx={{ mt: 1 }}
             >
               <Link color="textPrimary" component={RouterLink} to="/app" variant="subtitle2">
-                App
-              </Link>
-              <Link color="textPrimary" component={RouterLink} to="/app" variant="subtitle2">
-              Settings
+                Dashboard
               </Link>
               <Typography color="textSecondary" variant="subtitle2">
                 Users
@@ -91,7 +88,7 @@ const UserList: React.FC = () => {
             </Breadcrumbs>
           </Box>
           <Box sx={{ mt: 3 }}>
-            <UserListTable users={users} isLoading={isLoading}/>
+            <UserListTable users={users} isLoading={isLoading} />
           </Box>
         </Container>
       </Box>

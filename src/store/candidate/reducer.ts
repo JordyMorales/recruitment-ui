@@ -1,34 +1,40 @@
-import { uiStuffTypes, createTagTypes, getAllTagsTypes, getTagByIdTypes, updateTagTypes } from './constants';
+import {
+  uiStuffTypes,
+  createCandidateTypes,
+  getAllCandidatesTypes,
+  getCandidateByIdTypes,
+  updateCandidateTypes,
+} from './constants';
 
-import { TagState, emptyTag } from './types';
-const initialState: TagState = {
+import { CandidateState, emptyCandidate } from './types';
+const initialState: CandidateState = {
   isOpen: false,
   shouldClose: false,
   error: '',
   isLoading: false,
-  tag: emptyTag,
+  candidate: emptyCandidate,
   list: {
     isLoading: false,
     totalItems: 0,
-    tags: [],
+    candidates: [],
     totalPages: 0,
     currentPage: 0,
   },
 };
 
-const tagReducer = (state = initialState, action: any) => {
+const candidateReducer = (state = initialState, action: any) => {
   const { type, payload } = action;
 
   switch (type) {
-    case uiStuffTypes.SET_TAG:
+    case uiStuffTypes.SET_CANDIDATE:
       return {
         ...state,
-        tag: payload,
+        candidate: payload,
       };
-    case uiStuffTypes.CLEAR_TAG:
+    case uiStuffTypes.CLEAR_CANDIDATE:
       return {
         ...state,
-        tag: emptyTag,
+        candidate: emptyCandidate,
       };
     case uiStuffTypes.SHOW_MODAL:
       return {
@@ -40,36 +46,36 @@ const tagReducer = (state = initialState, action: any) => {
         ...state,
         isOpen: false,
         shouldClose: false,
-        tag: emptyTag,
+        candidate: emptyCandidate,
       };
 
-    case createTagTypes.REQUEST:
+    case createCandidateTypes.REQUEST:
       return {
         ...state,
         isLoading: true,
       };
 
-    case createTagTypes.SUCCESS:
+    case createCandidateTypes.SUCCESS:
       return {
         ...state,
-        tag: emptyTag,
+        candidate: emptyCandidate,
         list: {
           ...state.list,
           totalItems: state.list.totalItems + 1,
-          tags: [payload, ...state.list.tags],
+          candidates: [payload, ...state.list.candidates],
         },
         isLoading: false,
         shouldClose: true,
       };
 
-    case createTagTypes.FAILURE:
+    case createCandidateTypes.FAILURE:
       return {
         ...state,
         error: payload,
         isLoading: false,
       };
 
-    case getAllTagsTypes.REQUEST:
+    case getAllCandidatesTypes.REQUEST:
       return {
         ...state,
         list: {
@@ -78,16 +84,16 @@ const tagReducer = (state = initialState, action: any) => {
         },
       };
 
-    case getAllTagsTypes.SUCCESS:
+    case getAllCandidatesTypes.SUCCESS:
       return {
         ...state,
         list: {
-          tags: payload,
+          candidates: payload,
           isLoading: false,
         },
       };
 
-    case getAllTagsTypes.FAILURE:
+    case getAllCandidatesTypes.FAILURE:
       return {
         ...state,
         error: payload,
@@ -97,50 +103,50 @@ const tagReducer = (state = initialState, action: any) => {
         },
       };
 
-    case getTagByIdTypes.REQUEST:
+    case getCandidateByIdTypes.REQUEST:
       return {
         ...state,
         isLoading: true,
       };
 
-    case getTagByIdTypes.SUCCESS:
+    case getCandidateByIdTypes.SUCCESS:
       return {
         ...state,
-        tag: payload,
+        candidate: payload,
         isLoading: false,
       };
 
-    case getTagByIdTypes.FAILURE:
+    case getCandidateByIdTypes.FAILURE:
       return {
         ...state,
         error: payload,
         isLoading: false,
       };
 
-    case updateTagTypes.REQUEST:
+    case updateCandidateTypes.REQUEST:
       return {
         ...state,
         isLoading: true,
       };
 
-    case updateTagTypes.SUCCESS:
-      const index = state.list.tags.findIndex((tag) => tag.tagId === payload.tagId);
+    case updateCandidateTypes.SUCCESS:
+      const index = state.list.candidates.findIndex((candidate) => candidate.candidateId === payload.candidateId);
       return {
         ...state,
-        tag: emptyTag,
+        candidate: emptyCandidate,
         list: {
           ...state.list,
-          tags: [
-            ...state.list.tags.slice(0, index),
+          candidates: [
+            ...state.list.candidates.slice(0, index),
             { ...state[index], ...payload },
-            ...state.list.tags.slice(index + 1),
+            ...state.list.candidates.slice(index + 1),
           ],
         },
         isLoading: false,
         shouldClose: true,
       };
 
-    case updateTagTypes.FAILURE:
+    case updateCandidateTypes.FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -152,4 +158,4 @@ const tagReducer = (state = initialState, action: any) => {
   }
 };
 
-export default tagReducer;
+export default candidateReducer;

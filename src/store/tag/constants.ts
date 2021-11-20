@@ -1,8 +1,8 @@
 export const uiStuffTypes = {
   SET_TAG: 'SET_TAG',
   CLEAR_TAG: 'CLEAR_TAG',
-  SHOW_MODAL: 'SHOW_MODAL',
-  HIDE_MODAL: 'HIDE_MODAL',
+  SHOW_MODAL: 'SHOW_TAG_MODAL',
+  HIDE_MODAL: 'HIDE_TAG_MODAL',
 };
 
 export const createTagTypes = {

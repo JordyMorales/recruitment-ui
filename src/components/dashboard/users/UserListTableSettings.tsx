@@ -1,3 +1,4 @@
+import { Chip } from '@mui/material';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import parsePhoneNumber from 'libphonenumber-js';
 
@@ -16,7 +17,7 @@ const getFlag = (countryCode: any) => {
   return String.fromCodePoint(...codePoints);
 };
 
-export const columns: GridColDef[] = [  
+export const columns: GridColDef[] = [
   { field: 'userId', headerName: 'Id', width: 150, hide: true },
   { field: 'firstName', headerName: 'FirstName', width: 100 },
   { field: 'middleName', headerName: 'MiddleName', width: 100, hide: true },
@@ -26,20 +27,13 @@ export const columns: GridColDef[] = [
     headerName: 'Email',
     width: 280,
     renderCell: (params: GridRenderCellParams<any>) => (
-      <button
-        style={{
-          background: '#6b778c',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '16px',
-          height: '28px',
-          cursor: 'pointer',
-          padding: '0 12px',
-        }}
+      <Chip
+        size="small"
+        label={params.value}
+        color="default"
+        variant="outlined"
         onClick={() => window.open(`mailto:${params.value}`)}
-      >
-        {params.value}
-      </button>
+      />
     ),
   },
   {
@@ -69,18 +63,7 @@ export const columns: GridColDef[] = [
     headerName: 'Role',
     width: 120,
     renderCell: (params: GridRenderCellParams<any>) => (
-      <button
-        style={{
-          background: '#293142',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '16px',
-          height: '28px',
-          padding: '0 12px',
-        }}
-      >
-        {params.value}
-      </button>
+      <Chip size="small" label={params.value} color="default" />
     ),
   },
   {
@@ -88,18 +71,14 @@ export const columns: GridColDef[] = [
     headerName: 'State',
     width: 120,
     renderCell: (params: GridRenderCellParams<any>) => (
-      <button
+      <Chip
+        size="small"
+        label={params.value}
         style={{
           background: stateColor[params.value],
-          color: '#fff',
-          border: 'none',
-          borderRadius: '16px',
-          height: '28px',
-          padding: '0 12px',
+          color: '#FFFFFF',
         }}
-      >
-        {params.value}
-      </button>
+      />
     ),
   },
 ];

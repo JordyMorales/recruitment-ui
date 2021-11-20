@@ -11,7 +11,6 @@ interface ThemeConfig {
   theme?: string;
 }
 
-
 const baseOptions: ThemeOptions = {
   direction: 'ltr',
   components: {
@@ -139,10 +138,10 @@ const themesOptions: Record<string, ThemeOptions> = {
               width: '1px',
             },
             '*::-webkit-scrollbar-track': {
-              'background-color': '#FFFFFF',
+              backgroundColor: '#FFFFFF',
             },
             '*::-webkit-scrollbar-thumb': {
-              'background-color': 'rgba(145, 158, 171, 0.24)',
+              backgroundColor: 'rgba(145, 158, 171, 0.24)',
             },
           },
         },
@@ -200,10 +199,10 @@ const themesOptions: Record<string, ThemeOptions> = {
               width: '1px',
             },
             '*::-webkit-scrollbar-track': {
-              'background-color': '#1c2531',
+              backgroundColor: '#1c2531',
             },
             '*::-webkit-scrollbar-thumb': {
-              'background-color': 'rgba(145, 158, 171, 0.24)',
+              backgroundColor: 'rgba(145, 158, 171, 0.24)',
             },
           },
         },

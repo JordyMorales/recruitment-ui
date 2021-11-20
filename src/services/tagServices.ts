@@ -10,7 +10,6 @@ class Tag {
   createTag = async (payload: any): Promise<any> => {
     try {
       const res = await this.axios.post('/tags', payload);
-      console.log("🚀 ~ file: tagServices.ts ~ line 14 ~ Tag ~ createTag= ~ res.data.tag", res.data.tag)
       return res.data.tag;
     } catch (error) {
       throw error;
@@ -20,7 +19,6 @@ class Tag {
   getAllTags = async (): Promise<any> => {
     try {
       const res = await this.axios.get('/tags');
-      console.log("🚀 ~ file: tagServices.ts ~ line 23 ~ Tag ~ getAllTags= ~ res.data.tags", res.data.tags)
       return res.data.tags;
     } catch (error) {
       throw error;

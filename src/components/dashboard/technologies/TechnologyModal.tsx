@@ -44,8 +44,8 @@ const TechnologyModal: React.FC<TechnologyModalProps> = (props) => {
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }): Promise<void> => {
           try {
             technology.technologyId
-              ? dispatch(technologyActions.updateTechnologyRequest({ ...values }))
-              : dispatch(technologyActions.createTechnologyRequest({ ...values }));
+              ? dispatch(technologyActions.updateTechnologyRequest(values))
+              : dispatch(technologyActions.createTechnologyRequest(values));
 
             setStatus({ success: true });
             setSubmitting(false);

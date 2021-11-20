@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { styled } from '@mui/system';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -15,7 +14,7 @@ import {
   TextField,
   Switch,
 } from '@mui/material';
-import { CompactPicker, ChromePicker } from 'react-color';
+import { SketchPicker } from 'react-color';
 import { RootState } from '../../../store/rootReducer';
 import { tagActions } from '../../../store/tag/actions';
 import { Typography } from '@material-ui/core';
@@ -30,7 +29,6 @@ const TagModal: React.FC<TagModalProps> = (props) => {
   const dispatch = useDispatch();
   const { tag } = useSelector((state: RootState) => state.tag);
 
-  const [color, setColor] = useState(tag.color || '#FFF');
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   return (
@@ -39,18 +37,20 @@ const TagModal: React.FC<TagModalProps> = (props) => {
         initialValues={{
           tagId: tag.tagId || '',
           name: tag.name || '',
+          color: tag.color || '#FFF',
           isActive: tag.isActive,
           submit: null,
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string().max(100).required(),
+          color: Yup.string().max(15).required(),
           isActive: Yup.string().max(100),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }): Promise<void> => {
           try {
             tag.tagId
-              ? dispatch(tagActions.updateTagRequest({ ...values, color }))
-              : dispatch(tagActions.createTagRequest({ ...values, color }));
+              ? dispatch(tagActions.updateTagRequest(values))
+              : dispatch(tagActions.createTagRequest(values));
 
             setStatus({ success: true });
             setSubmitting(false);
@@ -63,7 +63,16 @@ const TagModal: React.FC<TagModalProps> = (props) => {
           }
         }}
       >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }): JSX.Element => (
+        {({
+          errors,
+          handleBlur,
+          handleChange,
+          handleSubmit,
+          isSubmitting,
+          setFieldValue,
+          touched,
+          values,
+        }): JSX.Element => (
           <form onSubmit={handleSubmit}>
             <Box sx={{ p: 3 }}>
               <DialogTitle id="form-dialog-title">Tag</DialogTitle>
@@ -81,9 +90,6 @@ const TagModal: React.FC<TagModalProps> = (props) => {
                       required
                       value={values.name}
                       variant="standard"
-                      InputProps={{
-                        className: '#4BBE86',
-                      }}
                     />
                   </Grid>
                   <Grid item md={6} xs={12}>
@@ -94,25 +100,20 @@ const TagModal: React.FC<TagModalProps> = (props) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       required
-                      value={color}
-                      InputProps={{
-                        classes: {
-                          input: color,
-                        },
-                      }}
+                      value={values.color}
                       variant="standard"
                       onClick={() => setDisplayColorPicker(true)}
+                      sx={{ input: { color: values.color } }}
                     />
                     {displayColorPicker ? (
-                      <div style={{ position: 'absolute', zIndex: '4' }}>
+                      <div style={{ position: 'fixed', zIndex: '3' }}>
                         <div
                           style={{ position: 'fixed', top: '0px', right: '0px', bottom: '0px', left: '0px' }}
+                          onClick={() => setDisplayColorPicker(false)}
                         />
-                        <CompactPicker
-                          onChange={({ hex }: any) => {
-                            setColor(hex);
-                            setDisplayColorPicker(false);
-                          }}
+                        <SketchPicker
+                          color={values.color}
+                          onChange={({ hex }) => setFieldValue('color', hex)}
                         />
                       </div>
                     ) : null}

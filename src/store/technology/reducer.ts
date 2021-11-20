@@ -20,7 +20,7 @@ const initialState: TechnologyState = {
     totalPages: 0,
     currentPage: 0,
   },
-}; 
+};
 
 const technologyReducer = (state = initialState, action: any) => {
   const { type, payload } = action;
@@ -46,6 +46,7 @@ const technologyReducer = (state = initialState, action: any) => {
         ...state,
         isOpen: false,
         shouldClose: false,
+        technology: emptyTechnology,
       };
 
     case createTechnologyTypes.REQUEST:

@@ -3,16 +3,16 @@ import { Helmet } from 'react-helmet-async';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Breadcrumbs, Button, Container, Grid, Link, Typography } from '@mui/material';
-import { RootState } from '../../store/rootReducer';
-import { technologyActions } from '../../store/technology/actions';
-import { TechnologyListTable, TechnologyModal } from '../../components/dashboard/technologies';
+import { RootState } from '../../../store/rootReducer';
+import { tagActions } from '../../../store/tag/actions';
+import { TagListTable, TagModal } from '../../../components/dashboard/tags';
 
-import useMounted from '../../hooks/useMounted';
-import useSettings from '../../hooks/useSettings';
-import ChevronRightIcon from '../../icons/ChevronRight';
-import PlusIcon from '../../icons/Plus';
+import useMounted from '../../../hooks/useMounted';
+import useSettings from '../../../hooks/useSettings';
+import ChevronRightIcon from '../../../icons/ChevronRight';
+import PlusIcon from '../../../icons/Plus';
 
-const TechnologyList: React.FC = () => {
+const TagList: React.FC = () => {
   const dispatch = useDispatch();
 
   const mounted = useMounted();
@@ -21,17 +21,17 @@ const TechnologyList: React.FC = () => {
   const {
     isOpen,
     shouldClose,
-    list: { technologies, isLoading },
-  } = useSelector((state: RootState) => state.technology);
+    list: { tags, isLoading },
+  } = useSelector((state: RootState) => state.tag);
 
   useEffect(() => {
-    if (mounted) {
-      dispatch(technologyActions.getAllTechnologiesRequest());
+    if (mounted && !tags.length ) {
+      dispatch(tagActions.getAllTagsRequest());
     }
-  }, [dispatch, mounted]);
+  }, [dispatch, mounted, tags.length]);
 
   const handleClose = useCallback(() => {
-    dispatch(technologyActions.hiModal());
+    dispatch(tagActions.hiModal());
   }, [dispatch]);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const TechnologyList: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard: Technology List</title>
+        <title>Dashboard: Tag List</title>
       </Helmet>
       <Box
         sx={{
@@ -56,7 +56,7 @@ const TechnologyList: React.FC = () => {
           <Grid container justifyContent="space-between" spacing={3}>
             <Grid item>
               <Typography color="textPrimary" variant="h5">
-                Technologies
+                Tags
               </Typography>
             </Grid>
             <Grid item>
@@ -65,10 +65,10 @@ const TechnologyList: React.FC = () => {
                   color="primary"
                   startIcon={<PlusIcon />}
                   sx={{ m: 1 }}
-                  onClick={() => dispatch(technologyActions.showModal())}
+                  onClick={() => dispatch(tagActions.showModal())}
                   variant="contained"
                 >
-                  New Technology
+                  New Tag
                 </Button>
               </Box>
             </Grid>
@@ -80,24 +80,21 @@ const TechnologyList: React.FC = () => {
               sx={{ mt: 1 }}
             >
               <Link color="textPrimary" component={RouterLink} to="/app" variant="subtitle2">
-                App
-              </Link>
-              <Link color="textPrimary" component={RouterLink} to="/app" variant="subtitle2">
-                Settings
+                Dashboard
               </Link>
               <Typography color="textSecondary" variant="subtitle2">
-                Technologies
+                Tags
               </Typography>
             </Breadcrumbs>
           </Box>
           <Box sx={{ mt: 3 }}>
-            <TechnologyListTable technologies={technologies} isLoading={isLoading}/>
+            <TagListTable tags={tags} isLoading={isLoading} />
           </Box>
         </Container>
       </Box>
-      <TechnologyModal isOpen={isOpen} handleClose={handleClose} updateForm={false} />
+      <TagModal isOpen={isOpen} handleClose={handleClose} updateForm={false} />
     </>
   );
 };
 
-export default TechnologyList;
+export default TagList;

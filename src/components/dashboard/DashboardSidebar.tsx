@@ -18,6 +18,8 @@ import UsersIcon from '../../icons/Users';
 import Logo from '../Logo';
 import Scrollbar from '../Scrollbar';
 import NavSection from '../NavSection';
+import Guard from '../Guard';
+import { Role } from '../../types/user';
 
 interface DashboardSidebarProps {
   onMobileClose: () => void;
@@ -34,6 +36,7 @@ const sections = [
         icon: <ChartSquareBarIcon fontSize="small" />,
       },
     ],
+    roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER', 'EMPLOYEE', 'CANDIDATE'] as Role[],
   },
   {
     title: 'Management',
@@ -46,12 +49,15 @@ const sections = [
           {
             title: 'List',
             path: '/app/candidates',
+            roles: ['ADMIN', 'CANDIDATE'] as Role[],
           },
           {
             title: 'Create',
             path: '/app/candidates/new',
+            roles: ['ADMIN'] as Role[],
           },
         ],
+        roles: ['ADMIN', 'RECRUITER', 'CANDIDATE'] as Role[],
       },
       {
         title: 'Jobs',
@@ -61,12 +67,15 @@ const sections = [
           {
             title: 'List',
             path: '/app/jobs',
+            roles: ['ADMIN'] as Role[],
           },
           {
             title: 'Create',
             path: '/app/jobs/new',
+            roles: ['ADMIN'] as Role[],
           },
         ],
+        roles: ['ADMIN'] as Role[],
       },
       {
         title: 'Interviews',
@@ -76,12 +85,15 @@ const sections = [
           {
             title: 'List',
             path: '/app/interviews',
+            roles: ['ADMIN', 'CANDIDATE'] as Role[],
           },
           {
             title: 'Create',
             path: '/app/interviews/new',
+            roles: ['ADMIN'] as Role[],
           },
         ],
+        roles: ['ADMIN', 'CANDIDATE'] as Role[],
       },
     ],
   },
@@ -92,18 +104,22 @@ const sections = [
         title: 'Users',
         path: '/app/users',
         icon: <ManageAccountIcon fontSize="small" />,
+        roles: ['ADMIN'] as Role[],
       },
       {
         title: 'Technologies',
         path: '/app/technologies',
         icon: <CodeIcon fontSize="small" />,
+        roles: ['ADMIN', 'RECRUITER'] as Role[],
       },
       {
         title: 'Tags',
         path: '/app/tags',
         icon: <TagsIcon fontSize="small" />,
+        roles: ['ADMIN', 'RECRUITER'] as Role[],
       },
     ],
+    roles: ['ADMIN', 'RECRUITER'] as Role[],
   },
 ];
 
@@ -130,6 +146,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   const content = (
@@ -199,16 +216,17 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
         <Divider />
         <Box sx={{ p: 2 }}>
           {sections.map((section) => (
-            <NavSection
-              key={section.title}
-              pathname={location.pathname}
-              sx={{
-                '& + &': {
-                  mt: 3,
-                },
-              }}
-              {...section}
-            />
+            <Guard roles={section.roles} key={section.title}>
+              <NavSection
+                pathname={location.pathname}
+                sx={{
+                  '& + &': {
+                    mt: 3,
+                  },
+                }}
+                {...section}
+              />
+            </Guard>
           ))}
         </Box>
         <Divider />
