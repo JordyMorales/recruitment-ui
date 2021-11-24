@@ -6,7 +6,7 @@ import services from '../../services';
 import {
   createTagTypes,
   getAllTagsTypes,
-  getTagByIdTypes,
+  getActiveTagsTypes,
   updateTagTypes,
 } from './constants';
 
@@ -32,13 +32,13 @@ function* getAllTags(): any {
   }
 }
 
-function* getTagById({ payload }: any): any {
+function* getActiveTags(): any {
   try {
-    const res = yield call([services.tag, 'getTagById'], payload);
-    yield put(tagActions.getTagByIdSuccess(res));
+    const res = yield call([services.tag, 'getActiveTags']);
+    yield put(tagActions.getActiveTagsSuccess(res));
   } catch (error: any) {
-    console.error('function*getAllTags -> error', error);
-    yield put(tagActions.getTagByIdFailure(error));
+    console.error('function*getActiveTags -> error', error);
+    yield put(tagActions.getActiveTagsFailure(error));
   }
 }
 
@@ -57,7 +57,7 @@ function* updateTag({ payload }: AnyAction): any {
 function* TagSaga() {
   yield takeLatest(createTagTypes.REQUEST, createTag);
   yield takeLatest(getAllTagsTypes.REQUEST, getAllTags);
-  yield takeLatest(getTagByIdTypes.REQUEST, getTagById);
+  yield takeLatest(getActiveTagsTypes.REQUEST, getActiveTags);
   yield takeLatest(updateTagTypes.REQUEST, updateTag);
 }
 

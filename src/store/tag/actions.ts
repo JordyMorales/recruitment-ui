@@ -2,7 +2,7 @@ import {
   uiStuffTypes,
   createTagTypes,
   getAllTagsTypes,
-  getTagByIdTypes,
+  getActiveTagsTypes,
   updateTagTypes,
 } from './constants';
 
@@ -43,16 +43,16 @@ export const tagActions = {
     type: getAllTagsTypes.FAILURE,
     payload: error,
   }),
-  getTagByIdRequest: (payload: any) => ({
-    type: getTagByIdTypes.REQUEST,
+
+  getActiveTagsRequest: () => ({
+    type: getActiveTagsTypes.REQUEST,
+  }),
+  getActiveTagsSuccess: (payload: any) => ({
+    type: getActiveTagsTypes.SUCCESS,
     payload,
   }),
-  getTagByIdSuccess: (payload: any) => ({
-    type: getTagByIdTypes.SUCCESS,
-    payload,
-  }),
-  getTagByIdFailure: (error: string) => ({
-    type: getTagByIdTypes.FAILURE,
+  getActiveTagsFailure: (error: string) => ({
+    type: getActiveTagsTypes.FAILURE,
     payload: error,
   }),
   updateTagRequest: (payload: any) => ({

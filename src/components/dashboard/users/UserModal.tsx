@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 import { CountryRegionData } from 'react-country-region-selector';
 import { DatePicker } from '@mui/lab';
@@ -77,7 +78,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
           try {
             user.userId
               ? dispatch(userActions.updateUserRequest(values))
-              : dispatch(userActions.createUserRequest(values));
+              : dispatch(userActions.createUserRequest({ ...values, userId: uuidv4() }));
 
             setStatus({ success: true });
             setSubmitting(false);

@@ -21,14 +21,14 @@ const UserList: React.FC = () => {
   const {
     isOpen,
     shouldClose,
-    list: { users, isLoading },
+    list: { users, isLoading, initialLoading },
   } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    if (mounted && !users.length) {
+    if (mounted && initialLoading) {
       dispatch(userActions.getAllUsersRequest());
     }
-  }, [dispatch, mounted, users.length]);
+  }, [dispatch, mounted, initialLoading]);
 
   const handleClose = useCallback(() => {
     dispatch(userActions.hiModal());

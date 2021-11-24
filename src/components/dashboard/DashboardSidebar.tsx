@@ -3,22 +3,20 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { Avatar, Box, Divider, Drawer, Link, Typography, Theme, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/system';
-
 import useAuth from '../../hooks/useAuth';
-
-import CalendarIcon from '../../icons/Calendar';
-import ChartSquareBarIcon from '../../icons/ChartSquareBar';
-
-import TagsIcon from '../../icons/Tags';
-import CodeIcon from '../../icons/Code';
-import ShoppingCartIcon from '../../icons/ShoppingCart';
-import ManageAccountIcon from '../../icons/ManageAccount';
-import UsersIcon from '../../icons/Users';
-
-import Logo from '../Logo';
 import Scrollbar from '../Scrollbar';
 import NavSection from '../NavSection';
 import Guard from '../Guard';
+
+import Logo from '../Logo';
+import HomeIcon from '../../icons/Home';
+import CodeIcon from '../../icons/Code';
+import UsersIcon from '../../icons/Users';
+import WorkIcon from '../../icons/Work';
+import CalendarIcon from '../../icons/Calendar';
+import ManageAccountIcon from '../../icons/ManageAccount';
+import TagsIcon from '../../icons/Tags';
+
 import { Role } from '../../types/user';
 
 interface DashboardSidebarProps {
@@ -33,7 +31,7 @@ const sections = [
       {
         title: 'Overview',
         path: '/app',
-        icon: <ChartSquareBarIcon fontSize="small" />,
+        icon: <HomeIcon fontSize="small" />,
       },
     ],
     roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER', 'EMPLOYEE', 'CANDIDATE'] as Role[],
@@ -54,18 +52,18 @@ const sections = [
           {
             title: 'Create',
             path: '/app/candidates/new',
-            roles: ['ADMIN'] as Role[],
+            roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER'] as Role[],
           },
         ],
         roles: ['ADMIN', 'RECRUITER', 'CANDIDATE'] as Role[],
       },
       {
-        title: 'Jobs',
+        title: 'Job Listings',
         path: '/app/jobs',
-        icon: <ShoppingCartIcon fontSize="small" />,
+        icon: <WorkIcon fontSize="small" />,
         children: [
           {
-            title: 'List',
+            title: 'Browse',
             path: '/app/jobs',
             roles: ['ADMIN'] as Role[],
           },

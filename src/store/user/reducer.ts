@@ -17,6 +17,7 @@ const initialState: UserState = {
   profile: emptyUser,
   user: emptyUser,
   list: {
+    initialLoading: true,
     isLoading: false,
     totalItems: 0,
     users: [],
@@ -93,6 +94,7 @@ const userReducer = (state = initialState, action: any) => {
         list: {
           users: payload,
           isLoading: false,
+          initialLoading: false,
         },
       };
 

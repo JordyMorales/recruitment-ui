@@ -2,7 +2,7 @@ import {
   uiStuffTypes,
   createTechnologyTypes,
   getAllTechnologiesTypes,
-  getTechnologyByIdTypes,
+  getActiveTechnologiesTypes,
   updateTechnologyTypes,
 } from './constants';
 
@@ -103,24 +103,32 @@ const technologyReducer = (state = initialState, action: any) => {
         },
       };
 
-    case getTechnologyByIdTypes.REQUEST:
+    case getActiveTechnologiesTypes.REQUEST:
       return {
         ...state,
-        isLoading: true,
+        list: {
+          ...initialState.list,
+          isLoading: true,
+        },
       };
 
-    case getTechnologyByIdTypes.SUCCESS:
+    case getActiveTechnologiesTypes.SUCCESS:
       return {
         ...state,
-        technology: payload,
-        isLoading: false,
+        list: {
+          technologies: payload,
+          isLoading: false,
+        },
       };
 
-    case getTechnologyByIdTypes.FAILURE:
+    case getActiveTechnologiesTypes.FAILURE:
       return {
         ...state,
         error: payload,
-        isLoading: false,
+        list: {
+          ...initialState.list,
+          isLoading: false,
+        },
       };
 
     case updateTechnologyTypes.REQUEST:

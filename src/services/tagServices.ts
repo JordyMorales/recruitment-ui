@@ -25,10 +25,10 @@ class Tag {
     }
   };
 
-  getTagById = async (payload: any): Promise<any> => {
+  getActiveTags = async (): Promise<any> => {
     try {
-      const res = await this.axios.get(`/tags/${payload.tagId}`);
-      return res.data.tag;
+      const res = await this.axios.get('/tags/search?isActive=true');
+      return res.data.tags;
     } catch (error) {
       throw error;
     }

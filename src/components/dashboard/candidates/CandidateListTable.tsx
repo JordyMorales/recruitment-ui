@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { EditTwoTone, ForwardTwoTone } from '@mui/icons-material';
 import { DataGrid, GridRowsProp, GridRenderCellParams } from '@mui/x-data-grid';
 import { candidateActions } from '../../../store/candidate/actions';
 import { columns } from './CandidateListTableSettings';
 import { Candidate } from '../../../types/candidate';
+
+import EditIcon from '../../../icons/Edit';
+import ArrowRightIcon from '../../../icons/ArrowRight';
 
 interface CandidateListTableProps {
   candidates: Candidate[];
@@ -28,17 +30,18 @@ const CandidateListTable: React.FC<CandidateListTableProps> = ({ candidates, isL
           {
             field: 'actions',
             headerName: 'Actions',
+            type: '',
             width: 80,
             renderCell: (params: GridRenderCellParams<any>) => (
               <>
-                <EditTwoTone
+                <EditIcon
+                  fontSize="small"
                   style={{ marginRight: '10px' }}
                   onClick={() => {
                     dispatch(candidateActions.setCandidate(params.row));
-                    dispatch(candidateActions.showModal());
                   }}
                 />
-                <ForwardTwoTone onClick={() => console.log(params.row)} />
+                <ArrowRightIcon fontSize="small" onClick={() => console.log(params.row)} />
               </>
             ),
           },

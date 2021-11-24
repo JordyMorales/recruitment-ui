@@ -10,10 +10,6 @@ class Technology {
   createTechnology = async (payload: any): Promise<any> => {
     try {
       const res = await this.axios.post('/technologies', payload);
-      console.log(
-        '🚀 ~ file: TechnologyServices.ts ~ line 14 ~ Technology ~ createTechnology= ~ res.data.Technology',
-        res.data.Technology,
-      );
       return res.data.Technology;
     } catch (error) {
       throw error;
@@ -23,20 +19,16 @@ class Technology {
   getAllTechnologies = async (): Promise<any> => {
     try {
       const res = await this.axios.get('/technologies');
-      console.log(
-        '🚀 ~ file: TechnologyServices.ts ~ line 23 ~ Technology ~ getAllTechnologys= ~ res.data.technologies',
-        res.data.technologies,
-      );
       return res.data.technologies;
     } catch (error) {
       throw error;
     }
   };
 
-  getTechnologyById = async (payload: any): Promise<any> => {
+  getActiveTechnologies = async (): Promise<any> => {
     try {
-      const res = await this.axios.get(`/technologies/${payload.technologyId}`);
-      return res.data.Technology;
+      const res = await this.axios.get('/technologies/search?isActive=true');
+      return res.data.technologies;
     } catch (error) {
       throw error;
     }

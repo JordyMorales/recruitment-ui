@@ -12,8 +12,8 @@ const getFlag = (countryCode: any) => {
 
 export const columns: GridColDef[] = [
   { field: 'candidateId', headerName: 'Id', width: 150, hide: true },
-  { field: 'firstName', headerName: 'First Name', width: 100 },
-  { field: 'middleName', headerName: 'Middle Name', width: 100, hide: true },
+  { field: 'firstName', headerName: 'First Name' },
+  { field: 'middleName', headerName: 'Middle Name', hide: true },
   { field: 'lastName', headerName: 'Last Name', width: 120 },
   {
     field: 'email',
@@ -44,8 +44,8 @@ export const columns: GridColDef[] = [
       }
     },
   },
-  { field: 'address', headerName: 'Address', width: 100, hide: true },
-  { field: 'city', headerName: 'City', width: 100, hide: true },
+  { field: 'address', headerName: 'Address', hide: true },
+  { field: 'city', headerName: 'City', hide: true },
   { field: 'country', headerName: 'Country', width: 120 },
   { field: 'englishLevel', headerName: 'English Level', width: 120 },
   { field: 'engineeringLevel', headerName: 'Engineering Level', width: 120, hide: true },
@@ -53,7 +53,7 @@ export const columns: GridColDef[] = [
   { field: 'contractPreference', headerName: 'Contract Preference', width: 120, hide: true },
   { field: 'company', headerName: 'Company', width: 120 },
   { field: 'resumeUrl', headerName: 'Resume Url', width: 120, hide: true },
-  { field: 'seniority:', headerName: 'Seniority:', width: 120 },
+  { field: 'seniority', headerName: 'Seniority', width: 120 },
   { field: 'tags', headerName: 'Tags', width: 120 },
   { field: 'links', headerName: 'Links', width: 120, hide: true },
   { field: 'phones', headerName: 'Phones', width: 120, hide: true },
@@ -63,19 +63,15 @@ export const columns: GridColDef[] = [
     width: 300,
     renderCell: (params: GridRenderCellParams<any>) =>
       params.value.map((tag) => (
-        <button
+        <Chip
+          size="small"
+          label={tag.name}
           style={{
             backgroundColor: tag.color,
-            color: '#fff',
-            border: 'none',
-            borderRadius: '16px',
-            height: '28px',
-            cursor: 'pointer',
-            padding: '0 12px',
+            margin: 2,
+            color: '#FFFFFF',
           }}
-        >
-          {tag.name}
-        </button>
+        />
       )),
   },
   { field: 'emails', headerName: 'Emails', width: 120, hide: true },
@@ -85,19 +81,7 @@ export const columns: GridColDef[] = [
     width: 300,
     renderCell: (params: GridRenderCellParams<any>) =>
       params.value.map((technology) => (
-        <button
-          style={{
-            backgroundColor: '#6b778c',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '16px',
-            height: '28px',
-            cursor: 'pointer',
-            padding: '0 12px',
-          }}
-        >
-          {technology.name}
-        </button>
+        <Chip size="small" label={technology.name} style={{ margin: 2, color: '#FFFFFF' }} />
       )),
   },
   { field: 'referralBy', headerName: 'Referral By', width: 120, hide: true },

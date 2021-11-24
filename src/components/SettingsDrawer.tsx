@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import useSettings from '../hooks/useSettings';
-import AdjustmentsIcon from '../icons/Adjustments';
+import TuneIcon from '../icons/Tune';
 import { THEMES } from '../constants';
 
 const getValues = (settings) => ({
@@ -66,7 +66,7 @@ const SettingsDrawer = () => {
             zIndex: (theme) => theme.zIndex.speedDial,
           }}
         >
-          <AdjustmentsIcon fontSize="small" />
+          <TuneIcon fontSize="small" />
         </Fab>
       </Tooltip>
       <Drawer
@@ -91,8 +91,8 @@ const SettingsDrawer = () => {
             onChange={(event): void => handleChange('theme', event.target.value)}
             select
             SelectProps={{ native: true }}
-            value={values.theme}
-            variant="outlined"
+            value={values.theme}            
+            variant="standard"
           >
             {Object.keys(THEMES).map((theme) => (
               <option key={theme} value={theme}>

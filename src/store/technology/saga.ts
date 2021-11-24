@@ -6,7 +6,7 @@ import services from '../../services';
 import {
   createTechnologyTypes,
   getAllTechnologiesTypes,
-  getTechnologyByIdTypes,
+  getActiveTechnologiesTypes,
   updateTechnologyTypes,
 } from './constants';
 
@@ -32,13 +32,13 @@ function* getAllTechnologies(): any {
   }
 }
 
-function* getTechnologyById({ payload }: any): any {
+function* getActiveTechnologies(): any {
   try {
-    const res = yield call([services.technology, 'getTechnologyById'], payload);
-    yield put(technologyActions.getTechnologyByIdSuccess(res));
+    const res = yield call([services.technology, 'getActiveTechnologies']);
+    yield put(technologyActions.getActiveTechnologiesSuccess(res));
   } catch (error: any) {
-    console.error('function*getAllTechnologies -> error', error);
-    yield put(technologyActions.getTechnologyByIdFailure(error));
+    console.error('function*getActiveTechnologies -> error', error);
+    yield put(technologyActions.getActiveTechnologiesFailure(error));
   }
 }
 
@@ -57,7 +57,7 @@ function* updateTechnology({ payload }: AnyAction): any {
 function* TechnologySaga() {
   yield takeLatest(createTechnologyTypes.REQUEST, createTechnology);
   yield takeLatest(getAllTechnologiesTypes.REQUEST, getAllTechnologies);
-  yield takeLatest(getTechnologyByIdTypes.REQUEST, getTechnologyById);
+  yield takeLatest(getActiveTechnologiesTypes.REQUEST, getActiveTechnologies);
   yield takeLatest(updateTechnologyTypes.REQUEST, updateTechnology);
 }
 

@@ -25,10 +25,10 @@ const TagList: React.FC = () => {
   } = useSelector((state: RootState) => state.tag);
 
   useEffect(() => {
-    if (mounted && !tags.length ) {
+    if (mounted) {
       dispatch(tagActions.getAllTagsRequest());
     }
-  }, [dispatch, mounted, tags.length]);
+  }, [dispatch, mounted]);
 
   const handleClose = useCallback(() => {
     dispatch(tagActions.hiModal());

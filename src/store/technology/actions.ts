@@ -2,7 +2,7 @@ import {
   uiStuffTypes,
   createTechnologyTypes,
   getAllTechnologiesTypes,
-  getTechnologyByIdTypes,
+  getActiveTechnologiesTypes,
   updateTechnologyTypes,
 } from './constants';
 
@@ -43,16 +43,15 @@ export const technologyActions = {
     type: getAllTechnologiesTypes.FAILURE,
     payload: error,
   }),
-  getTechnologyByIdRequest: (payload: any) => ({
-    type: getTechnologyByIdTypes.REQUEST,
+  getActiveTechnologiesRequest: () => ({
+    type: getActiveTechnologiesTypes.REQUEST,
+  }),
+  getActiveTechnologiesSuccess: (payload: any) => ({
+    type: getActiveTechnologiesTypes.SUCCESS,
     payload,
   }),
-  getTechnologyByIdSuccess: (payload: any) => ({
-    type: getTechnologyByIdTypes.SUCCESS,
-    payload,
-  }),
-  getTechnologyByIdFailure: (error: string) => ({
-    type: getTechnologyByIdTypes.FAILURE,
+  getActiveTechnologiesFailure: (error: string) => ({
+    type: getActiveTechnologiesTypes.FAILURE,
     payload: error,
   }),
   updateTechnologyRequest: (payload: any) => ({

@@ -17,11 +17,11 @@ export const getAllTagsTypes = {
   FAILURE: 'GET_ALL_TAGS_FAILURE',
 };
 
-export const getTagByIdTypes = {
-  REQUEST: 'GET_TAG_BY_ID_REQUEST',
-  SUCCESS: 'GET_TAG_BY_ID_SUCCESS',
-  FAILURE: 'GET_TAG_BY_ID_FAILURE',
-}
+export const getActiveTagsTypes = {
+  REQUEST: 'GET_ACTIVE_TAGS_REQUEST',
+  SUCCESS: 'GET_ACTIVE_TAGS_SUCCESS',
+  FAILURE: 'GET_ACTIVE_TAGS_FAILURE',
+};
 
 export const updateTagTypes = {
   REQUEST: 'UPDATE_TAG_REQUEST',

@@ -25,10 +25,10 @@ const TechnologyList: React.FC = () => {
   } = useSelector((state: RootState) => state.technology);
 
   useEffect(() => {
-    if (mounted && !technologies.length) {
+    if (mounted) {
       dispatch(technologyActions.getAllTechnologiesRequest());
     }
-  }, [dispatch, mounted, technologies.length]);
+  }, [dispatch, mounted]);
 
   const handleClose = useCallback(() => {
     dispatch(technologyActions.hiModal());

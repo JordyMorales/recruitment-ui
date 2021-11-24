@@ -1,8 +1,6 @@
 export const uiStuffTypes = {
   SET_CANDIDATE: 'SET_CANDIDATE',
   CLEAR_CANDIDATE: 'CLEAR_CANDIDATE',
-  SHOW_MODAL: 'SHOW_CANDIDATE_MODAL',
-  HIDE_MODAL: 'HIDE_CANDIDATE_MODAL',
 };
 
 export const createCandidateTypes = {

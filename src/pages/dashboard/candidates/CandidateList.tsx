@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
@@ -19,26 +19,15 @@ const CandidateList: React.FC = () => {
   const { settings } = useSettings();
 
   const {
-    isOpen,
-    shouldClose,
-    list: { candidates, isLoading },
+    list: { candidates, isLoading, initialLoading },
   } = useSelector((state: RootState) => state.candidate);
 
   useEffect(() => {
-    if (mounted && !candidates.length) {
+    if (mounted && initialLoading) {
       dispatch(candidateActions.getAllCandidatesRequest());
     }
-  }, [dispatch, mounted, candidates.length]);
+  }, [dispatch, mounted, initialLoading]);
 
-  const handleClose = useCallback(() => {
-    dispatch(candidateActions.hiModal());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (shouldClose) {
-      handleClose();
-    }
-  }, [handleClose, shouldClose]);
 
   return (
     <>

@@ -17,11 +17,11 @@ export const getAllTechnologiesTypes = {
   FAILURE: 'GET_ALL_TECHNOLOGIES_FAILURE',
 };
 
-export const getTechnologyByIdTypes = {
-  REQUEST: 'GET_TECHNOLOGY_BY_ID_REQUEST',
-  SUCCESS: 'GET_TECHNOLOGY_BY_ID_SUCCESS',
-  FAILURE: 'GET_TECHNOLOGY_BY_ID_FAILURE',
-}
+export const getActiveTechnologiesTypes = {
+  REQUEST: 'GET_ACTIVE_TECHNOLOGIES_REQUEST',
+  SUCCESS: 'GET_ACTIVE_TECHNOLOGIES_SUCCESS',
+  FAILURE: 'GET_ACTIVE_TECHNOLOGIES_FAILURE',
+};
 
 export const updateTechnologyTypes = {
   REQUEST: 'UPDATE_TECHNOLOGY_REQUEST',

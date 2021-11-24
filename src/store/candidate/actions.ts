@@ -14,12 +14,6 @@ export const candidateActions = {
   clearCandidate: () => ({
     type: uiStuffTypes.CLEAR_CANDIDATE,
   }),
-  showModal: () => ({
-    type: uiStuffTypes.SHOW_MODAL,
-  }),
-  hiModal: () => ({
-    type: uiStuffTypes.HIDE_MODAL,
-  }),
   createCandidateRequest: (payload: any) => ({
     type: createCandidateTypes.REQUEST,
     payload,

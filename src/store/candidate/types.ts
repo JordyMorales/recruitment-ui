@@ -1,8 +1,6 @@
 import { Candidate } from '../../types/candidate';
 
 export interface CandidateState {
-  isOpen: boolean;
-  shouldClose: boolean;
   isLoading: boolean;
   error: string;
   candidate: Candidate;
@@ -10,6 +8,7 @@ export interface CandidateState {
 }
 
 export interface CandidateList {
+  initialLoading: boolean;
   isLoading: boolean;
   totalItems: number;
   candidates: Candidate[];
@@ -19,7 +18,7 @@ export interface CandidateList {
 
 export const emptyCandidate: Candidate = {
   candidateId: '',
-  personalData: '',
+  personalData: {},
   address: '',
   city: '',
   country: '',

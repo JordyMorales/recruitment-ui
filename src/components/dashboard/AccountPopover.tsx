@@ -14,8 +14,8 @@ import {
   Typography
 } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
-import CogIcon from '../../icons/Cog';
 import UserIcon from '../../icons/User';
+import CogIcon from '../../icons/Cog';
 
 const AccountPopover: React.FC = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);

@@ -8,12 +8,11 @@ import {
 
 import { CandidateState, emptyCandidate } from './types';
 const initialState: CandidateState = {
-  isOpen: false,
-  shouldClose: false,
   error: '',
   isLoading: false,
   candidate: emptyCandidate,
   list: {
+    initialLoading: true,
     isLoading: false,
     totalItems: 0,
     candidates: [],
@@ -36,19 +35,6 @@ const candidateReducer = (state = initialState, action: any) => {
         ...state,
         candidate: emptyCandidate,
       };
-    case uiStuffTypes.SHOW_MODAL:
-      return {
-        ...state,
-        isOpen: true,
-      };
-    case uiStuffTypes.HIDE_MODAL:
-      return {
-        ...state,
-        isOpen: false,
-        shouldClose: false,
-        candidate: emptyCandidate,
-      };
-
     case createCandidateTypes.REQUEST:
       return {
         ...state,
@@ -65,7 +51,6 @@ const candidateReducer = (state = initialState, action: any) => {
           candidates: [payload, ...state.list.candidates],
         },
         isLoading: false,
-        shouldClose: true,
       };
 
     case createCandidateTypes.FAILURE:
@@ -90,6 +75,7 @@ const candidateReducer = (state = initialState, action: any) => {
         list: {
           candidates: payload,
           isLoading: false,
+          initialLoading: false,
         },
       };
 
@@ -130,7 +116,9 @@ const candidateReducer = (state = initialState, action: any) => {
       };
 
     case updateCandidateTypes.SUCCESS:
-      const index = state.list.candidates.findIndex((candidate) => candidate.candidateId === payload.candidateId);
+      const index = state.list.candidates.findIndex(
+        (candidate) => candidate.candidateId === payload.candidateId,
+      );
       return {
         ...state,
         candidate: emptyCandidate,
@@ -143,7 +131,6 @@ const candidateReducer = (state = initialState, action: any) => {
           ],
         },
         isLoading: false,
-        shouldClose: true,
       };
 
     case updateCandidateTypes.FAILURE:

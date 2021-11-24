@@ -1,4 +1,10 @@
-import { uiStuffTypes, createTagTypes, getAllTagsTypes, getTagByIdTypes, updateTagTypes } from './constants';
+import {
+  uiStuffTypes,
+  createTagTypes,
+  getAllTagsTypes,
+  getActiveTagsTypes,
+  updateTagTypes,
+} from './constants';
 
 import { TagState, emptyTag } from './types';
 const initialState: TagState = {
@@ -97,24 +103,32 @@ const tagReducer = (state = initialState, action: any) => {
         },
       };
 
-    case getTagByIdTypes.REQUEST:
+    case getActiveTagsTypes.REQUEST:
       return {
         ...state,
-        isLoading: true,
+        list: {
+          ...initialState.list,
+          isLoading: true,
+        },
       };
 
-    case getTagByIdTypes.SUCCESS:
+    case getActiveTagsTypes.SUCCESS:
       return {
         ...state,
-        tag: payload,
-        isLoading: false,
+        list: {
+          tags: payload,
+          isLoading: false,
+        },
       };
 
-    case getTagByIdTypes.FAILURE:
+    case getActiveTagsTypes.FAILURE:
       return {
         ...state,
         error: payload,
-        isLoading: false,
+        list: {
+          ...initialState.list,
+          isLoading: false,
+        },
       };
 
     case updateTagTypes.REQUEST:

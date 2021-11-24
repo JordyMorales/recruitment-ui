@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import { candidateActions } from './actions';
+import { userActions } from '../user/actions';
 import services from '../../services';
 import {
   createCandidateTypes,
@@ -12,9 +13,14 @@ import {
 
 function* createCandidate({ payload }: AnyAction): any {
   try {
-    const res = yield call([services.candidate, 'createCandidate'], payload);
-    yield put(candidateActions.createCandidateSuccess(res));
-    toast.success('You have created a new Candidate!');
+    const userCreated = yield call([services.user, 'createUser'], payload.user);
+    yield put(userActions.createUserSuccess(userCreated));
+
+    const candidateCreated = yield call([services.candidate, 'createCandidate'], payload.candidate);
+    console.log("🚀 ~ file: saga.ts ~ line 20 ~ function*createCandidate ~ candidateCreated", candidateCreated)
+    yield put(candidateActions.createCandidateSuccess({ ...candidateCreated, personalData: userCreated }));
+
+    toast.success('Candidate created successfully!!');
   } catch (error: any) {
     console.error('function*createCandidate -> error', error);
     toast.error(error);

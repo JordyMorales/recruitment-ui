@@ -11,6 +11,7 @@ export interface UserState {
 }
 
 export interface UserList {
+  initialLoading: boolean;
   isLoading: boolean;
   totalItems: number;
   users: User[];
