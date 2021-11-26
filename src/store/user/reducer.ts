@@ -3,6 +3,7 @@ import {
   createUserTypes,
   getAllUsersTypes,
   getCurrentUserTypes,
+  updateCurrentUserTypes,
   getUserByIdTypes,
   registerTypes,
   updateUserTypes,
@@ -122,6 +123,26 @@ const userReducer = (state = initialState, action: any) => {
       };
 
     case getCurrentUserTypes.FAILURE:
+      return {
+        ...state,
+        error: payload,
+        isLoading: false,
+      };
+
+    case updateCurrentUserTypes.REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case updateCurrentUserTypes.SUCCESS:
+      return {
+        ...state,
+        profile: payload,
+        isLoading: false,
+      };
+
+    case updateCurrentUserTypes.FAILURE:
       return {
         ...state,
         error: payload,

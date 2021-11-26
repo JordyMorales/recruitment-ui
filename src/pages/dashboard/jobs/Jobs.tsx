@@ -41,7 +41,7 @@ const Jobs: React.FC = () => {
                 <Button
                   color="primary"
                   startIcon={<PlusIcon />}
-                  sx={{ m: 1 }}
+                  sx={{ m: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
                   onClick={() => {}}
                   variant="contained"
                 >

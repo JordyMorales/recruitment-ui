@@ -3,7 +3,9 @@ import {
   createCandidateTypes,
   getAllCandidatesTypes,
   getCandidateByIdTypes,
+  getCandidateProfileTypes,
   updateCandidateTypes,
+  updateCandidateProfileTypes,
 } from './constants';
 
 export const candidateActions = {
@@ -49,6 +51,18 @@ export const candidateActions = {
     type: getCandidateByIdTypes.FAILURE,
     payload: error,
   }),
+  getCandidateProfileRequest: (payload: any) => ({
+    type: getCandidateProfileTypes.REQUEST,
+    payload,
+  }),
+  getCandidateProfileSuccess: (payload: any) => ({
+    type: getCandidateProfileTypes.SUCCESS,
+    payload,
+  }),
+  getCandidateProfileFailure: (error: string) => ({
+    type: getCandidateProfileTypes.FAILURE,
+    payload: error,
+  }),
   updateCandidateRequest: (payload: any) => ({
     type: updateCandidateTypes.REQUEST,
     payload,
@@ -59,6 +73,18 @@ export const candidateActions = {
   }),
   updateCandidateFailure: (error: string) => ({
     type: updateCandidateTypes.FAILURE,
+    payload: error,
+  }),
+  updateCandidateProfileRequest: (payload: any) => ({
+    type: updateCandidateProfileTypes.REQUEST,
+    payload,
+  }),
+  updateCandidateProfileSuccess: (payload: any) => ({
+    type: updateCandidateProfileTypes.SUCCESS,
+    payload,
+  }),
+  updateCandidateProfileFailure: (error: string) => ({
+    type: updateCandidateProfileTypes.FAILURE,
     payload: error,
   }),
 };

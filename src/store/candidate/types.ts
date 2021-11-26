@@ -3,6 +3,7 @@ import { Candidate } from '../../types/candidate';
 export interface CandidateState {
   isLoading: boolean;
   error: string;
+  account: Candidate;
   candidate: Candidate;
   list: CandidateList;
 }

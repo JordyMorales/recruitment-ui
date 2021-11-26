@@ -3,7 +3,7 @@ import { createSvgIcon } from "@mui/material";
 const ManageAccount = createSvgIcon(
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    enable-background="new 0 0 24 24"
+    enableBackground="new 0 0 24 24"
     viewBox="0 0 24 24"
     fill="currentColor"
   >
@@ -13,10 +13,10 @@ const ManageAccount = createSvgIcon(
     <g>
       <g>
         <g>
-          <circle cx="10" cy="8" enable-background="new" opacity=".3" r="2" />
+          <circle cx="10" cy="8" enableBackground="new" opacity=".3" r="2" />
           <path
             d="M10,16c0-0.34,0.03-0.67,0.08-0.99C10.05,15,10.03,15,10,15 c-1.97,0-3.9,0.53-5.59,1.54C4.16,16.68,4,17,4,17.35V18h6.29C10.1,17.37,10,16.7,10,16z"
-            enable-background="new"
+            enableBackground="new"
             opacity=".3"
           />
         </g>

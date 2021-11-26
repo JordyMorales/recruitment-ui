@@ -7,6 +7,7 @@ import {
   createUserTypes,
   getAllUsersTypes,
   getCurrentUserTypes,
+  updateCurrentUserTypes,
   getUserByIdTypes,
   registerTypes,
   updateUserTypes,
@@ -44,6 +45,17 @@ function* getCurrentUser(): any {
   }
 }
 
+function* updateCurrentUser({ payload }: AnyAction): any {
+  try {
+    yield call([services.user, 'updateUser'], payload);
+    yield put(userActions.updateCurrentUserSuccess(payload));
+  } catch (error: any) {
+    console.error('function*updateCurrentUser -> error', error);
+    toast.error(error);
+    yield put(userActions.updateCurrentUserFailure(error));
+  }
+}
+
 function* getUserById({ payload }: any): any {
   try {
     const res = yield call([services.user, 'getUserById'], payload);
@@ -70,7 +82,6 @@ function* updateUser({ payload }: AnyAction): any {
   try {
     yield call([services.user, 'updateUser'], payload);
     yield put(userActions.updateUserSuccess(payload));
-    toast.success('You have updated a User!');
   } catch (error: any) {
     console.error('function*updateUser -> error', error);
     toast.error(error);
@@ -82,6 +93,7 @@ function* UserSaga() {
   yield takeLatest(createUserTypes.REQUEST, createUser);
   yield takeLatest(getAllUsersTypes.REQUEST, getAllUsers);
   yield takeLatest(getCurrentUserTypes.REQUEST, getCurrentUser);
+  yield takeLatest(updateCurrentUserTypes.REQUEST, updateCurrentUser);
   yield takeLatest(getUserByIdTypes.REQUEST, getUserById);
   yield takeLatest(registerTypes.REQUEST, register);
   yield takeLatest(updateUserTypes.REQUEST, updateUser);

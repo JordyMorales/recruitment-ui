@@ -25,7 +25,6 @@ const TechnologyList = Loadable(lazy(() => import('./pages/dashboard/technologie
 const TagList = Loadable(lazy(() => import('./pages/dashboard/tags/TagList')));
 
 const Account = Loadable(lazy(() => import('./pages/dashboard/account/Account')));
-const Profile = Loadable(lazy(() => import('./pages/dashboard/profile/Profile')));
 
 const Login = Loadable(lazy(() => import('./pages/authentication/Login')));
 const PasswordRecovery = Loadable(lazy(() => import('./pages/authentication/PasswordRecovery')));
@@ -123,10 +122,6 @@ const routes = [
             <TagList />
           </RoleBasedGuard>
         ),
-      },
-      {
-        path: 'profile',
-        element: <Profile />,
       },
       {
         path: 'account',

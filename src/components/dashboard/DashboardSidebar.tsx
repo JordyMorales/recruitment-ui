@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { Avatar, Box, Divider, Drawer, Link, Typography, Theme, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/system';
+import { RootState } from '../../store/rootReducer';
+import { userActions } from '../../store/user/actions';
 import useAuth from '../../hooks/useAuth';
 import Scrollbar from '../Scrollbar';
 import NavSection from '../NavSection';
@@ -137,14 +140,21 @@ const CustomBox = styled(Box)(({ theme }) => ({
 const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
-  const { user } = useAuth();
+  const dispatch = useDispatch();
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
+  const { profile } = useSelector((state: RootState) => state.user);
+
+  useEffect(() => {
+    if (!profile.userId) {
+      dispatch(userActions.getCurrentUserRequest());
+    }
+  }, [dispatch, profile]);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   const content = (
@@ -190,7 +200,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
           >
             <RouterLink to="/dashboard/account">
               <Avatar
-                src={user.photoUrl}
+                src={profile.photoUrl}
                 sx={{
                   cursor: 'pointer',
                   height: 48,
@@ -200,12 +210,12 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
             </RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle2">
-                {user.firstName}
+                {`${profile.firstName} ${profile.lastName}`}
               </Typography>
               <Typography color="textSecondary" variant="body2">
-                role:
+                Role:{' '}
                 <Link color="primary" component={RouterLink} to="/pricing">
-                  {user.role}
+                  {profile.role}
                 </Link>
               </Typography>
             </Box>

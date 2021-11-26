@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Box, Breadcrumbs, Button, Container, Grid, Link, Typography } from '@mui/material';
 import { RootState } from '../../../store/rootReducer';
 import { candidateActions } from '../../../store/candidate/actions';
-import { CandidateListTable } from '../../../components/dashboard/candidates';
+import { CandidateListView } from '../../../components/dashboard/candidates';
 
 import useMounted from '../../../hooks/useMounted';
 import useSettings from '../../../hooks/useSettings';
@@ -54,7 +54,7 @@ const CandidateList: React.FC = () => {
                   color="primary"
                   component={RouterLink}
                   startIcon={<PlusIcon fontSize="small" />}
-                  sx={{ m: 1 }}
+                  sx={{ m: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
                   to="/app/candidates/new"
                   variant="contained"
                 >
@@ -78,7 +78,7 @@ const CandidateList: React.FC = () => {
             </Breadcrumbs>
           </Box>
           <Box sx={{ mt: 3 }}>
-            <CandidateListTable candidates={candidates} isLoading={isLoading} />
+            <CandidateListView candidates={candidates} isLoading={isLoading} />
           </Box>
         </Container>
       </Box>

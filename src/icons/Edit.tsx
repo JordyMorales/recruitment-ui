@@ -3,7 +3,7 @@ import { createSvgIcon } from '@mui/material';
 const Edit = createSvgIcon(
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    enable-background="new 0 0 24 24"
+    enableBackground="new 0 0 24 24"
     viewBox="0 0 24 24"
     fill="currentColor"
   >
@@ -12,7 +12,7 @@ const Edit = createSvgIcon(
     </g>
     <g>
       <g>
-        <polygon enable-background="new" opacity=".3" points="5,18.08 5,19 5.92,19 14.98,9.94 14.06,9.02" />
+        <polygon enableBackground="new" opacity=".3" points="5,18.08 5,19 5.92,19 14.98,9.94 14.06,9.02" />
         <g>
           <path d="M3,17.25L3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25z M5.92,19L5,19l0-0.92l9.06-9.06l0.92,0.92L5.92,19z" />
         </g>

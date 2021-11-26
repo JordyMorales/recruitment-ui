@@ -134,14 +134,17 @@ const themesOptions: Record<string, ThemeOptions> = {
       MuiCssBaseline: {
         styleOverrides: {
           '*': {
-            '*::-webkit-scrollbar': {
-              width: '1px',
+            '::-webkit-scrollbar': {
+              width: '5px',
             },
-            '*::-webkit-scrollbar-track': {
+            '::-webkit-scrollbar-track': {
               backgroundColor: '#FFFFFF',
             },
-            '*::-webkit-scrollbar-thumb': {
+            '::-webkit-scrollbar-thumb': {
               backgroundColor: 'rgba(145, 158, 171, 0.24)',
+            },
+            '::-webkit-scrollbar-thumb:horizontal': {
+              backgroundColor: '#FFFFFF',
             },
           },
         },

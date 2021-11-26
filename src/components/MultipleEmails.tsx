@@ -48,11 +48,9 @@ const MultipleEmails: React.FC<MultipleEmailsProps> = ({ values = [], onChange }
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  {emails.size > 1 && (
-                    <IconButton onClick={() => handleRemoveFields(email)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  )}
+                  <IconButton onClick={() => handleRemoveFields(email)}>
+                    <DeleteIcon />
+                  </IconButton>
                 </InputAdornment>
               ),
             }}

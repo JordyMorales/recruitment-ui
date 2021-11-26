@@ -3,13 +3,16 @@ import {
   createCandidateTypes,
   getAllCandidatesTypes,
   getCandidateByIdTypes,
+  getCandidateProfileTypes,
   updateCandidateTypes,
+  updateCandidateProfileTypes,
 } from './constants';
 
 import { CandidateState, emptyCandidate } from './types';
 const initialState: CandidateState = {
   error: '',
   isLoading: false,
+  account: emptyCandidate,
   candidate: emptyCandidate,
   list: {
     initialLoading: true,
@@ -109,6 +112,26 @@ const candidateReducer = (state = initialState, action: any) => {
         isLoading: false,
       };
 
+    case getCandidateProfileTypes.REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case getCandidateProfileTypes.SUCCESS:
+      return {
+        ...state,
+        account: payload,
+        isLoading: false,
+      };
+
+    case getCandidateProfileTypes.FAILURE:
+      return {
+        ...state,
+        error: payload,
+        isLoading: false,
+      };
+
     case updateCandidateTypes.REQUEST:
       return {
         ...state,
@@ -116,7 +139,7 @@ const candidateReducer = (state = initialState, action: any) => {
       };
 
     case updateCandidateTypes.SUCCESS:
-      const index = state.list.candidates.findIndex(
+      const updateCandidateIndex = state.list.candidates.findIndex(
         (candidate) => candidate.candidateId === payload.candidateId,
       );
       return {
@@ -125,15 +148,46 @@ const candidateReducer = (state = initialState, action: any) => {
         list: {
           ...state.list,
           candidates: [
-            ...state.list.candidates.slice(0, index),
-            { ...state[index], ...payload },
-            ...state.list.candidates.slice(index + 1),
+            ...state.list.candidates.slice(0, updateCandidateIndex),
+            { ...state.list.candidates[updateCandidateIndex], ...payload },
+            ...state.list.candidates.slice(updateCandidateIndex + 1),
           ],
         },
         isLoading: false,
       };
 
     case updateCandidateTypes.FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: payload,
+      };
+
+    case updateCandidateProfileTypes.REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case updateCandidateProfileTypes.SUCCESS:
+      const updateCandidateProfileIndex = state.list.candidates.findIndex(
+        (candidate) => candidate.candidateId === payload.candidateId,
+      );
+      return {
+        ...state,
+        account: payload,
+        list: {
+          ...state.list,
+          candidates: [
+            ...state.list.candidates.slice(0, updateCandidateProfileIndex),
+            { ...state.list.candidates[updateCandidateProfileIndex], ...payload },
+            ...state.list.candidates.slice(updateCandidateProfileIndex + 1),
+          ],
+        },
+        isLoading: false,
+      };
+
+    case updateCandidateProfileTypes.FAILURE:
       return {
         ...state,
         isLoading: false,

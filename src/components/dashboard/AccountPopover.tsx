@@ -14,8 +14,8 @@ import {
   Typography
 } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
-import UserIcon from '../../icons/User';
 import CogIcon from '../../icons/Cog';
+
 
 const AccountPopover: React.FC = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
@@ -89,25 +89,7 @@ const AccountPopover: React.FC = () => {
           </Typography>
         </Box>
         <Divider />
-        <Box sx={{ mt: 2 }}>
-          <MenuItem
-            component={RouterLink}
-            to="/app/profile"
-          >
-            <ListItemIcon>
-              <UserIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText
-              primary={(
-                <Typography
-                  color="textPrimary"
-                  variant="subtitle2"
-                >
-                  Profile
-                </Typography>
-              )}
-            />
-          </MenuItem>
+        <Box sx={{ mt: 2 }}>          
           <MenuItem
             component={RouterLink}
             to="/app/account"

@@ -8,19 +8,23 @@ import {
   createCandidateTypes,
   getAllCandidatesTypes,
   getCandidateByIdTypes,
+  getCandidateProfileTypes,
   updateCandidateTypes,
+  updateCandidateProfileTypes
 } from './constants';
 
 function* createCandidate({ payload }: AnyAction): any {
   try {
-    const userCreated = yield call([services.user, 'createUser'], payload.user);
-    yield put(userActions.createUserSuccess(userCreated));
+    if (payload.user && payload.candidate) {
+      const userCreated = yield call([services.user, 'createUser'], payload.user);
+      yield put(userActions.createUserSuccess(userCreated));
 
-    const candidateCreated = yield call([services.candidate, 'createCandidate'], payload.candidate);
-    console.log("🚀 ~ file: saga.ts ~ line 20 ~ function*createCandidate ~ candidateCreated", candidateCreated)
-    yield put(candidateActions.createCandidateSuccess({ ...candidateCreated, personalData: userCreated }));
-
-    toast.success('Candidate created successfully!!');
+      const candidateCreated = yield call([services.candidate, 'createCandidate'], payload.candidate);
+      yield put(candidateActions.createCandidateSuccess({ ...candidateCreated, personalData: userCreated }));
+    } else {
+      const candidateCreated = yield call([services.candidate, 'createCandidate'], payload);
+      yield put(candidateActions.createCandidateSuccess(candidateCreated));
+    }
   } catch (error: any) {
     console.error('function*createCandidate -> error', error);
     toast.error(error);
@@ -43,8 +47,18 @@ function* getCandidateById({ payload }: any): any {
     const res = yield call([services.candidate, 'getCandidateById'], payload);
     yield put(candidateActions.getCandidateByIdSuccess(res));
   } catch (error: any) {
-    console.error('function*getAllCandidates -> error', error);
+    console.error('function*getCandidateById -> error', error);
     yield put(candidateActions.getCandidateByIdFailure(error));
+  }
+}
+
+function* getCandidateProfile({ payload }: any): any {
+  try {
+    const res = yield call([services.candidate, 'getCandidateById'], payload);
+    yield put(candidateActions.getCandidateProfileSuccess(res));
+  } catch (error) {
+    console.error('function*getCandidateProfile -> error', error);
+    yield put(candidateActions.getCandidateProfileFailure(error));
   }
 }
 
@@ -60,11 +74,26 @@ function* updateCandidate({ payload }: AnyAction): any {
   }
 }
 
+function* updateCandidateProfile({ payload }: AnyAction): any {
+  try {
+    yield call([services.candidate, 'updateCandidate'], payload);
+    yield put(candidateActions.updateCandidateProfileSuccess(payload));
+  } catch (error: any) {
+    console.error('function*updateCandidateProfile -> error', error);
+    toast.error(error);
+    yield put(candidateActions.updateCandidateProfileFailure(error));
+  }
+}
+
+
 function* CandidateSaga() {
   yield takeLatest(createCandidateTypes.REQUEST, createCandidate);
   yield takeLatest(getAllCandidatesTypes.REQUEST, getAllCandidates);
   yield takeLatest(getCandidateByIdTypes.REQUEST, getCandidateById);
+  yield takeLatest(getCandidateProfileTypes.REQUEST, getCandidateProfile);
   yield takeLatest(updateCandidateTypes.REQUEST, updateCandidate);
+  yield takeLatest(updateCandidateProfileTypes.REQUEST, updateCandidateProfile);
+  
 }
 
 export default CandidateSaga;

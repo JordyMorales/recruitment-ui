@@ -3,6 +3,7 @@ import {
   createUserTypes,
   getAllUsersTypes,
   getCurrentUserTypes,
+  updateCurrentUserTypes,
   getUserByIdTypes,
   registerTypes,
   updateUserTypes,
@@ -54,6 +55,18 @@ export const userActions = {
   }),
   getCurrentUserFailure: (error: string) => ({
     type: getCurrentUserTypes.FAILURE,
+    payload: error,
+  }),
+  updateCurrentUserRequest: (payload: any) => ({
+    type: updateCurrentUserTypes.REQUEST,
+    payload,
+  }),
+  updateCurrentUserSuccess: (payload: any) => ({
+    type: updateCurrentUserTypes.SUCCESS,
+    payload,
+  }),
+  updateCurrentUserFailure: (error: string) => ({
+    type: updateCurrentUserTypes.FAILURE,
     payload: error,
   }),
   getUserByIdRequest: (payload: any) => ({

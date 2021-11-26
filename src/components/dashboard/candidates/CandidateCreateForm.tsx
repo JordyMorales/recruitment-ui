@@ -20,6 +20,7 @@ import { RootState } from '../../../store/rootReducer';
 import { tagActions } from '../../../store/tag/actions';
 import { technologyActions } from '../../../store/technology/actions';
 import { candidateActions } from '../../../store/candidate/actions';
+import { getRegionOptions } from '../../../utils';
 
 const ProductCreateForm: React.FC = (props) => {
   const mounted = useMounted();
@@ -27,6 +28,7 @@ const ProductCreateForm: React.FC = (props) => {
   const dispatch = useDispatch();
 
   const { isLoading } = useSelector((state: RootState) => state.candidate);
+
 
   const {
     list: { tags },
@@ -43,10 +45,7 @@ const ProductCreateForm: React.FC = (props) => {
     }
   }, [dispatch, mounted]);
 
-  const getRegionOptions = (country) => {
-    const index = CountryRegionData.findIndex((region) => region[0] === country);
-    return CountryRegionData[index][2].split('|').map((region) => region.substring(0, region.indexOf('~')));
-  };
+  
 
   return (
     <Formik
@@ -173,7 +172,7 @@ const ProductCreateForm: React.FC = (props) => {
                         name="user.firstName"
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        // required
+                        required
                         value={values.user.firstName}
                         variant="standard"
                       />
@@ -200,7 +199,7 @@ const ProductCreateForm: React.FC = (props) => {
                         name="user.lastName"
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        // required
+                        required
                         value={values.user.lastName}
                         variant="standard"
                       />
@@ -214,7 +213,7 @@ const ProductCreateForm: React.FC = (props) => {
                         name="user.email"
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        // required
+                        required
                         value={values.user.email}
                         variant="standard"
                       />
@@ -284,7 +283,7 @@ const ProductCreateForm: React.FC = (props) => {
                           select
                         >
                           {values.user.country &&
-                            getRegionOptions(values.user.country).map((option) => (
+                            getRegionOptions(CountryRegionData, values.user.country).map((option) => (
                               <MenuItem key={option} value={option}>
                                 {option}
                               </MenuItem>
@@ -354,7 +353,7 @@ const ProductCreateForm: React.FC = (props) => {
                         label="English Level"
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        // required
+                        required
                         value={values.candidate.englishLevel}
                         variant="standard"
                         select
@@ -498,7 +497,6 @@ const ProductCreateForm: React.FC = (props) => {
                         name="candidate.referralBy"
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        // required
                         value={values.candidate.referralBy}
                         variant="standard"
                       />

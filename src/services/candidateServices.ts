@@ -12,7 +12,7 @@ class Candidate {
       const res = await this.axios.post('/candidates', payload);
       return res.data.candidate;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -21,7 +21,7 @@ class Candidate {
       const res = await this.axios.get('/candidates');
       return res.data.candidates;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -30,7 +30,7 @@ class Candidate {
       const res = await this.axios.get(`/candidates/${payload.candidateId}`);
       return res.data.candidate;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -38,7 +38,7 @@ class Candidate {
     try {
       await this.axios.put(`/candidates/${payload.candidateId}`, payload);
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 }

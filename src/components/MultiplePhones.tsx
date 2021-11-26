@@ -48,11 +48,9 @@ const MultiplePhones: React.FC<MultiplePhonesProps> = ({ values = [], onChange }
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  {phones.size > 1 && (
-                    <IconButton onClick={() => handleRemoveFields(phone)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  )}
+                  <IconButton onClick={() => handleRemoveFields(phone)}>
+                    <DeleteIcon />
+                  </IconButton>
                 </InputAdornment>
               ),
             }}

@@ -3,13 +3,13 @@ import { styled } from '@mui/system';
 import { Theme } from '@mui/material';
 import type { SxProps } from '@mui/system';
 
-interface LogoProps {
+interface AnimatedLogoProps {
   sx?: SxProps<Theme>;
 }
 
 const Svg = styled('svg')``;
 
-const Logo: React.FC<LogoProps> = (props) => (
+const AnimatedLogo: React.FC<AnimatedLogoProps> = (props) => (
   <Svg version="1.1" viewBox="0 0 100 50" height="180" width="180" {...props}>
     <rect>
       <animate id="r1" begin="0;r1.end" dur="2s" attributeName="visibility" from="hide" to="hide" />
@@ -73,4 +73,4 @@ const Logo: React.FC<LogoProps> = (props) => (
   </Svg>
 );
 
-export default Logo;
+export default AnimatedLogo;

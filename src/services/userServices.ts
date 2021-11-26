@@ -27,7 +27,7 @@ class User {
 
   getCurrentUser = async (): Promise<any> => {
     try {
-      const res = await this.axios.get('/users');
+      const res = await this.axios.get('/users/me');
       return res.data.user;
     } catch (error) {
       throw error;

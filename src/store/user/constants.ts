@@ -23,6 +23,12 @@ export const getCurrentUserTypes = {
   FAILURE: 'GET_CURRENT_USER_FAILURE',
 };
 
+export const updateCurrentUserTypes = {
+  REQUEST: 'UPDATE_CURRENT_USER_REQUEST',
+  SUCCESS: 'UPDATE_CURRENT_USER_SUCCESS',
+  FAILURE: 'UPDATE_CURRENT_USER_FAILURE',
+};
+
 export const getUserByIdTypes = {
   REQUEST: 'GET_USER_BY_ID_REQUEST',
   SUCCESS: 'GET_USER_BY_ID_SUCCESS',

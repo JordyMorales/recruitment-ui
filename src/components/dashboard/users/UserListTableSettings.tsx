@@ -1,6 +1,7 @@
 import { Chip } from '@mui/material';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import parsePhoneNumber from 'libphonenumber-js';
+import { getFlag } from '../../../utils';
 
 const stateColor: any = {
   ACTIVE: '#4caf50',
@@ -9,13 +10,6 @@ const stateColor: any = {
   REMOVED: '#ff3d00',
 };
 
-const getFlag = (countryCode: any) => {
-  const codePoints = countryCode
-    .toUpperCase()
-    .split('')
-    .map((char: any) => 127397 + char.charCodeAt());
-  return String.fromCodePoint(...codePoints);
-};
 
 export const columns: GridColDef[] = [
   { field: 'userId', headerName: 'Id', width: 150, hide: true },

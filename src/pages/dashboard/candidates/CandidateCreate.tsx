@@ -35,7 +35,7 @@ const CandidateCreate: React.FC = () => {
                   color="primary"
                   component={RouterLink}
                   startIcon={<ArrowLeftIcon fontSize="small" />}
-                  sx={{ mt: 1 }}
+                  sx={{ m: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
                   to="/app/candidates"
                   variant="outlined"
                 >
