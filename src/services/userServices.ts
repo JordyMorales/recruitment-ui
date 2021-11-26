@@ -12,7 +12,7 @@ class User {
       const res = await this.axios.post('/users', payload);
       return res.data.user;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -21,7 +21,7 @@ class User {
       const res = await this.axios.get('/users');
       return res.data.users;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -30,7 +30,7 @@ class User {
       const res = await this.axios.get('/users/me');
       return res.data.user;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -39,7 +39,7 @@ class User {
       const res = await this.axios.get(`/users/${payload.userId}`);
       return res.data.user;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -48,7 +48,7 @@ class User {
       const res = await this.axios.post('/users', payload);
       return res.data.users;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -56,7 +56,7 @@ class User {
     try {
       await this.axios.put(`/users/${payload.userId}`, payload);
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 }

@@ -15,6 +15,8 @@ import {
 } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
 import CogIcon from '../../icons/Cog';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/rootReducer';
 
 
 const AccountPopover: React.FC = () => {
@@ -22,6 +24,8 @@ const AccountPopover: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
+
+  const { profile } = useSelector((state: RootState) => state.user);
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -54,7 +58,7 @@ const AccountPopover: React.FC = () => {
         }}
       >
         <Avatar
-          src={user.photoUrl}
+          src={profile.photoUrl}
           sx={{
             height: 32,
             width: 32
@@ -79,13 +83,13 @@ const AccountPopover: React.FC = () => {
             color="textPrimary"
             variant="subtitle2"
           >
-            {user.firstName}
+            {`${profile.firstName} ${profile.lastName}`}
           </Typography>
           <Typography
             color="textSecondary"
             variant="subtitle2"
           >
-            {user.email}
+            {profile.email}
           </Typography>
         </Box>
         <Divider />

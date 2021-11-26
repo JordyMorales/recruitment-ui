@@ -28,7 +28,6 @@ const CandidateList: React.FC = () => {
     }
   }, [dispatch, mounted, initialLoading]);
 
-
   return (
     <>
       <Helmet>
@@ -57,6 +56,7 @@ const CandidateList: React.FC = () => {
                   sx={{ m: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
                   to="/app/candidates/new"
                   variant="contained"
+                  onClick={() => dispatch(candidateActions.clearCandidate())}
                 >
                   New Candidate
                 </Button>
@@ -82,7 +82,6 @@ const CandidateList: React.FC = () => {
           </Box>
         </Container>
       </Box>
-      {/* <CandidateModal isOpen={isOpen} handleClose={handleClose} updateForm={false} /> */}
     </>
   );
 };

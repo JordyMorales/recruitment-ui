@@ -6,7 +6,6 @@ import { Avatar, Box, Divider, Drawer, Link, Typography, Theme, useMediaQuery } 
 import { styled } from '@mui/system';
 import { RootState } from '../../store/rootReducer';
 import { userActions } from '../../store/user/actions';
-import useAuth from '../../hooks/useAuth';
 import Scrollbar from '../Scrollbar';
 import NavSection from '../NavSection';
 import Guard from '../Guard';

@@ -5,13 +5,11 @@ import { Link as RouterLink, useParams } from 'react-router-dom';
 import {
   Avatar,
   Box,
-  Breadcrumbs,
   Button,
   Chip,
   Container,
   Divider,
   Grid,
-  Link,
   Tab,
   Tabs,
   Typography,
@@ -93,9 +91,10 @@ const CandidateDetails = () => {
               <Box sx={{ m: -1 }}>
                 <Button
                   color="primary"
+                  component={RouterLink}
                   startIcon={<PencilAltIcon />}
                   sx={{ mt: 2, ml: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
-                  onClick={() => {}}
+                  to={`/app/candidates/${params.candidateId}/edit`}
                   variant="contained"
                 >
                   Edit

@@ -36,7 +36,8 @@ class Candidate {
 
   updateCandidate = async (payload: any): Promise<any> => {
     try {
-      await this.axios.put(`/candidates/${payload.candidateId}`, payload);
+      const res = await this.axios.put(`/candidates/${payload.candidateId}`, payload);
+      return res.data.candidate;
     } catch (error) {
       throw error.response.data.message;
     }

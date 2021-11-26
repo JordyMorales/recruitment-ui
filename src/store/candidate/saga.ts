@@ -10,7 +10,7 @@ import {
   getCandidateByIdTypes,
   getCandidateProfileTypes,
   updateCandidateTypes,
-  updateCandidateProfileTypes
+  updateCandidateProfileTypes,
 } from './constants';
 
 function* createCandidate({ payload }: AnyAction): any {
@@ -20,7 +20,7 @@ function* createCandidate({ payload }: AnyAction): any {
       yield put(userActions.createUserSuccess(userCreated));
 
       const candidateCreated = yield call([services.candidate, 'createCandidate'], payload.candidate);
-      yield put(candidateActions.createCandidateSuccess({ ...candidateCreated, personalData: userCreated }));
+      yield put(candidateActions.createCandidateSuccess({ ...candidateCreated }));
     } else {
       const candidateCreated = yield call([services.candidate, 'createCandidate'], payload);
       yield put(candidateActions.createCandidateSuccess(candidateCreated));
@@ -64,9 +64,16 @@ function* getCandidateProfile({ payload }: any): any {
 
 function* updateCandidate({ payload }: AnyAction): any {
   try {
-    yield call([services.candidate, 'updateCandidate'], payload);
-    yield put(candidateActions.updateCandidateSuccess(payload));
-    toast.success('You have updated a Candidate!');
+    if (payload.user && payload.candidate) {
+      yield call([services.user, 'updateUser'], payload.user);
+      yield put(userActions.updateUserSuccess(payload.user));
+
+      const candidateUpdated = yield call([services.candidate, 'updateCandidate'], payload.candidate);
+      yield put(candidateActions.updateCandidateSuccess({ ...candidateUpdated }));
+    } else {
+      yield call([services.candidate, 'updateCandidate'], payload);
+      yield put(candidateActions.updateCandidateSuccess(payload));
+    }
   } catch (error: any) {
     console.error('function*updateCandidate -> error', error);
     toast.error(error);
@@ -85,7 +92,6 @@ function* updateCandidateProfile({ payload }: AnyAction): any {
   }
 }
 
-
 function* CandidateSaga() {
   yield takeLatest(createCandidateTypes.REQUEST, createCandidate);
   yield takeLatest(getAllCandidatesTypes.REQUEST, getAllCandidates);
@@ -93,7 +99,6 @@ function* CandidateSaga() {
   yield takeLatest(getCandidateProfileTypes.REQUEST, getCandidateProfile);
   yield takeLatest(updateCandidateTypes.REQUEST, updateCandidate);
   yield takeLatest(updateCandidateProfileTypes.REQUEST, updateCandidateProfile);
-  
 }
 
 export default CandidateSaga;

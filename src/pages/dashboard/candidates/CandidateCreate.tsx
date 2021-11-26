@@ -2,7 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Box, Breadcrumbs, Button, Container, Grid, Link, Typography } from '@mui/material';
-import CandidateCreateForm from '../../../components/dashboard/candidates/CandidateCreateForm';
+import { CandidateForm } from '../../../components/dashboard/candidates';
 import useSettings from '../../../hooks/useSettings';
 import ArrowLeftIcon from '../../../icons/ArrowLeft';
 import ChevronRightIcon from '../../../icons/ChevronRight';
@@ -59,7 +59,7 @@ const CandidateCreate: React.FC = () => {
             </Breadcrumbs>
           </Box>
           <Box sx={{ mt: 3 }}>
-            <CandidateCreateForm />
+            <CandidateForm />
           </Box>
         </Container>
       </Box>

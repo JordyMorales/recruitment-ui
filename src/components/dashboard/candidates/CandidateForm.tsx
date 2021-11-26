@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
@@ -21,14 +21,15 @@ import { tagActions } from '../../../store/tag/actions';
 import { technologyActions } from '../../../store/technology/actions';
 import { candidateActions } from '../../../store/candidate/actions';
 import { getRegionOptions } from '../../../utils';
+import ScreenLoader from '../../ScreenLoader';
 
-const ProductCreateForm: React.FC = (props) => {
+const CandidateForm: React.FC = (props) => {
   const mounted = useMounted();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const params = useParams();
 
-  const { isLoading } = useSelector((state: RootState) => state.candidate);
-
+  const { isLoading, candidate } = useSelector((state: RootState) => state.candidate);
 
   const {
     list: { tags },
@@ -39,53 +40,67 @@ const ProductCreateForm: React.FC = (props) => {
   } = useSelector((state: RootState) => state.technology);
 
   useEffect(() => {
+    if (mounted && params.candidateId && !candidate.candidateId) {
+      dispatch(candidateActions.getCandidateByIdRequest({ candidateId: params.candidateId }));
+    }
+  }, [candidate.candidateId, dispatch, mounted, params.candidateId]);
+
+  useEffect(() => {
     if (mounted) {
       dispatch(tagActions.getActiveTagsRequest());
       dispatch(technologyActions.getActiveTechnologiesRequest());
     }
   }, [dispatch, mounted]);
 
-  
+  useEffect(() => {
+    if (!params.candidateId) {
+      dispatch(candidateActions.clearCandidate());
+    }
+  }, [dispatch, mounted, params.candidateId]);
+
+  if (isLoading) {
+    return <ScreenLoader />;
+  }
 
   return (
     <Formik
       initialValues={{
         user: {
-          userId: '',
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          dateOfBirth: new Date(),
-          country: '',
-          city: '',
-          address: '',
-          photoUrl: '',
-          resumeUrl: '',
-          role: 'CANDIDATE',
-          state: 'INACTIVE',
+          userId: params.candidateId ? candidate.personalData.userId : '',
+          firstName: params.candidateId ? candidate.personalData.firstName : '',
+          middleName: params.candidateId ? candidate.personalData.middleName : '',
+          lastName: params.candidateId ? candidate.personalData.lastName : '',
+          email: params.candidateId ? candidate.personalData.email : '',
+          phone: params.candidateId ? candidate.personalData.phone : '',
+          dateOfBirth: params.candidateId ? candidate.personalData.dateOfBirth : new Date(),
+          country: params.candidateId ? candidate.personalData.country : '',
+          city: params.candidateId ? candidate.personalData.city : '',
+          address: params.candidateId ? candidate.personalData.address : '',
+          photoUrl: params.candidateId ? candidate.personalData.photoUrl : '',
+          resumeUrl: params.candidateId ? candidate.personalData.resumeUrl : '',
+          role: params.candidateId ? candidate.personalData.role : 'CANDIDATE',
+          state: params.candidateId ? candidate.personalData.state : 'INACTIVE',
         },
         candidate: {
-          candidateId: '',
-          englishLevel: 'A1',
-          engineeringLevel: 0.0,
-          salaryPretension: '',
-          contractPreference: '',
-          jobTitle: '',
-          company: '',
-          seniority: '',
-          availability: '',
-          tags: [],
-          links: [],
-          phones: [],
-          emails: [],
-          technologies: [],
-          referralBy: '',
-          createdBy: '',
-          updatedBy: '',
-          createdAt: null,
-          updatedAt: null,
+          candidateId: params.candidateId ? candidate.candidateId : '',
+          englishLevel: params.candidateId ? candidate.englishLevel : 'A1',
+          engineeringLevel: params.candidateId ? candidate.engineeringLevel : 0.0,
+          salaryPretension: params.candidateId ? candidate.salaryPretension : '',
+          contractPreference: params.candidateId ? candidate.contractPreference : '',
+          jobTitle: params.candidateId ? candidate.jobTitle : '',
+          company: params.candidateId ? candidate.company : '',
+          seniority: params.candidateId ? candidate.seniority : '',
+          availability: params.candidateId ? candidate.availability : '',
+          tags: params.candidateId ? candidate.tags : [],
+          links: params.candidateId ? candidate.links : [],
+          phones: params.candidateId ? candidate.phones : [],
+          emails: params.candidateId ? candidate.emails : [],
+          technologies: params.candidateId ? candidate.technologies : [],
+          referralBy: params.candidateId ? candidate.referralBy : '',
+          createdBy: params.candidateId ? candidate.createdBy : '',
+          updatedBy: params.candidateId ? candidate.updatedBy : '',
+          createdAt: params.candidateId ? candidate.createdAt : null,
+          updatedAt: params.candidateId ? candidate.updatedAt : null,
         },
         submit: null,
       }}
@@ -125,12 +140,19 @@ const ProductCreateForm: React.FC = (props) => {
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }): Promise<void> => {
         try {
           const uuid = uuidv4();
-          await dispatch(
-            candidateActions.createCandidateRequest({
-              user: { ...values.user, userId: uuid },
-              candidate: { ...values.candidate, userId: uuid },
-            }),
-          );
+          params.candidateId
+            ? dispatch(
+                candidateActions.updateCandidateRequest({
+                  user: { ...values.user, userId: params.candidateId },
+                  candidate: { ...values.candidate, userId: params.candidateId },
+                }),
+              )
+            : await dispatch(
+                candidateActions.createCandidateRequest({
+                  user: { ...values.user, userId: uuid },
+                  candidate: { ...values.candidate, userId: uuid },
+                }),
+              );
 
           if (!isLoading) {
             setStatus({ success: true });
@@ -232,7 +254,6 @@ const ProductCreateForm: React.FC = (props) => {
                         label="Date of Birth"
                         value={values.user.dateOfBirth}
                         inputFormat="YYYY/MM/DD"
-                        // inputFormat="DD/MM/YYYY"
                         onChange={(newValue) => setFieldValue('user.dateOfBirth', newValue)}
                         renderInput={(params) => (
                           <TextField
@@ -517,7 +538,7 @@ const ProductCreateForm: React.FC = (props) => {
                   type="submit"
                   variant="contained"
                 >
-                  Create Candidate
+                  {values.candidate.candidateId ? 'Save Changes' : 'Create Candidate'}
                 </LoadingButton>
               </Box>
             </Grid>
@@ -528,4 +549,4 @@ const ProductCreateForm: React.FC = (props) => {
   );
 };
 
-export default ProductCreateForm;
+export default CandidateForm;
