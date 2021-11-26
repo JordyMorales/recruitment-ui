@@ -80,7 +80,7 @@ const GeneralSettings: React.FC = (props) => {
               </Typography>
               <Typography color="textSecondary" variant="body2">
                 Role:{' '}
-                <Link color="primary" component={RouterLink} to="/dashboard/account">
+                <Link color="primary" component={RouterLink} to="/app/account">
                   {profile.role}
                 </Link>
               </Typography>

@@ -1,0 +1,57 @@
+<svg width="152" height="130" viewBox="0 0 152 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#dark-theme_svg__clip0_7075:30069)">
+    <g filter="url(#dark-theme_svg__filter0_d_7075:30069)">
+      <path fill="#1A202C" d="M0 0h52v130H0z"></path>
+      <rect fill="rgb(78,186,137)" x="16" y="8" width="18" height="10" transform="skewX(-22)" opacity="0.85" rx="1"
+        ry="1"></rect>
+      <rect fill="rgb(38,122,78)" x="16" y="12" width="18" height="10" transform="skewX(22)" opacity="0.91" rx="1"
+        ry="1"></rect>
+      <rect x="8" y="36" width="36" height="6" rx="3" fill="rgb(78,186,137)"></rect>
+      <rect x="8" y="54" width="36" height="6" rx="3" fill="#4B5563"></rect>
+      <rect x="8" y="72" width="36" height="6" rx="3" fill="#4B5563"></rect>
+      <rect x="8" y="90" width="36" height="6" rx="3" fill="#4B5563"></rect>
+      <rect x="8" y="108" width="36" height="6" rx="3" fill="#4B5563"></rect>
+    </g>
+    <path fill="#12141C" d="M52 0h100v130H52z"></path>
+    <g filter="url(#dark-theme_svg__filter1_dd_7075:30069)">
+      <path fill="#1A202C" d="M52 0h100v22H52z"></path>
+      <rect x="58" y="8" width="33" height="6" rx="3" fill="#A0AEC0"></rect>
+      <rect x="122" y="7" width="8" height="8" rx="4" fill="#A0AEC0"></rect>
+      <rect x="138" y="7" width="8" height="8" rx="4" fill="#A0AEC0"></rect>
+    </g>
+  </g>
+  <defs>
+    <filter id="dark-theme_svg__filter0_d_7075:30069" x="-2" y="-1" width="56" height="134" filterUnits="userSpaceOnUse"
+      color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+      <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+      </feColorMatrix>
+      <feOffset dy="1"></feOffset>
+      <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"></feColorMatrix>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_7075:30069"></feBlend>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow_7075:30069" result="shape"></feBlend>
+    </filter>
+    <filter id="dark-theme_svg__filter1_dd_7075:30069" x="50" y="-1" width="104" height="26"
+      filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+      <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+      </feColorMatrix>
+      <feOffset dy="1"></feOffset>
+      <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+      <feColorMatrix values="0 0 0 0 0.392157 0 0 0 0 0.454902 0 0 0 0 0.545098 0 0 0 0.1 0"></feColorMatrix>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_7075:30069"></feBlend>
+      <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+      </feColorMatrix>
+      <feOffset dy="1"></feOffset>
+      <feGaussianBlur stdDeviation="0.5"></feGaussianBlur>
+      <feComposite in2="hardAlpha" operator="out"></feComposite>
+      <feColorMatrix values="0 0 0 0 0.392157 0 0 0 0 0.454902 0 0 0 0 0.545098 0 0 0 0.06 0"></feColorMatrix>
+      <feBlend in2="effect1_dropShadow_7075:30069" result="effect2_dropShadow_7075:30069"></feBlend>
+      <feBlend in="SourceGraphic" in2="effect2_dropShadow_7075:30069" result="shape"></feBlend>
+    </filter>
+    <clipPath id="dark-theme_svg__clip0_7075:30069">
+      <path d="M0 4a4 4 0 014-4h148v130H0V4z" fill="#fff"></path>
+    </clipPath>
+  </defs>
+</svg>

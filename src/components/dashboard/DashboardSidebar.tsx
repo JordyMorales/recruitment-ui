@@ -197,7 +197,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
               p: 2,
             }}
           >
-            <RouterLink to="/dashboard/account">
+            <RouterLink to="/app/account">
               <Avatar
                 src={profile.photoUrl}
                 sx={{
@@ -213,7 +213,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
               </Typography>
               <Typography color="textSecondary" variant="body2">
                 Role:{' '}
-                <Link color="primary" component={RouterLink} to="/pricing">
+                <Link color="primary" component={RouterLink} to="/app/account">
                   {profile.role}
                 </Link>
               </Typography>
