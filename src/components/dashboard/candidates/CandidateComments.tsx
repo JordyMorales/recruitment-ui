@@ -59,7 +59,7 @@ const CandidateComments: React.FC = () => {
                     onChange={handleChange}
                     required
                     value={values.comment}
-                    variant="standard"
+                    variant="outlined"
                   />
                 </Grid>
               </CardContent>
@@ -76,6 +76,7 @@ const CandidateComments: React.FC = () => {
                   loading={isSubmitting}
                   loadingPosition="end"
                   type="submit"
+                  size="large"
                   variant="contained"
                 >
                   Add Comment

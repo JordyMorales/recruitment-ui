@@ -9,6 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import store from './store';
 import App from './App';
 import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-quill/dist/quill.snow.css';
 import './index.css';
 
 ReactDOM.render(

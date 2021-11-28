@@ -5,19 +5,16 @@ import { Link as RouterLink, useParams } from 'react-router-dom';
 import {
   Avatar,
   Box,
+  Breadcrumbs,
   Button,
-  Chip,
   Container,
   Divider,
   Grid,
+  Link,
   Tab,
   Tabs,
   Typography,
 } from '@mui/material';
-
-import useMounted from '../../../hooks/useMounted';
-import useSettings from '../../../hooks/useSettings';
-import PencilAltIcon from '../../../icons/PencilAlt';
 import {
   CandidateApplications,
   CandidateComments,
@@ -25,6 +22,11 @@ import {
 } from '../../../components/dashboard/candidates';
 import { RootState } from '../../../store/rootReducer';
 import { candidateActions } from '../../../store/candidate/actions';
+
+import useMounted from '../../../hooks/useMounted';
+import useSettings from '../../../hooks/useSettings';
+import PencilAltIcon from '../../../icons/PencilAlt';
+import ChevronRightIcon from '../../../icons/ChevronRight';
 
 const tabs = [
   { label: 'Details', value: 'details' },
@@ -55,7 +57,7 @@ const CandidateDetails = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard: Candidate Details</title>
+        <title>NSC: Candidate details</title>
       </Helmet>
       <Box
         sx={{
@@ -65,24 +67,15 @@ const CandidateDetails = () => {
         }}
       >
         <Container maxWidth={settings.compact ? 'xl' : false}>
-          <Grid container justifyContent="space-between">
+          <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
             <Grid item>
-              <Grid container spacing={2}>
-                <Grid item>
-                  <Avatar
-                    src={candidate.personalData?.photoUrl}
-                    sx={{
-                      height: { xs: 50, sm: 61, md: 62, lg: 63, xl: 64 },
-                      width: { xs: 50, sm: 61, md: 62, lg: 63, xl: 64 },
-                    }}
-                  />
+              <Grid container spacing={1} display="flex">
+                <Grid item alignSelf="center">
+                  <Avatar src={candidate.personalData?.photoUrl} />
                 </Grid>
-                <Grid item>
-                  <Typography color="textPrimary" sx={{}} variant="h5">
+                <Grid item alignSelf="center">
+                  <Typography color="textPrimary" variant="h5">
                     {`${candidate.personalData.firstName} ${candidate.personalData.lastName}`}
-                  </Typography>
-                  <Typography color="textSecondary" variant="h6">
-                    candidate_id: <Chip size="small" label={candidate.candidateId} />
                   </Typography>
                 </Grid>
               </Grid>
@@ -102,6 +95,24 @@ const CandidateDetails = () => {
               </Box>
             </Grid>
           </Grid>
+
+          <Box sx={{ mt: 1 }}>
+            <Breadcrumbs
+              aria-label="breadcrumb"
+              separator={<ChevronRightIcon fontSize="small" />}
+              sx={{ mt: 1 }}
+            >
+              <Link color="textPrimary" component={RouterLink} to="/app" variant="subtitle2">
+                Dashboard
+              </Link>
+              <Link color="textPrimary" component={RouterLink} to="/app/candidates" variant="subtitle2">
+                Candidates
+              </Link>
+              <Typography color="textSecondary" variant="subtitle2">
+                Details
+              </Typography>
+            </Breadcrumbs>
+          </Box>
 
           <Box sx={{ mt: 1 }}>
             <Tabs

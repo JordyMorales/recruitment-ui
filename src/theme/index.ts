@@ -1,8 +1,9 @@
 import { merge } from 'lodash';
-import { Theme, Direction } from '@mui/system';
-import { createTheme, ThemeOptions, responsiveFontSizes } from '@mui/material/styles';
-import { darkShadows, lightShadows } from './shadows';
+import { createTheme, Direction, responsiveFontSizes, Theme, ThemeOptions } from '@mui/material';
+// import { Theme, Direction } from '@mui/system';
+// import { createTheme, ThemeOptions, responsiveFontSizes } from '@mui/material/styles';
 import { THEMES } from '../constants';
+import { darkShadows, lightShadows } from './shadows';
 
 interface ThemeConfig {
   direction?: Direction;

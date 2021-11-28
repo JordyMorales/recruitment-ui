@@ -1,0 +1,30 @@
+export const uiStuffTypes = {
+  SET_JOB: 'SET_JOB',
+  CLEAR_JOB: 'CLEAR_JOB',
+  SHOW_MODAL: 'SHOW_JOB_MODAL',
+  HIDE_MODAL: 'HIDE_JOB_MODAL',
+};
+
+export const createJobTypes = {
+  REQUEST: 'CREATE_JOB_REQUEST',
+  SUCCESS: 'CREATE_JOB_SUCCESS',
+  FAILURE: 'CREATE_JOB_FAILURE',
+};
+
+export const getAllJobsTypes = {
+  REQUEST: 'GET_ALL_JOBS_REQUEST',
+  SUCCESS: 'GET_ALL_JOBS_SUCCESS',
+  FAILURE: 'GET_ALL_JOBS_FAILURE',
+};
+
+export const getJobByIdTypes = {
+  REQUEST: 'GET_JOB_BY_ID_REQUEST',
+  SUCCESS: 'GET_JOB_BY_ID_SUCCESS',
+  FAILURE: 'GET_JOB_BY_ID_FAILURE',
+}
+
+export const updateJobTypes = {
+  REQUEST: 'UPDATE_JOB_REQUEST',
+  SUCCESS: 'UPDATE_JOB_SUCCESS',
+  FAILURE: 'UPDATE_JOB_FAILURE',
+};

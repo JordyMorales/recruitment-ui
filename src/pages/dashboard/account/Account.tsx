@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Breadcrumbs, Container, Divider, Grid, Link, Tab, Tabs, Typography } from '@mui/material';
+import { Avatar, Box, Breadcrumbs, Container, Divider, Grid, Link, Tab, Tabs, Typography } from '@mui/material';
 import {
   Applications,
   GeneralSettings,
@@ -9,9 +9,10 @@ import {
   ProfessionalInformation,
   SecuritySettings,
 } from '../../../components/dashboard/account';
-import useMounted from '../../../hooks/useMounted';
 import useSettings from '../../../hooks/useSettings';
 import ChevronRightIcon from '../../../icons/ChevronRight';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/rootReducer';
 
 const tabs = [
   { label: 'General', value: 'general' },
@@ -22,14 +23,10 @@ const tabs = [
 ];
 
 const Account: React.FC = () => {
-  const mounted = useMounted();
   const { settings } = useSettings();
   const [currentTab, setCurrentTab] = useState<string>('general');
 
-  useEffect(() => {
-    if (mounted) {
-    }
-  }, [mounted]);
+  const { profile } = useSelector((state: RootState) => state.user);
 
   const handleTabsChange = (event: React.ChangeEvent<{}>, value: string): void => {
     setCurrentTab(value);
@@ -38,7 +35,7 @@ const Account: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard: Account</title>
+        <title>NSC: Personal Account</title>
       </Helmet>
       <Box
         sx={{
@@ -48,14 +45,21 @@ const Account: React.FC = () => {
         }}
       >
         <Container maxWidth={settings.compact ? 'xl' : false}>
-          <Grid container justifyContent="space-between" spacing={3}>
+          <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
             <Grid item>
-              <Typography color="textPrimary" variant="h5">
-                Account
-              </Typography>
+              <Grid container spacing={1} display="flex">
+                <Grid item alignSelf="center">
+                  <Avatar src={profile?.photoUrl} />
+                </Grid>
+                <Grid item alignSelf="center">
+                  <Typography color="textPrimary" variant="h5">
+                    {`${profile.firstName} ${profile.lastName}`}
+                  </Typography>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
-          <Box>
+          <Box sx={{ mt: 1 }}>
             <Breadcrumbs
               aria-label="breadcrumb"
               separator={<ChevronRightIcon fontSize="small" />}

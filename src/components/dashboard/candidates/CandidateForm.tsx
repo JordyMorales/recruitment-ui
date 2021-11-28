@@ -7,7 +7,7 @@ import { Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 import { Box, Card, CardContent, CardHeader, FormHelperText, Grid, TextField, MenuItem } from '@mui/material';
 import useMounted from '../../../hooks/useMounted';
-import DatePicker from '@mui/lab/DatePicker';
+import { MobileDatePicker } from '@mui/lab';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import MultipleSelectChip from '../../MultipleSelectChip';
@@ -196,7 +196,7 @@ const CandidateForm: React.FC = (props) => {
                         onChange={handleChange}
                         required
                         value={values.user.firstName}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item lg={5} md={5} sm={5} xs={12}>
@@ -209,7 +209,7 @@ const CandidateForm: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.user.middleName}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -223,7 +223,7 @@ const CandidateForm: React.FC = (props) => {
                         onChange={handleChange}
                         required
                         value={values.user.lastName}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -237,20 +237,21 @@ const CandidateForm: React.FC = (props) => {
                         onChange={handleChange}
                         required
                         value={values.user.email}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item lg={7} md={7} sm={7} xs={12}>
                       <MuiPhoneNumber
                         label="Phone"
                         fullWidth
+                        variant="outlined"
                         defaultCountry={'bo'}
                         value={values.user.phone}
                         onChange={(newValue) => setFieldValue('user.phone', newValue)}
                       />
                     </Grid>
                     <Grid item lg={5} md={5} sm={5} xs={12}>
-                      <DatePicker
+                      <MobileDatePicker
                         label="Date of Birth"
                         value={values.user.dateOfBirth}
                         inputFormat="YYYY/MM/DD"
@@ -259,7 +260,7 @@ const CandidateForm: React.FC = (props) => {
                           <TextField
                             {...params}
                             fullWidth
-                            variant="standard"
+                            variant="outlined"
                             name="user.dateOfBirth"
                             error={Boolean(touched.user?.dateOfBirth && errors.user?.dateOfBirth)}
                             helperText={touched.user?.dateOfBirth && errors.user?.dateOfBirth}
@@ -277,7 +278,7 @@ const CandidateForm: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.user.country}
-                        variant="standard"
+                        variant="outlined"
                         select
                       >
                         {CountryRegionData.map((option) => {
@@ -300,7 +301,7 @@ const CandidateForm: React.FC = (props) => {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.user.city}
-                          variant="standard"
+                          variant="outlined"
                           select
                         >
                           {values.user.country &&
@@ -322,7 +323,7 @@ const CandidateForm: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.user.address}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                   </Grid>
@@ -376,7 +377,7 @@ const CandidateForm: React.FC = (props) => {
                         onChange={handleChange}
                         required
                         value={values.candidate.englishLevel}
-                        variant="standard"
+                        variant="outlined"
                         select
                       >
                         {Object.keys(EnglishLevel).map((key) => (
@@ -397,7 +398,7 @@ const CandidateForm: React.FC = (props) => {
                         value={values.candidate.engineeringLevel}
                         onChange={handleChange}
                         type="number"
-                        variant="standard"
+                        variant="outlined"
                         InputProps={{ inputProps: { min: 0, max: 5, step: '0.1' } }}
                       />
                     </Grid>
@@ -414,7 +415,7 @@ const CandidateForm: React.FC = (props) => {
                         onChange={handleChange}
                         type="number"
                         value={values.candidate.salaryPretension}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item md={12} xs={12}>
@@ -449,7 +450,7 @@ const CandidateForm: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.candidate.company}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -462,7 +463,7 @@ const CandidateForm: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.candidate.jobTitle}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -476,7 +477,7 @@ const CandidateForm: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.candidate.seniority}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -493,7 +494,7 @@ const CandidateForm: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.candidate.contractPreference}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -506,7 +507,7 @@ const CandidateForm: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.candidate.availability}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -519,7 +520,7 @@ const CandidateForm: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.candidate.referralBy}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                   </Grid>
@@ -536,6 +537,7 @@ const CandidateForm: React.FC = (props) => {
                   loading={isLoading}
                   loadingPosition="end"
                   type="submit"
+                  size="large"
                   variant="contained"
                 >
                   {values.candidate.candidateId ? 'Save Changes' : 'Create Candidate'}

@@ -6,17 +6,16 @@ import { toast } from 'react-toastify';
 import {
   Dialog,
   DialogTitle,
-  DialogActions,
   DialogContent,
   Button,
   Box,
   Grid,
   TextField,
   Switch,
+  Typography,
 } from '@mui/material';
 import { RootState } from '../../../store/rootReducer';
 import { technologyActions } from '../../../store/technology/actions';
-import { Typography } from '@material-ui/core';
 
 export interface TechnologyModalProps {
   isOpen: boolean;
@@ -63,22 +62,22 @@ const TechnologyModal: React.FC<TechnologyModalProps> = (props) => {
             <Box sx={{ p: 3 }}>
               <DialogTitle id="form-dialog-title">Technology</DialogTitle>
               <DialogContent>
-                <Grid container spacing={3}>
-                  <Grid item md={6} xs={12}>
+                <Grid container spacing={3} sx={{ mt: 1 }}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.name && errors.name)}
                       fullWidth
                       helperText={touched.name && errors.name}
-                      label="First name"
+                      label="Name"
                       name="name"
                       onBlur={handleBlur}
                       onChange={handleChange}
                       required
                       value={values.name}
-                      variant="standard"
+                      variant="outlined"
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
                     <Typography variant="body2">Enable or Disable by toggling this.</Typography>
                     <Switch
                       color="primary"
@@ -90,18 +89,25 @@ const TechnologyModal: React.FC<TechnologyModalProps> = (props) => {
                   </Grid>
                 </Grid>
               </DialogContent>
-              <DialogActions>
+              <Box sx={{ display: 'flex', mx: 3, mt: 1 }}>
                 <Box sx={{ mt: 2 }}>
-                  <Button color="secondary" variant="contained" onClick={props.handleClose}>
+                  <Button color="primary" variant="text" size="large" onClick={props.handleClose}>
                     Cancel
                   </Button>
                 </Box>
+                <Box sx={{ flexGrow: 1 }} />
                 <Box sx={{ mt: 2 }}>
-                  <Button color="primary" disabled={isSubmitting} type="submit" variant="contained">
+                  <Button
+                    color="primary"
+                    disabled={isSubmitting}
+                    type="submit"
+                    variant="contained"
+                    size="large"
+                  >
                     Save
                   </Button>
                 </Box>
-              </DialogActions>
+              </Box>
             </Box>
           </form>
         )}

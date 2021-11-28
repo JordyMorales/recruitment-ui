@@ -208,7 +208,7 @@ const userReducer = (state = initialState, action: any) => {
           ...state.list,
           users: [
             ...state.list.users.slice(0, index),
-            { ...state[index], ...payload },
+            { ...state.list.users[index], ...payload },
             ...state.list.users.slice(index + 1),
           ],
         },

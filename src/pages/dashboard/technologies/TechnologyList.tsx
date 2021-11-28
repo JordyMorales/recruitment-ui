@@ -43,7 +43,7 @@ const TechnologyList: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard: Technology List</title>
+        <title>NSC: Technologies list</title>
       </Helmet>
       <Box
         sx={{
@@ -53,7 +53,7 @@ const TechnologyList: React.FC = () => {
         }}
       >
         <Container maxWidth={settings.compact ? 'xl' : false}>
-          <Grid container justifyContent="space-between" spacing={3}>
+          <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
             <Grid item>
               <Typography color="textPrimary" variant="h5">
                 Technologies

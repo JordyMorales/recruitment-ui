@@ -21,7 +21,7 @@ import { RootState } from '../../store/rootReducer';
 
 const AccountPopover: React.FC = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
 

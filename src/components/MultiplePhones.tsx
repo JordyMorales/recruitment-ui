@@ -42,6 +42,7 @@ const MultiplePhones: React.FC<MultiplePhonesProps> = ({ values = [], onChange }
             name="phone"
             defaultCountry="bo"
             fullWidth
+            variant="outlined"
             required={phones.size > 1}
             value={phone}
             onChange={(value) => handleChangeInput(index, value)}

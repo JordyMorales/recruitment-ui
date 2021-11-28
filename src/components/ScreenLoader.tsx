@@ -1,11 +1,18 @@
 import React from 'react';
-import { CircularProgress, Container } from '@mui/material';
+import { CircularProgress, Grid } from '@mui/material';
 
 const ScreenLoader: React.FC = () => {
   return (
-    <Container>
+    <Grid
+      container
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <CircularProgress />
-    </Container>
+    </Grid>
   );
 };
 

@@ -14,10 +14,11 @@ import Logo from '../Logo';
 import HomeIcon from '../../icons/Home';
 import CodeIcon from '../../icons/Code';
 import UsersIcon from '../../icons/Users';
-import WorkIcon from '../../icons/Work';
-import CalendarIcon from '../../icons/Calendar';
+import JobsIcon from '../../icons/Jobs';
+import InterviewIcon from '../../icons/Interview';
 import ManageAccountIcon from '../../icons/ManageAccount';
 import TagsIcon from '../../icons/Tags';
+import ProcessIcon from '../../icons/Process';
 
 import { Role } from '../../types/user';
 
@@ -62,7 +63,7 @@ const sections = [
       {
         title: 'Job Listings',
         path: '/app/jobs',
-        icon: <WorkIcon fontSize="small" />,
+        icon: <JobsIcon fontSize="small" />,
         children: [
           {
             title: 'Browse',
@@ -79,7 +80,7 @@ const sections = [
       },
       {
         title: 'Interviews',
-        icon: <CalendarIcon fontSize="small" />,
+        icon: <InterviewIcon fontSize="small" />,
         path: '/app/interviews',
         children: [
           {
@@ -100,6 +101,12 @@ const sections = [
   {
     title: 'Settings',
     items: [
+      {
+        title: 'Process',
+        path: '/app/processes',
+        icon: <ProcessIcon fontSize="small" />,
+        roles: ['ADMIN', 'RECRUITER'] as Role[],
+      },
       {
         title: 'Users',
         path: '/app/users',

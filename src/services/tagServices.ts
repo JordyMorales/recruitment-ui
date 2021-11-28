@@ -12,7 +12,7 @@ class Tag {
       const res = await this.axios.post('/tags', payload);
       return res.data.tag;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -21,7 +21,7 @@ class Tag {
       const res = await this.axios.get('/tags');
       return res.data.tags;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -30,7 +30,7 @@ class Tag {
       const res = await this.axios.get('/tags/search?isActive=true');
       return res.data.tags;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -38,7 +38,7 @@ class Tag {
     try {
       await this.axios.put(`/tags/${payload.tagId}`, payload);
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 }

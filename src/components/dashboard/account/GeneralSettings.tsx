@@ -167,7 +167,7 @@ const GeneralSettings: React.FC = (props) => {
                         onChange={handleChange}
                         required
                         value={values.firstName}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -180,7 +180,7 @@ const GeneralSettings: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.middleName}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -194,7 +194,7 @@ const GeneralSettings: React.FC = (props) => {
                         onChange={handleChange}
                         required
                         value={values.lastName}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -212,13 +212,14 @@ const GeneralSettings: React.FC = (props) => {
                         onChange={handleChange}
                         required
                         value={values.email}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                       <MuiPhoneNumber
                         label="Phone"
                         fullWidth
+                        variant="outlined"
                         defaultCountry={'bo'}
                         value={values.phone}
                         onChange={(newValue) => setFieldValue('phone', newValue)}
@@ -234,7 +235,7 @@ const GeneralSettings: React.FC = (props) => {
                           <TextField
                             {...params}
                             fullWidth
-                            variant="standard"
+                            variant="outlined"
                             name="dateOfBirth"
                             error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
                             helperText={touched.dateOfBirth && errors.dateOfBirth}
@@ -252,7 +253,7 @@ const GeneralSettings: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.address}
-                        variant="standard"
+                        variant="outlined"
                       />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -265,7 +266,7 @@ const GeneralSettings: React.FC = (props) => {
                         onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.country}
-                        variant="standard"
+                        variant="outlined"
                         select
                       >
                         {CountryRegionData.map((option) => {
@@ -288,7 +289,7 @@ const GeneralSettings: React.FC = (props) => {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.city}
-                          variant="standard"
+                          variant="outlined"
                           select
                         >
                           {values.country &&
@@ -315,6 +316,7 @@ const GeneralSettings: React.FC = (props) => {
                     loadingPosition="end"
                     disabled={isEqual(profile, values)}
                     type="submit"
+                    size="large"
                     variant="contained"
                   >
                     Save Changes

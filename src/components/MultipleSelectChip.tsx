@@ -11,6 +11,7 @@ export interface MultipleSelectChipProps {
   options: any[];
   onChange: any;
   withColor?: boolean;
+  error?: boolean;
 }
 
 const MultipleSelectChip: React.FC<MultipleSelectChipProps> = ({
@@ -21,6 +22,7 @@ const MultipleSelectChip: React.FC<MultipleSelectChipProps> = ({
   defaultValue,
   onChange,
   withColor = false,
+  error,
 }) => {
   return (
     <Autocomplete
@@ -53,7 +55,13 @@ const MultipleSelectChip: React.FC<MultipleSelectChipProps> = ({
         ))
       }
       renderInput={(params) => (
-        <TextField {...params} variant="standard" label={label} placeholder={placeholder} />
+        <TextField
+          {...params}
+          variant="outlined"
+          label={label}
+          placeholder={placeholder}
+          error={error}
+        />
       )}
     />
   );

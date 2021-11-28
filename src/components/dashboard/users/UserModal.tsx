@@ -9,7 +9,6 @@ import { DatePicker } from '@mui/lab';
 import {
   Dialog,
   DialogTitle,
-  DialogActions,
   DialogContent,
   Button,
   Box,
@@ -105,8 +104,8 @@ const UserModal: React.FC<UserModalProps> = (props) => {
             <Box sx={{ p: 3 }}>
               <DialogTitle id="form-dialog-title">User</DialogTitle>
               <DialogContent>
-                <Grid container spacing={3}>
-                  <Grid item md={6} xs={12}>
+                <Grid container spacing={3} sx={{ mt: 1 }}>
+                    <Grid item lg={7} md={7} sm={7} xs={12}>
                     <TextField
                       error={Boolean(touched.firstName && errors.firstName)}
                       fullWidth
@@ -117,10 +116,10 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onChange={handleChange}
                       required
                       value={values.firstName}
-                      variant="standard"
+                      variant="outlined"
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                    <Grid item lg={5} md={5} sm={5} xs={12}>
                     <TextField
                       error={Boolean(touched.middleName && errors.middleName)}
                       fullWidth
@@ -130,10 +129,10 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.middleName}
-                      variant="standard"
+                      variant="outlined"
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.lastName && errors.lastName)}
                       fullWidth
@@ -144,10 +143,10 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onChange={handleChange}
                       required
                       value={values.lastName}
-                      variant="standard"
+                      variant="outlined"
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.email && errors.email)}
                       fullWidth
@@ -158,28 +157,29 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onChange={handleChange}
                       required
                       value={values.email}
-                      variant="standard"
+                      variant="outlined"
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                    <Grid item lg={7} md={7} sm={7} xs={12}>
                     <MuiPhoneNumber
                       label="Phone"
                       fullWidth
+                      variant="outlined"
                       defaultCountry={'bo'}
                       value={values.phone}
                       onChange={(newValue) => setFieldValue('phone', newValue)}
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                    <Grid item lg={5} md={5} sm={5} xs={12}>
                     <DatePicker
                       label="Date of Birth"
                       value={values.dateOfBirth}
                       inputFormat="YYYY/MM/DD"
                       onChange={(newValue) => setFieldValue('dateOfBirth', newValue)}
-                      renderInput={(params) => <TextField {...params} variant="standard" fullWidth />}
+                      renderInput={(params) => <TextField {...params} variant="outlined" fullWidth />}
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.country && errors.country)}
                       fullWidth
@@ -189,7 +189,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.country}
-                      variant="standard"
+                      variant="outlined"
                       select
                     >
                       {CountryRegionData.map((option) => {
@@ -201,7 +201,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       })}
                     </TextField>
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                      <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.city && errors.city)}
                       fullWidth
@@ -211,7 +211,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.city}
-                      variant="standard"
+                      variant="outlined"
                       select
                     >
                       {values.country &&
@@ -222,7 +222,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                         ))}
                     </TextField>
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.address && errors.address)}
                       fullWidth
@@ -232,11 +232,11 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.address}
-                      variant="standard"
+                      variant="outlined"
                     />
                   </Grid>
 
-                  <Grid item md={6} xs={12}>
+                  <Grid item lg={6} md={6} sm={6} xs={12}>
                     <TextField
                       error={Boolean(touched.role && errors.role)}
                       fullWidth
@@ -246,7 +246,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.role}
-                      variant="standard"
+                      variant="outlined"
                       select
                     >
                       {roles.map((option) => (
@@ -257,7 +257,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                     </TextField>
                   </Grid>
 
-                  <Grid item md={6} xs={12}>
+                  <Grid item lg={6} md={6} sm={6} xs={12}>
                     <TextField
                       error={Boolean(touched.state && errors.state)}
                       fullWidth
@@ -267,7 +267,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.state}
-                      variant="standard"
+                      variant="outlined"
                       select
                     >
                       {states.map((option) => (
@@ -279,18 +279,19 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                   </Grid>
                 </Grid>
               </DialogContent>
-              <DialogActions>
+              <Box sx={{ display: 'flex', mx: 3, mt: 1 }}>
                 <Box sx={{ mt: 2 }}>
-                  <Button color="secondary" variant="contained" onClick={props.handleClose}>
+                  <Button color="primary" variant="text" size="large" onClick={props.handleClose}>
                     Cancel
                   </Button>
                 </Box>
+                <Box sx={{ flexGrow: 1 }} />
                 <Box sx={{ mt: 2 }}>
-                  <Button color="primary" disabled={isSubmitting} type="submit" variant="contained">
+                  <Button color="primary" disabled={isSubmitting} type="submit" variant="contained" size="large">
                     Save
                   </Button>
                 </Box>
-              </DialogActions>
+              </Box>
             </Box>
           </form>
         )}

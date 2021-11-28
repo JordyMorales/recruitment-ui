@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Box, Breadcrumbs, Button, Container, Grid, Link, Typography } from '@mui/material';
 import useSettings from '../../../hooks/useSettings';
@@ -9,12 +9,12 @@ import { CandidateForm } from '../../../components/dashboard/candidates';
 
 const CandidateEdit: React.FC = () => {
   const { settings } = useSettings();
-  const navigate = useNavigate();
+  const params = useParams();
 
   return (
     <>
       <Helmet>
-        <title>Dashboard: Candidate Edit</title>
+        <title>NSC: Edit candidate</title>
       </Helmet>
       <Box
         sx={{
@@ -24,7 +24,7 @@ const CandidateEdit: React.FC = () => {
         }}
       >
         <Container maxWidth={settings.compact ? 'xl' : false}>
-          <Grid container justifyContent="space-between" spacing={3}>
+          <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
             <Grid item>
               <Typography color="textPrimary" variant="h5">
                 Edit candidate
@@ -37,9 +37,8 @@ const CandidateEdit: React.FC = () => {
                   component={RouterLink}
                   startIcon={<ArrowLeftIcon fontSize="small" />}
                   sx={{ m: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
-                  to="/app/candidates"
+                  to={`/app/candidates/${params.candidateId}`}
                   variant="outlined"
-                  onClick={() => navigate(-1)}
                 >
                   Cancel
                 </Button>

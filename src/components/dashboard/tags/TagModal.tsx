@@ -6,18 +6,17 @@ import { toast } from 'react-toastify';
 import {
   Dialog,
   DialogTitle,
-  DialogActions,
   DialogContent,
   Button,
   Box,
   Grid,
   TextField,
   Switch,
+  Typography,
 } from '@mui/material';
 import { SketchPicker } from 'react-color';
 import { RootState } from '../../../store/rootReducer';
 import { tagActions } from '../../../store/tag/actions';
-import { Typography } from '@material-ui/core';
 
 export interface TagModalProps {
   isOpen: boolean;
@@ -77,8 +76,8 @@ const TagModal: React.FC<TagModalProps> = (props) => {
             <Box sx={{ p: 3 }}>
               <DialogTitle id="form-dialog-title">Tag</DialogTitle>
               <DialogContent>
-                <Grid container spacing={3}>
-                  <Grid item md={6} xs={12}>
+                <Grid container spacing={3} sx={{ mt: 1 }}>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.name && errors.name)}
                       fullWidth
@@ -89,10 +88,10 @@ const TagModal: React.FC<TagModalProps> = (props) => {
                       onChange={handleChange}
                       required
                       value={values.name}
-                      variant="standard"
+                      variant="outlined"
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
                     <TextField
                       fullWidth
                       label="Color"
@@ -101,7 +100,7 @@ const TagModal: React.FC<TagModalProps> = (props) => {
                       onChange={handleChange}
                       required
                       value={values.color}
-                      variant="standard"
+                      variant="outlined"
                       onClick={() => setDisplayColorPicker(true)}
                       sx={{ input: { color: values.color } }}
                     />
@@ -118,7 +117,7 @@ const TagModal: React.FC<TagModalProps> = (props) => {
                       </div>
                     ) : null}
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
                     <Typography variant="body2">Enable or Disable by toggling this.</Typography>
                     <Switch
                       checked={values.isActive}
@@ -130,18 +129,15 @@ const TagModal: React.FC<TagModalProps> = (props) => {
                   </Grid>
                 </Grid>
               </DialogContent>
-              <DialogActions>
-                <Box sx={{ mt: 2 }}>
-                  <Button color="secondary" variant="contained" onClick={props.handleClose}>
-                    Cancel
-                  </Button>
-                </Box>
-                <Box sx={{ mt: 2 }}>
-                  <Button color="primary" disabled={isSubmitting} type="submit" variant="contained">
-                    Save
-                  </Button>
-                </Box>
-              </DialogActions>
+              <Box sx={{ display: 'flex', mx: 3, mt: 1 }}>
+                <Button color="primary" variant="text" size="large" onClick={props.handleClose}>
+                  Cancel
+                </Button>
+                <Box sx={{ flexGrow: 1 }} />
+                <Button color="primary" disabled={isSubmitting} type="submit" variant="contained" size="large">
+                  Save
+                </Button>
+              </Box>
             </Box>
           </form>
         )}

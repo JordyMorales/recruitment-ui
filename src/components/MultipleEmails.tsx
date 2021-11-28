@@ -40,7 +40,7 @@ const MultipleEmails: React.FC<MultipleEmailsProps> = ({ values = [], onChange }
             name="email"
             type="email"
             placeholder="Email address"
-            variant="standard"
+            variant="outlined"
             required={emails.size > 1}
             fullWidth
             value={email}

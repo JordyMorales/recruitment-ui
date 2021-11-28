@@ -12,7 +12,7 @@ class Technology {
       const res = await this.axios.post('/technologies', payload);
       return res.data.Technology;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -21,7 +21,7 @@ class Technology {
       const res = await this.axios.get('/technologies');
       return res.data.technologies;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -30,7 +30,7 @@ class Technology {
       const res = await this.axios.get('/technologies/search?isActive=true');
       return res.data.technologies;
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 
@@ -38,7 +38,7 @@ class Technology {
     try {
       await this.axios.put(`/technologies/${payload.technologyId}`, payload);
     } catch (error) {
-      throw error;
+      throw error.response.data.message;
     }
   };
 }

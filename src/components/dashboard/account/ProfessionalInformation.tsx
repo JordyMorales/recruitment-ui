@@ -144,7 +144,7 @@ const ProfessionalInformation: React.FC = (props) => {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.company}
-                          variant="standard"
+                          variant="outlined"
                         />
                       </Grid>
                       <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -157,7 +157,7 @@ const ProfessionalInformation: React.FC = (props) => {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.jobTitle}
-                          variant="standard"
+                          variant="outlined"
                         />
                       </Grid>
                       <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -171,7 +171,7 @@ const ProfessionalInformation: React.FC = (props) => {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.seniority}
-                          variant="standard"
+                          variant="outlined"
                         />
                       </Grid>
                       <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -184,7 +184,7 @@ const ProfessionalInformation: React.FC = (props) => {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.contractPreference}
-                          variant="standard"
+                          variant="outlined"
                         />
                       </Grid>
                       <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -197,7 +197,7 @@ const ProfessionalInformation: React.FC = (props) => {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.availability}
-                          variant="standard"
+                          variant="outlined"
                         />
                       </Grid>
 
@@ -212,7 +212,7 @@ const ProfessionalInformation: React.FC = (props) => {
                           onChange={handleChange}
                           type="number"
                           value={values.salaryPretension}
-                          variant="standard"
+                          variant="outlined"
                         />
                       </Grid>
                     </Grid>
@@ -259,6 +259,7 @@ const ProfessionalInformation: React.FC = (props) => {
                     loading={isLoading}
                     loadingPosition="end"
                     type="submit"
+                    size="large"
                     variant="contained"
                   >
                     Save Changes

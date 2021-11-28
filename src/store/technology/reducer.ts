@@ -148,7 +148,7 @@ const technologyReducer = (state = initialState, action: any) => {
           ...state.list,
           technologies: [
             ...state.list.technologies.slice(0, index),
-            { ...state[index], ...payload },
+            { ...state.list.technologies[index], ...payload },
             ...state.list.technologies.slice(index + 1),
           ],
         },

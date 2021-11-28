@@ -45,6 +45,25 @@ export const states = [
   },
 ];
 
+export const jobStates = [
+  {
+    label: 'Draff',
+    value: 'DRAFF',
+  },
+  {
+    label: 'Published',
+    value: 'PUBLISHED',
+  },
+  {
+    label: 'Canceled',
+    value: 'CANCELED',
+  },
+  {
+    label: 'Finished',
+    value: 'FINISHED',
+  },
+];
+
 export enum EnglishLevel {
   'Spanish only' = 'Spanish only',
   A1 = 'A1',

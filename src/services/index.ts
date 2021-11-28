@@ -4,6 +4,8 @@ import User from './userServices';
 import Technology from './technologyServices';
 import Tag from './tagServices';
 import Candidate from './candidateServices';
+import Process from './processServices';
+import Job from './jobServices';
 
 const axios = Axios.create({
   baseURL: window.__RUNTIME_CONFIG__?.REACT_APP_SERVER_URI || process.env.REACT_APP_SERVER_URI,
@@ -29,6 +31,8 @@ const services = {
   technology: new Technology(axios),
   tag: new Tag(axios),
   candidate: new Candidate(axios),
+  process: new Process(axios),
+  job: new Job(axios),
 };
 
 export default services;

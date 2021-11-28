@@ -13,7 +13,7 @@ const CandidateCreate: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard: Candidate Create</title>
+        <title>NSC: Create candidate</title>
       </Helmet>
       <Box
         sx={{
@@ -23,7 +23,7 @@ const CandidateCreate: React.FC = () => {
         }}
       >
         <Container maxWidth={settings.compact ? 'xl' : false}>
-          <Grid container justifyContent="space-between" spacing={3}>
+          <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
             <Grid item>
               <Typography color="textPrimary" variant="h5">
                 Create candidate
@@ -53,8 +53,11 @@ const CandidateCreate: React.FC = () => {
               <Link color="textPrimary" component={RouterLink} to="/app" variant="subtitle2">
                 Dashboard
               </Link>
-              <Typography color="textSecondary" variant="subtitle2">
+              <Link color="textPrimary" component={RouterLink} to="/app/candidates" variant="subtitle2">
                 Candidates
+              </Link>
+              <Typography color="textSecondary" variant="subtitle2">
+                Create
               </Typography>
             </Breadcrumbs>
           </Box>

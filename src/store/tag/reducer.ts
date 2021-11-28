@@ -146,7 +146,7 @@ const tagReducer = (state = initialState, action: any) => {
           ...state.list,
           tags: [
             ...state.list.tags.slice(0, index),
-            { ...state[index], ...payload },
+            { ...state.list.tags[index], ...payload },
             ...state.list.tags.slice(index + 1),
           ],
         },

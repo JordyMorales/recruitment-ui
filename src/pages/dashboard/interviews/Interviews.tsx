@@ -20,7 +20,7 @@ const Interviews: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard: Interviews List</title>
+        <title>NSC: Interview list</title>
       </Helmet>
       <Box
         sx={{
@@ -30,7 +30,7 @@ const Interviews: React.FC = () => {
         }}
       >
         <Container maxWidth={settings.compact ? 'xl' : false}>
-          <Grid container justifyContent="space-between" spacing={3}>
+          <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
             <Grid item>
               <Typography color="textPrimary" variant="h5">
               Interviews

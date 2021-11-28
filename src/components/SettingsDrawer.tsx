@@ -92,7 +92,7 @@ const SettingsDrawer = () => {
             select
             SelectProps={{ native: true }}
             value={values.theme}            
-            variant="standard"
+            variant="outlined"
           >
             {Object.keys(THEMES).map((theme) => (
               <option key={theme} value={theme}>

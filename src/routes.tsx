@@ -18,8 +18,14 @@ const CandidateCreate = Loadable(lazy(() => import('./pages/dashboard/candidates
 const CandidateEdit = Loadable(lazy(() => import('./pages/dashboard/candidates/CandidateEdit')));
 const CandidateDetails = Loadable(lazy(() => import('./pages/dashboard/candidates/CandidateDetails')));
 
-const Interviews = Loadable(lazy(() => import('./pages/dashboard/interviews/Interviews')));
 const Jobs = Loadable(lazy(() => import('./pages/dashboard/jobs/Jobs')));
+const JobCreate = Loadable(lazy(() => import('./pages/dashboard/jobs/JobCreate')));
+
+const Interviews = Loadable(lazy(() => import('./pages/dashboard/interviews/Interviews')));
+
+const Process = Loadable(lazy(() => import('./pages/dashboard/process/Process')));
+const ProcessCreate = Loadable(lazy(() => import('./pages/dashboard/process/ProcessCreate')));
+
 const UsersList = Loadable(lazy(() => import('./pages/dashboard/users/UsersList')));
 const TechnologyList = Loadable(lazy(() => import('./pages/dashboard/technologies/TechnologyList')));
 const TagList = Loadable(lazy(() => import('./pages/dashboard/tags/TagList')));
@@ -83,12 +89,24 @@ const routes = [
       },
       {
         path: 'jobs',
-        element: (
-          <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER', 'EMPLOYEE', 'CANDIDATE']}>
-            <Jobs />
-          </RoleBasedGuard>
-        ),
-        children: [],
+        children: [
+          {
+            index: true,
+            element: (
+              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER', 'EMPLOYEE', 'CANDIDATE']}>
+                <Jobs />
+              </RoleBasedGuard>
+            ),
+          },
+          {
+            path: 'new',
+            element: (
+              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
+                <JobCreate />
+              </RoleBasedGuard>
+            ),
+          },
+        ],
       },
       {
         path: 'interviews',
@@ -99,6 +117,28 @@ const routes = [
         ),
         children: [],
       },
+      {
+        path: 'processes',
+        children: [
+          {
+            index: true,
+            element: (
+              <RoleBasedGuard roles={['ADMIN', 'RECRUITER']}>
+                <Process />
+              </RoleBasedGuard>
+            ),
+          },
+          {
+            path: 'new',
+            element: (
+              <RoleBasedGuard roles={['ADMIN', 'RECRUITER']}>
+                <ProcessCreate />
+              </RoleBasedGuard>
+            ),
+          },
+        ],
+      },
+
       {
         path: 'users',
         element: (

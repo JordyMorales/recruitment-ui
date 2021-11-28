@@ -14,7 +14,6 @@ import PlusIcon from '../../../icons/Plus';
 
 const CandidateList: React.FC = () => {
   const dispatch = useDispatch();
-
   const mounted = useMounted();
   const { settings } = useSettings();
 
@@ -31,7 +30,7 @@ const CandidateList: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard: Candidates List</title>
+        <title>NSC: Candidates List</title>
       </Helmet>
       <Box
         sx={{
@@ -41,7 +40,7 @@ const CandidateList: React.FC = () => {
         }}
       >
         <Container maxWidth={settings.compact ? 'xl' : false}>
-          <Grid container justifyContent="space-between" spacing={3}>
+          <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
             <Grid item>
               <Typography color="textPrimary" variant="h5">
                 Candidates
@@ -72,8 +71,11 @@ const CandidateList: React.FC = () => {
               <Link color="textPrimary" component={RouterLink} to="/app" variant="subtitle2">
                 Dashboard
               </Link>
-              <Typography color="textSecondary" variant="subtitle2">
+              <Link color="textPrimary" component={RouterLink} to="/app/candidates" variant="subtitle2">
                 Candidates
+              </Link>
+              <Typography color="textSecondary" variant="subtitle2">
+                List
               </Typography>
             </Breadcrumbs>
           </Box>
