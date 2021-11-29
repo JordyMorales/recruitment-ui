@@ -6,6 +6,9 @@ import {
   getCandidateProfileTypes,
   updateCandidateTypes,
   updateCandidateProfileTypes,
+  applyForJobTypes,
+  updateApplicationTypes,
+  getCandidateApplicationsTypes,
 } from './constants';
 
 export const candidateActions = {
@@ -85,6 +88,42 @@ export const candidateActions = {
   }),
   updateCandidateProfileFailure: (error: string) => ({
     type: updateCandidateProfileTypes.FAILURE,
+    payload: error,
+  }),
+  applyForJobRequest: (payload: any) => ({
+    type: applyForJobTypes.REQUEST,
+    payload,
+  }),
+  applyForJobSuccess: (payload: any) => ({
+    type: applyForJobTypes.SUCCESS,
+    payload,
+  }),
+  applyForJobFailure: (error: string) => ({
+    type: applyForJobTypes.FAILURE,
+    payload: error,
+  }),
+  updateApplicationRequest: (payload: any) => ({
+    type: updateApplicationTypes.REQUEST,
+    payload,
+  }),
+  updateApplicationSuccess: (payload: any) => ({
+    type: updateApplicationTypes.SUCCESS,
+    payload,
+  }),
+  updateApplicationFailure: (error: string) => ({
+    type: updateApplicationTypes.FAILURE,
+    payload: error,
+  }),
+  getCandidateApplicationsRequest: (payload: any) => ({
+    type: getCandidateApplicationsTypes.REQUEST,
+    payload,
+  }),
+  getCandidateApplicationsSuccess: (payload: any) => ({
+    type: getCandidateApplicationsTypes.SUCCESS,
+    payload,
+  }),
+  getCandidateApplicationsFailure: (error: string) => ({
+    type: getCandidateApplicationsTypes.FAILURE,
     payload: error,
   }),
 };

@@ -5,6 +5,7 @@ import tagReducer from './tag/reducer';
 import candidateReducer from './candidate/reducer';
 import processReducer from './process/reducer';
 import jobReducer from './job/reducer';
+import applicationReducer from './application/reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   candidate: candidateReducer,
   process: processReducer,
   job: jobReducer,
+  application: applicationReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

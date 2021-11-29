@@ -1,3 +1,4 @@
+import { Application } from '../../types/application';
 import { Job } from '../../types/job';
 
 export interface JobState {
@@ -5,6 +6,8 @@ export interface JobState {
   isSuccessful: boolean;
   error: string;
   job: Job;
+  application: Application,
+  applications: JobApplications;
   list: JobList;
 }
 
@@ -17,6 +20,13 @@ export interface JobList {
   currentPage: number;
 }
 
+
+export interface JobApplications {
+  initialLoading: boolean;
+  isLoading: boolean;
+  applications: Application[]; 
+}
+
 export const emptyJob: Job = {
   jobId: '',
   name: '',
@@ -26,4 +36,15 @@ export const emptyJob: Job = {
   technologies: [],
   processId: '',
   state: 'DRAFF',
+};
+
+export const emptyApplication: Application = {
+  applicationId: '',
+  otherInfo: '',
+  appliedBy: null,
+  step: null,
+  jobId: null,
+  state: 'APPLIED',
+  appliedAt: new Date(),
+  updatedAt: null,
 };

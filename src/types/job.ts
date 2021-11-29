@@ -14,4 +14,5 @@ export interface Job {
   updatedBy?: any;
   createdAt?: Date;
   updatedAt?: Date;
+  applications?: any[];
 }

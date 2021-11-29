@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { Avatar, Box, Button, Card, CardContent, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import SelectProcessForm from './SelectProcessForm';
 import JobDetailsForm from './JobDetailsForm';
 import JobDescriptionForm from './JobDescriptionForm';
+import { RootState } from '../../../store/rootReducer';
 
 const JobCreateWizard: React.FC = (props) => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [completed, setCompleted] = useState<boolean>(false);
+
+  const { job } = useSelector((state: RootState) => state.job);
+  console.log("🚀 ~ file: JobCreateWizard.tsx ~ line 16 ~ job", job)
 
   const handleNext = (): void => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -71,7 +76,12 @@ const JobCreateWizard: React.FC = (props) => {
                   mt: 2,
                 }}
               >
-                <Button color="primary" component={RouterLink} to="/app/jobs/1" variant="contained">
+                <Button
+                  color="primary"
+                  component={RouterLink}
+                  to={`/app/jobs/${job.jobId}`}
+                  variant="contained"
+                >
                   View Job
                 </Button>
               </Box>

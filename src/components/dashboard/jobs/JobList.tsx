@@ -1,24 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import {
-  Box,
-  Card,
-  CardHeader,
-  CardContent,
-  Chip,
-  Grid,
-  Typography,
-  CardActions,
-  Button,
-} from '@mui/material';
+import { Box, Card, CardHeader, CardContent, Chip, Grid, Typography, Button } from '@mui/material';
 import { Job } from '../../../types/job';
 import IconButton from '@mui/material/IconButton';
 import ArrowRightIcon from '../../../icons/ArrowRight';
 import { jobActions } from '../../../store/job/actions';
 import ScreenLoader from '../../ScreenLoader';
-import { format } from 'date-fns';
 import { formatDistanceToNowStrict } from 'date-fns';
+import SendIcon from '../../../icons/Send';
+import { applicationActions } from '../../../store/application/actions';
+import useAuth from '../../../hooks/useAuth';
+import JobApplicationModal from './JobApplicationModal';
+import RoleBasedGuard from '../../RoleBasedGuard';
 
 interface JobListProps {
   jobs: Job[];
@@ -27,6 +21,7 @@ interface JobListProps {
 
 const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
   const dispatch = useDispatch();
+  const { user } = useAuth();
 
   if (isLoading)
     return (
@@ -55,7 +50,7 @@ const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
   return (
     <Grid container spacing={{ xs: 2, md: 3 }}>
       {jobs.map((job, index) => (
-        <Grid item key={index} xs={12} sm={12} md={6} lg={4} xl={4}>
+        <Grid item key={index} xs={12} sm={12} md={6} lg={6} xl={6}>
           <Card>
             <CardHeader
               action={
@@ -91,7 +86,7 @@ const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
                 },
               }}
             >
-              {job.technologies.map((technology, index) => (
+              {job.technologies.map((technology) => (
                 <Chip
                   key={technology.technologyId}
                   label={
@@ -103,21 +98,39 @@ const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
                 />
               ))}
             </CardContent>
-            {/* <CardActions>
-
-            </CardActions> */}
-            <Box sx={{ display: 'flex', mx: 2, mt: 3 }}>
-              <Button color="primary" onClick={() => {}} size="large" variant="text">
-                Previous
-              </Button>
+            <Box sx={{ display: 'flex', mx: 2, mb: 1 }}>
+              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
+                <Button color="primary" sx={{ m: 1 }} variant="text">
+                  View on panel
+                </Button>
+              </RoleBasedGuard>
               <Box sx={{ flexGrow: 1 }} />
-              <Button color="primary" type="submit" size="large" variant="contained">
-                Complete
+              <Button
+                color="primary"
+                onClick={() => {
+                  dispatch(
+                    applicationActions.setApplication({
+                      dateOfApplication: new Date(),
+                      otherInfo: '',
+                      appliedBy: user.userId,
+                      jobId: job.jobId,
+                      state: 'APPLIED',
+                    }),
+                  );
+                  dispatch(applicationActions.showModal());
+                }}
+                startIcon={<SendIcon fontSize="small" />}
+                sx={{ m: 1 }}
+                variant="contained"
+              >
+                Apply
               </Button>
             </Box>
           </Card>
         </Grid>
       ))}
+
+      <JobApplicationModal />
     </Grid>
   );
 };

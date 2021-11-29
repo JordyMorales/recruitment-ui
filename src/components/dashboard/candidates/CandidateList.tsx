@@ -44,7 +44,7 @@ const CandidateListView: React.FC<CandidateListProps> = ({ candidates, isLoading
   return (
     <Grid container spacing={{ xs: 2, md: 3 }}>
       {candidates.map((candidate, index) => (
-        <Grid item key={index} xs={12} sm={12} md={6} lg={4} xl={4}>
+        <Grid item key={index} xs={12} sm={12} md={6} lg={6} xl={6}>
           <Card>
             <CardHeader
               avatar={

@@ -71,7 +71,9 @@ const CandidateContactDetails: React.FC<CandidateContactDetailsProps> = ({ candi
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    {format(new Date(candidate.personalData.dateOfBirth), 'dd MMM yyyy')}
+                    {candidate.personalData?.dateOfBirth
+                      ? format(new Date(candidate.personalData?.dateOfBirth), 'dd MMM yyyy')
+                      : 'N/A'}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -80,7 +82,7 @@ const CandidateContactDetails: React.FC<CandidateContactDetailsProps> = ({ candi
                       City
                     </Typography>
                   </TableCell>
-                  <TableCell>{candidate.personalData.city}</TableCell>
+                  <TableCell>{candidate.personalData?.city}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>
@@ -187,7 +189,9 @@ const CandidateContactDetails: React.FC<CandidateContactDetailsProps> = ({ candi
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    {numeral(candidate.salaryPretension).format(`${candidate.salaryPretension}0,0.00`)}
+                    {candidate.salaryPretension
+                      ? numeral(candidate.salaryPretension).format(`${candidate.salaryPretension}0,0.00`)
+                      : 'N/A'}
                   </TableCell>
                 </TableRow>
               </TableBody>

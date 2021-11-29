@@ -29,7 +29,8 @@ const CandidateForm: React.FC = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const { isLoading, candidate } = useSelector((state: RootState) => state.candidate);
+  const { isLoading, isSuccessful, candidate } = useSelector((state: RootState) => state.candidate);
+  console.log('🚀 ~ file: CandidateForm.tsx ~ line 33 ~ candidate', candidate);
 
   const {
     list: { tags },
@@ -58,6 +59,13 @@ const CandidateForm: React.FC = (props) => {
     }
   }, [dispatch, mounted, params.candidateId]);
 
+  useEffect(() => {
+    if (mounted && isSuccessful) {
+      dispatch(candidateActions.clearCandidate());
+      navigate('/app/candidates');
+    }
+  }, [dispatch, isSuccessful, mounted, navigate]);
+
   if (isLoading) {
     return <ScreenLoader />;
   }
@@ -66,39 +74,39 @@ const CandidateForm: React.FC = (props) => {
     <Formik
       initialValues={{
         user: {
-          userId: params.candidateId ? candidate.personalData.userId : '',
-          firstName: params.candidateId ? candidate.personalData.firstName : '',
-          middleName: params.candidateId ? candidate.personalData.middleName : '',
-          lastName: params.candidateId ? candidate.personalData.lastName : '',
-          email: params.candidateId ? candidate.personalData.email : '',
-          phone: params.candidateId ? candidate.personalData.phone : '',
-          dateOfBirth: params.candidateId ? candidate.personalData.dateOfBirth : new Date(),
-          country: params.candidateId ? candidate.personalData.country : '',
-          city: params.candidateId ? candidate.personalData.city : '',
-          address: params.candidateId ? candidate.personalData.address : '',
-          photoUrl: params.candidateId ? candidate.personalData.photoUrl : '',
-          resumeUrl: params.candidateId ? candidate.personalData.resumeUrl : '',
-          role: params.candidateId ? candidate.personalData.role : 'CANDIDATE',
-          state: params.candidateId ? candidate.personalData.state : 'INACTIVE',
+          userId: params.candidateId ? candidate.personalData.userId || '' : '',
+          firstName: params.candidateId ? candidate.personalData.firstName || '' : '',
+          middleName: params.candidateId ? candidate.personalData.middleName || '' : '',
+          lastName: params.candidateId ? candidate.personalData.lastName || '' : '',
+          email: params.candidateId ? candidate.personalData.email || '' : '',
+          phone: params.candidateId ? candidate.personalData.phone || '' : '',
+          dateOfBirth: params.candidateId ? candidate.personalData.dateOfBirth || new Date() : new Date(),
+          country: params.candidateId ? candidate.personalData.country || '' : '',
+          city: params.candidateId ? candidate.personalData.city || '' : '',
+          address: params.candidateId ? candidate.personalData.address || '' : '',
+          photoUrl: params.candidateId ? candidate.personalData.photoUrl || '' : '',
+          resumeUrl: params.candidateId ? candidate.personalData.resumeUrl || '' : '',
+          role: params.candidateId ? candidate.personalData.role || 'CANDIDATE' : 'CANDIDATE',
+          state: params.candidateId ? candidate.personalData.state || 'INACTIVE' : 'INACTIVE',
         },
         candidate: {
-          candidateId: params.candidateId ? candidate.candidateId : '',
-          englishLevel: params.candidateId ? candidate.englishLevel : 'A1',
-          engineeringLevel: params.candidateId ? candidate.engineeringLevel : 0.0,
-          salaryPretension: params.candidateId ? candidate.salaryPretension : '',
-          contractPreference: params.candidateId ? candidate.contractPreference : '',
-          jobTitle: params.candidateId ? candidate.jobTitle : '',
-          company: params.candidateId ? candidate.company : '',
-          seniority: params.candidateId ? candidate.seniority : '',
-          availability: params.candidateId ? candidate.availability : '',
-          tags: params.candidateId ? candidate.tags : [],
-          links: params.candidateId ? candidate.links : [],
-          phones: params.candidateId ? candidate.phones : [],
-          emails: params.candidateId ? candidate.emails : [],
-          technologies: params.candidateId ? candidate.technologies : [],
-          referralBy: params.candidateId ? candidate.referralBy : '',
-          createdBy: params.candidateId ? candidate.createdBy : '',
-          updatedBy: params.candidateId ? candidate.updatedBy : '',
+          candidateId: params.candidateId ? candidate.candidateId || '' : '',
+          englishLevel: params.candidateId ? candidate.englishLevel || 'A1' : 'A1',
+          engineeringLevel: params.candidateId ? candidate.engineeringLevel || 0.0 : 0.0,
+          salaryPretension: params.candidateId ? candidate.salaryPretension || '' : '',
+          contractPreference: params.candidateId ? candidate.contractPreference || '' : '',
+          jobTitle: params.candidateId ? candidate.jobTitle || '' : '',
+          company: params.candidateId ? candidate.company || '' : '',
+          seniority: params.candidateId ? candidate.seniority || '' : '',
+          availability: params.candidateId ? candidate.availability || '' : '',
+          tags: params.candidateId ? candidate.tags || [] : [],
+          links: params.candidateId ? candidate.links || [] : [],
+          phones: params.candidateId ? candidate.phones || [] : [],
+          emails: params.candidateId ? candidate.emails || [] : [],
+          technologies: params.candidateId ? candidate.technologies || [] : [],
+          referralBy: params.candidateId ? candidate.referralBy || '' : '',
+          createdBy: params.candidateId ? candidate.createdBy || '' : '',
+          updatedBy: params.candidateId ? candidate.updatedBy || '' : '',
           createdAt: params.candidateId ? candidate.createdAt : null,
           updatedAt: params.candidateId ? candidate.updatedAt : null,
         },
@@ -147,18 +155,12 @@ const CandidateForm: React.FC = (props) => {
                   candidate: { ...values.candidate, userId: params.candidateId },
                 }),
               )
-            : await dispatch(
+            : dispatch(
                 candidateActions.createCandidateRequest({
                   user: { ...values.user, userId: uuid },
                   candidate: { ...values.candidate, userId: uuid },
                 }),
               );
-
-          if (!isLoading) {
-            setStatus({ success: true });
-            setSubmitting(false);
-            navigate('/app/candidates');
-          }
         } catch (err) {
           console.error(err);
           toast.error('Something went wrong!');

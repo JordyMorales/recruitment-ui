@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 import { formatDistanceToNowStrict } from 'date-fns';
@@ -8,39 +8,32 @@ import { JobOverview } from '../../../components/dashboard/jobs';
 import { RootState } from '../../../store/rootReducer';
 import { jobActions } from '../../../store/job/actions';
 
+import useAuth from '../../../hooks/useAuth';
 import useMounted from '../../../hooks/useMounted';
 import useSettings from '../../../hooks/useSettings';
-import ShareIcon from '../../../icons/Share';
 import SendIcon from '../../../icons/Send';
 import ChevronRightIcon from '../../../icons/ChevronRight';
 import CalendarIcon from '../../../icons/Calendar';
 import ScreenLoader from '../../../components/ScreenLoader';
 import JobApplicationModal from '../../../components/dashboard/jobs/JobApplicationModal';
+import RoleBasedGuard from '../../../components/RoleBasedGuard';
+import { applicationActions } from '../../../store/application/actions';
 
-const JobDetails = () => {
+const JobDetails: React.FC = () => {
   const mounted = useMounted();
   const dispatch = useDispatch();
   const params = useParams();
+  const { user } = useAuth();
 
   const { settings } = useSettings();
 
   const { isLoading, job } = useSelector((state: RootState) => state.job);
-
-  const [isApplicationOpen, setIsApplicationOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (mounted && params.jobId && !job.jobId) {
       dispatch(jobActions.getJobByIdRequest({ jobId: params.jobId }));
     }
   }, [dispatch, mounted, job, params.jobId]);
-
-  const handleApplyModalOpen = (): void => {
-    setIsApplicationOpen(true);
-  };
-
-  const handleApplyModalClose = (): void => {
-    setIsApplicationOpen(false);
-  };
 
   if (isLoading) return <ScreenLoader />;
 
@@ -90,33 +83,27 @@ const JobDetails = () => {
                 </Box>
               </Box>
             </Grid>
-            {/* <Grid item>
-              <Box sx={{ m: -1 }}>
-                <Button
-                  color="primary"
-                  component={RouterLink}
-                  startIcon={<PencilAltIcon />}
-                  sx={{ mt: 2, ml: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
-                  to={`/app/jobs/${params.jobId}/edit`}
-                  variant="contained"
-                >
-                  Edit
-                </Button>
-              </Box>
-            </Grid> */}
             <Grid item>
               <Box sx={{ m: -1 }}>
+                <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
+                  <Button color="primary" sx={{ m: 1 }} variant="text">
+                    View on panel
+                  </Button>
+                </RoleBasedGuard>
                 <Button
                   color="primary"
-                  startIcon={<ShareIcon fontSize="small" />}
-                  sx={{ m: 1 }}
-                  variant="text"
-                >
-                  Share
-                </Button>
-                <Button
-                  color="primary"
-                  onClick={handleApplyModalOpen}
+                  onClick={() => {
+                    dispatch(
+                      applicationActions.setApplication({
+                        dateOfApplication: new Date(),
+                        otherInfo: '',
+                        appliedBy: user.userId,
+                        jobId: job.jobId,
+                        state: 'APPLIED',
+                      }),
+                    );
+                    dispatch(applicationActions.showModal());
+                  }}
                   startIcon={<SendIcon fontSize="small" />}
                   sx={{ m: 1 }}
                   variant="contained"
@@ -148,11 +135,7 @@ const JobDetails = () => {
           <Box sx={{ mt: 3 }}>{isLoading ? <ScreenLoader /> : <JobOverview job={job} />}</Box>
         </Container>
       </Box>
-      <JobApplicationModal
-        onApply={handleApplyModalClose}
-        onClose={handleApplyModalClose}
-        open={isApplicationOpen}
-      />
+      <JobApplicationModal />
     </>
   );
 };

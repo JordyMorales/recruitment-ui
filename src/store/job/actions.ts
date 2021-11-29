@@ -4,6 +4,9 @@ import {
   getAllJobsTypes,
   getJobByIdTypes,
   updateJobTypes,
+  applyForJobTypes,
+  updateApplicationTypes,
+  getJobApplicationsTypes,
 } from './constants';
 
 export const jobActions = {
@@ -65,6 +68,42 @@ export const jobActions = {
   }),
   updateJobFailure: (error: string) => ({
     type: updateJobTypes.FAILURE,
+    payload: error,
+  }),
+  applyForJobRequest: (payload: any) => ({
+    type: applyForJobTypes.REQUEST,
+    payload,
+  }),
+  applyForJobSuccess: (payload: any) => ({
+    type: applyForJobTypes.SUCCESS,
+    payload,
+  }),
+  applyForJobFailure: (error: string) => ({
+    type: applyForJobTypes.FAILURE,
+    payload: error,
+  }),
+  updateApplicationRequest: (payload: any) => ({
+    type: updateApplicationTypes.REQUEST,
+    payload,
+  }),
+  updateApplicationSuccess: (payload: any) => ({
+    type: updateApplicationTypes.SUCCESS,
+    payload,
+  }),
+  updateApplicationFailure: (error: string) => ({
+    type: updateApplicationTypes.FAILURE,
+    payload: error,
+  }),
+  getJobApplicationsRequest: (payload: any) => ({
+    type: getJobApplicationsTypes.REQUEST,
+    payload,
+  }),
+  getJobApplicationsSuccess: (payload: any) => ({
+    type: getJobApplicationsTypes.SUCCESS,
+    payload,
+  }),
+  getJobApplicationsFailure: (error: string) => ({
+    type: getJobApplicationsTypes.FAILURE,
     payload: error,
   }),
 };

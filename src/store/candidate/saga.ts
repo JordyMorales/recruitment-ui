@@ -11,6 +11,9 @@ import {
   getCandidateProfileTypes,
   updateCandidateTypes,
   updateCandidateProfileTypes,
+  applyForJobTypes,
+  updateApplicationTypes,
+  getCandidateApplicationsTypes,
 } from './constants';
 
 function* createCandidate({ payload }: AnyAction): any {
@@ -92,6 +95,40 @@ function* updateCandidateProfile({ payload }: AnyAction): any {
   }
 }
 
+function* applyForJob({ payload }: AnyAction): any {
+  try {
+    const applicationCreated = yield call([services.job, 'applyForJob'], payload);
+    yield put(candidateActions.applyForJobSuccess(applicationCreated));
+    toast.success('Great, your application registered successfully!');
+  } catch (error: any) {
+    console.error('function*applyForJob -> error', error);
+    toast.error(error);
+    yield put(candidateActions.applyForJobFailure(error));
+  }
+}
+
+function* updateApplication({ payload }: AnyAction): any {
+  try {
+    yield call([services.job, 'updateApplication'], payload);
+    yield put(candidateActions.updateApplicationSuccess(payload));
+    toast.success('Great, your application updated successfully!');
+  } catch (error: any) {
+    console.error('function*updateApplication -> error', error);
+    toast.error(error);
+    yield put(candidateActions.updateApplicationFailure(error));
+  }
+}
+
+function* getCandidateApplications({ payload }: any): any {
+  try {
+    const res = yield call([services.candidate, 'getCandidateApplications'], payload);
+    yield put(candidateActions.getCandidateApplicationsSuccess(res));
+  } catch (error: any) {
+    console.error('function*getCandidateApplications -> error', error);
+    yield put(candidateActions.getCandidateApplicationsFailure(error));
+  }
+}
+
 function* CandidateSaga() {
   yield takeLatest(createCandidateTypes.REQUEST, createCandidate);
   yield takeLatest(getAllCandidatesTypes.REQUEST, getAllCandidates);
@@ -99,6 +136,9 @@ function* CandidateSaga() {
   yield takeLatest(getCandidateProfileTypes.REQUEST, getCandidateProfile);
   yield takeLatest(updateCandidateTypes.REQUEST, updateCandidate);
   yield takeLatest(updateCandidateProfileTypes.REQUEST, updateCandidateProfile);
+  yield takeLatest(applyForJobTypes.REQUEST, applyForJob);
+  yield takeLatest(updateApplicationTypes.REQUEST, updateApplication);
+  yield takeLatest(getCandidateApplicationsTypes.REQUEST, getCandidateApplications);
 }
 
 export default CandidateSaga;

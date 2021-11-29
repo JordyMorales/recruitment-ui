@@ -25,7 +25,6 @@ const JobDescriptionForm: React.FC<JobDescriptionFormProps> = (props) => {
   useEffect(() => {
     if (mounted && isSuccessful) {
       onComplete();
-      toast.success('The job was saved successfully');
     }
   }, [isSuccessful, mounted, onComplete]);
 

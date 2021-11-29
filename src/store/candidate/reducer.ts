@@ -6,13 +6,24 @@ import {
   getCandidateProfileTypes,
   updateCandidateTypes,
   updateCandidateProfileTypes,
+  applyForJobTypes,
+  updateApplicationTypes,
+  getCandidateApplicationsTypes,
 } from './constants';
 
-import { CandidateState, emptyCandidate } from './types';
+import { CandidateState, emptyApplication, emptyCandidate } from './types';
+
 const initialState: CandidateState = {
   error: '',
   isLoading: false,
+  isSuccessful: false,
   account: emptyCandidate,
+  application: emptyApplication,
+  applications: {
+    initialLoading: true,
+    isLoading: false,
+    applications: [],
+  },
   candidate: emptyCandidate,
   list: {
     initialLoading: true,
@@ -37,6 +48,7 @@ const candidateReducer = (state = initialState, action: any) => {
       return {
         ...state,
         candidate: emptyCandidate,
+        isSuccessful: false,
       };
     case createCandidateTypes.REQUEST:
       return {
@@ -54,6 +66,7 @@ const candidateReducer = (state = initialState, action: any) => {
           candidates: [payload, ...state.list.candidates],
         },
         isLoading: false,
+        isSuccessful: true,
       };
 
     case createCandidateTypes.FAILURE:
@@ -154,6 +167,7 @@ const candidateReducer = (state = initialState, action: any) => {
           ],
         },
         isLoading: false,
+        isSuccessful: true,
       };
 
     case updateCandidateTypes.FAILURE:
@@ -185,6 +199,7 @@ const candidateReducer = (state = initialState, action: any) => {
           ],
         },
         isLoading: false,
+        isSuccessful: true,
       };
 
     case updateCandidateProfileTypes.FAILURE:
@@ -192,6 +207,93 @@ const candidateReducer = (state = initialState, action: any) => {
         ...state,
         isLoading: false,
         error: payload,
+      };
+
+    case applyForJobTypes.REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case applyForJobTypes.SUCCESS:
+      return {
+        ...state,
+        application: emptyApplication,
+        applications: {
+          ...state.applications,
+          applications: [payload, ...state.applications.applications],
+        },
+        isLoading: false,
+        isSuccessful: true,
+      };
+
+    case applyForJobTypes.FAILURE:
+      return {
+        ...state,
+        error: payload,
+        isLoading: false,
+      };
+
+    case updateApplicationTypes.REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case updateApplicationTypes.SUCCESS:
+      const applicationIndex = state.applications.applications.findIndex(
+        (application) => application.applicationId === payload.applicationId,
+      );
+
+      return {
+        ...state,
+        application: emptyApplication,
+        applications: {
+          ...state.applications,
+          applications: [
+            ...state.applications.applications.slice(0, applicationIndex),
+            { ...state.applications.applications[applicationIndex], ...payload },
+            ...state.applications.applications.slice(applicationIndex + 1),
+          ],
+        },
+        isLoading: false,
+        isSuccessful: true,
+      };
+
+    case updateApplicationTypes.FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: payload,
+      };
+
+    case getCandidateApplicationsTypes.REQUEST:
+      return {
+        ...state,
+        applications: {
+          ...initialState.applications,
+          isLoading: true,
+        },
+      };
+
+    case getCandidateApplicationsTypes.SUCCESS:
+      return {
+        ...state,
+        applications: {
+          applications: payload,
+          isLoading: false,
+          initialLoading: false,
+        },
+      };
+
+    case getCandidateApplicationsTypes.FAILURE:
+      return {
+        ...state,
+        error: payload,
+        applications: {
+          ...initialState.applications,
+          isLoading: false,
+        },
       };
 
     default:

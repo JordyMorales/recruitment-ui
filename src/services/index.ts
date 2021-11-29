@@ -6,6 +6,7 @@ import Tag from './tagServices';
 import Candidate from './candidateServices';
 import Process from './processServices';
 import Job from './jobServices';
+import Application from './applicationServices';
 
 const axios = Axios.create({
   baseURL: window.__RUNTIME_CONFIG__?.REACT_APP_SERVER_URI || process.env.REACT_APP_SERVER_URI,
@@ -33,6 +34,7 @@ const services = {
   candidate: new Candidate(axios),
   process: new Process(axios),
   job: new Job(axios),
+  application: new Application(axios),
 };
 
 export default services;
