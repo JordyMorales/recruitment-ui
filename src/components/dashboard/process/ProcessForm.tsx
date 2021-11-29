@@ -39,11 +39,7 @@ const ProcessForm: React.FC = (props) => {
         code: Yup.string().max(100).required(),
         name: Yup.string().max(100).required(),
         description: Yup.string().max(255),
-        steps: Yup.array().of(
-          Yup.object().shape({
-            name: Yup.string().max(28, 'Max 28 chars'),
-          }),
-        ),
+        steps: Yup.array().min(1),
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }): Promise<void> => {
         try {
@@ -68,16 +64,7 @@ const ProcessForm: React.FC = (props) => {
         }
       }}
     >
-      {({
-        errors,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        isSubmitting,
-        setFieldValue,
-        touched,
-        values,
-      }): JSX.Element => (
+      {({ errors, handleBlur, handleChange, handleSubmit, setFieldValue, touched, values }): JSX.Element => (
         <form onSubmit={handleSubmit} {...props}>
           <Grid container spacing={3}>
             <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -130,22 +117,19 @@ const ProcessForm: React.FC = (props) => {
               </Card>
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-              <Card>
-                <Steps steps={values.steps} onChange={(newValue) => setFieldValue('steps', newValue)} />
-              </Card>
+              <Steps steps={values.steps} onChange={(newValue) => setFieldValue('steps', newValue)} />
+              {Boolean(touched.steps && errors.steps) && (
+                <Box sx={{ ml: 2 }}>
+                  <FormHelperText error>{errors.steps}</FormHelperText>
+                </Box>
+              )}
               {errors.submit && (
                 <Box sx={{ mt: 3 }}>
                   <FormHelperText error>{errors.submit}</FormHelperText>
                 </Box>
               )}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-                <LoadingButton
-                  color="primary"
-                  loading={isLoading}
-                  loadingPosition="end"
-                  type="submit"
-                  variant="contained"
-                >
+                <LoadingButton color="primary" loading={isLoading} type="submit" variant="contained">
                   {params.processId ? 'Save Changes' : 'Create Process'}
                 </LoadingButton>
               </Box>

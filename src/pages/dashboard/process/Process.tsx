@@ -3,14 +3,14 @@ import { Helmet } from 'react-helmet-async';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Breadcrumbs, Button, Container, Grid, Link, Typography } from '@mui/material';
-
 import useMounted from '../../../hooks/useMounted';
 import useSettings from '../../../hooks/useSettings';
-import ChevronRightIcon from '../../../icons/ChevronRight';
-import PlusIcon from '../../../icons/Plus';
 import { RootState } from '../../../store/rootReducer';
 import { processActions } from '../../../store/process/actions';
 import { ProcessList } from '../../../components/dashboard/process';
+
+import ChevronRightIcon from '../../../icons/ChevronRight';
+import PlusIcon from '../../../icons/Plus';
 
 const Process: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Process: React.FC = () => {
   const { settings } = useSettings();
 
   const {
-    list: {processes, isLoading, initialLoading }
+    list: { processes, isLoading, initialLoading },
   } = useSelector((state: RootState) => state.process);
 
   useEffect(() => {
@@ -78,7 +78,9 @@ const Process: React.FC = () => {
               </Typography>
             </Breadcrumbs>
           </Box>
-          <Box sx={{ mt: 3 }}><ProcessList processes={processes} isLoading={isLoading} /></Box>
+          <Box sx={{ mt: 3 }}>
+            <ProcessList processes={processes} isLoading={isLoading} />
+          </Box>
         </Container>
       </Box>
     </>

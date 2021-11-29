@@ -10,7 +10,7 @@ import SettingsDrawer from './components/SettingsDrawer';
 import useSettings from './hooks/useSettings';
 import useAuth from './hooks/useAuth';
 import routes from './routes';
-import DateAdapter from '@mui/lab/AdapterDayjs';
+import DateAdapter from '@mui/lab/AdapterDateFns';
 import { LocalizationProvider } from '@mui/lab';
 
 const App: React.FC = () => {

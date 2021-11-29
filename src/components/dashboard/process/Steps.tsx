@@ -70,6 +70,7 @@ const Steps: React.FC<StepsProps> = (props) => {
                   <Draggable key={step.stepId} draggableId={step.stepId} index={index}>
                     {(draggableProvided) => (
                       <Card
+                      variant="outlined"
                         {...draggableProvided.draggableProps}
                         ref={draggableProvided.innerRef}
                         {...draggableProvided.dragHandleProps}

@@ -1,21 +1,31 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Breadcrumbs, Button, Container, Grid, Link, Typography } from '@mui/material';
-
 import useMounted from '../../../hooks/useMounted';
 import useSettings from '../../../hooks/useSettings';
+import { JobList } from '../../../components/dashboard/jobs';
+import { RootState } from '../../../store/rootReducer';
+import { jobActions } from '../../../store/job/actions';
+
 import ChevronRightIcon from '../../../icons/ChevronRight';
 import PlusIcon from '../../../icons/Plus';
 
 const Jobs: React.FC = () => {
+  const dispatch = useDispatch();
   const mounted = useMounted();
   const { settings } = useSettings();
 
+  const {
+    list: { jobs, isLoading, initialLoading },
+  } = useSelector((state: RootState) => state.job);
+
   useEffect(() => {
-    if (mounted) {
+    if (mounted && initialLoading) {
+      dispatch(jobActions.getAllJobsRequest());
     }
-  }, [mounted]);
+  }, [dispatch, mounted, initialLoading]);
 
   return (
     <>
@@ -69,7 +79,7 @@ const Jobs: React.FC = () => {
             </Breadcrumbs>
           </Box>
           <Box sx={{ mt: 3 }}>
-            {/* <ProjectCreateWizard /> */}
+            <JobList jobs={jobs} isLoading={isLoading} />
           </Box>
         </Container>
       </Box>

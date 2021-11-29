@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link as RouterLink } from 'react-router-dom';
-import { Avatar, Box, Breadcrumbs, Container, Divider, Grid, Link, Tab, Tabs, Typography } from '@mui/material';
+import {
+  Box,
+  Breadcrumbs,
+  Container,
+  Divider,
+  Grid,
+  Link,
+  Tab,
+  Tabs,
+  Typography,
+} from '@mui/material';
 import {
   Applications,
   GeneralSettings,
@@ -47,16 +57,9 @@ const Account: React.FC = () => {
         <Container maxWidth={settings.compact ? 'xl' : false}>
           <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
             <Grid item>
-              <Grid container spacing={1} display="flex">
-                <Grid item alignSelf="center">
-                  <Avatar src={profile?.photoUrl} />
-                </Grid>
-                <Grid item alignSelf="center">
-                  <Typography color="textPrimary" variant="h5">
-                    {`${profile.firstName} ${profile.lastName}`}
-                  </Typography>
-                </Grid>
-              </Grid>
+              <Typography color="textPrimary" variant="h5">
+                {`${profile.firstName} ${profile.lastName}`}
+              </Typography>
             </Grid>
           </Grid>
           <Box sx={{ mt: 1 }}>

@@ -74,7 +74,6 @@ const CandidateComments: React.FC = () => {
                 <LoadingButton
                   color="primary"
                   loading={isSubmitting}
-                  loadingPosition="end"
                   type="submit"
                   size="large"
                   variant="contained"

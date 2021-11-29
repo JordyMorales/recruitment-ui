@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 import { CountryRegionData } from 'react-country-region-selector';
-import { DatePicker } from '@mui/lab';
+import { MobileDatePicker } from '@mui/lab';
 import {
   Dialog,
   DialogTitle,
@@ -171,7 +171,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                     />
                   </Grid>
                     <Grid item lg={5} md={5} sm={5} xs={12}>
-                    <DatePicker
+                    <MobileDatePicker
                       label="Date of Birth"
                       value={values.dateOfBirth}
                       inputFormat="YYYY/MM/DD"

@@ -10,7 +10,6 @@ class Process {
   createProcess = async (payload: any): Promise<any> => {
     try {
       const res = await this.axios.post('/processes', payload);
-      console.log("🚀 ~ file: processServices.ts ~ line 14 ~ Process ~ createProcess= ~ res.data.process", res.data.process)
       return res.data.process;
     } catch (error) {
       throw error.response.data.message;

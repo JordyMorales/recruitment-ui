@@ -1,5 +1,5 @@
 import Quill from 'react-quill';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material';
 
 const QuillEditorRoot = styled((props) => (
   <Quill {...props} />
@@ -68,8 +68,8 @@ const QuillEditorRoot = styled((props) => (
         flexGrow: 1,
         '& .ql-editor': {
           color: theme.palette.text.primary,
-          // fontFamily: theme.typography.body1.fontFamily,
-          // fontSize: theme.typography.body1.fontSize,
+          fontFamily: theme.typography.body1.fontFamily,
+          fontSize: theme.typography.body1.fontSize,
           padding: theme.spacing(2),
           '&.ql-blank::before': {
             color: theme.palette.text.secondary,

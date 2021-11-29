@@ -80,13 +80,12 @@ const reduceChildRoutes = ({
       : false;
 
     acc.push(
-      <Guard roles={item.roles}>
+      <Guard roles={item.roles} key={key}>
         <NavItem
           active={partialMatch}
           depth={depth}
           icon={item.icon}
           info={item.info}
-          key={key}
           open={partialMatch}
           path={item.path}
           title={item.title}
@@ -101,13 +100,12 @@ const reduceChildRoutes = ({
     );
   } else {
     acc.push(
-      <Guard roles={item.roles}>
+      <Guard roles={item.roles}  key={key}>
         <NavItem
           active={exactMatch}
           depth={depth}
           icon={item.icon}
           info={item.info}
-          key={key}
           path={item.path}
           title={item.title}
         />

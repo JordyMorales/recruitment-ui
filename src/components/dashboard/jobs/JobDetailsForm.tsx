@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { MobileDatePicker } from '@mui/lab';
+import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import useMounted from '../../../hooks/useMounted';
 import { technologyActions } from '../../../store/technology/actions';
 import { RootState } from '../../../store/rootReducer';
@@ -154,7 +154,6 @@ const JobDetailsForm: React.FC<ProcessFormProps> = (props) => {
                       <MobileDatePicker
                         label="Start Date"
                         value={values.startDate}
-                        inputFormat="YYYY/MM/DD"
                         onChange={(newValue) => setFieldValue('startDate', newValue)}
                         renderInput={(params) => (
                           <TextField

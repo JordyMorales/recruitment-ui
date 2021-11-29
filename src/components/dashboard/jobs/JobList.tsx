@@ -1,19 +1,31 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Card, CardHeader, CardContent, Chip, Grid, Typography } from '@mui/material';
-import { Process } from '../../../types/process';
+import {
+  Box,
+  Card,
+  CardHeader,
+  CardContent,
+  Chip,
+  Grid,
+  Typography,
+  CardActions,
+  Button,
+} from '@mui/material';
+import { Job } from '../../../types/job';
 import IconButton from '@mui/material/IconButton';
 import ArrowRightIcon from '../../../icons/ArrowRight';
-import AnimatedLogo from '../../../icons/AnimatedLogo';
-import { processActions } from '../../../store/process/actions';
+import { jobActions } from '../../../store/job/actions';
+import ScreenLoader from '../../ScreenLoader';
+import { format } from 'date-fns';
+import { formatDistanceToNowStrict } from 'date-fns';
 
-interface ProcessListProps {
-  processes: Process[];
+interface JobListProps {
+  jobs: Job[];
   isLoading: boolean;
 }
 
-const ProcessList: React.FC<ProcessListProps> = ({ processes, isLoading }) => {
+const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
   const dispatch = useDispatch();
 
   if (isLoading)
@@ -35,38 +47,33 @@ const ProcessList: React.FC<ProcessListProps> = ({ processes, isLoading }) => {
             zIndex: 2000,
           }}
         >
-          <AnimatedLogo />
+          <ScreenLoader />
         </Box>
       </div>
     );
 
   return (
     <Grid container spacing={{ xs: 2, md: 3 }}>
-      {processes.map((process, index) => (
-        <Grid item key={index} xs={12} sm={12} md={6} lg={6} xl={6}>
+      {jobs.map((job, index) => (
+        <Grid item key={index} xs={12} sm={12} md={6} lg={4} xl={4}>
           <Card>
             <CardHeader
               action={
                 <IconButton
                   aria-label="settings"
                   component={RouterLink}
-                  onClick={() => dispatch(processActions.setProcess(process))}
-                  to={`/app/processes/${process.processId}`}
+                  onClick={() => dispatch(jobActions.setJob(job))}
+                  to={`/app/jobs/${job.jobId}`}
                 >
                   <ArrowRightIcon />
                 </IconButton>
               }
               title={
                 <Typography sx={{ fontSize: { xl: 24, lg: 19, md: 17, sm: 16, xs: 15 } }}>
-                  {process.name}
+                  {job.name}
                 </Typography>
               }
-              subheader={
-                process.code
-                // <Typography variant="caption" sx={{ fontSize: { lg: 15, md: 14, sm: 13, xs: 12 } }}>
-                //   {process.personalData?.email}
-                // </Typography>
-              }
+              subheader={`Job will start in ${formatDistanceToNowStrict(new Date(job.startDate))}`}
             />
             <CardContent
               sx={{
@@ -84,18 +91,30 @@ const ProcessList: React.FC<ProcessListProps> = ({ processes, isLoading }) => {
                 },
               }}
             >
-              {process.steps.map((step, index) => (
+              {job.technologies.map((technology, index) => (
                 <Chip
-                  key={index}
+                  key={technology.technologyId}
                   label={
                     <Typography sx={{ fontSize: { lg: 11, md: 11, sm: 11, xs: 10 } }}>
-                      {step.name}
+                      {technology.name}
                     </Typography>
                   }
                   sx={{ mr: 0.3 }}
                 />
               ))}
             </CardContent>
+            {/* <CardActions>
+
+            </CardActions> */}
+            <Box sx={{ display: 'flex', mx: 2, mt: 3 }}>
+              <Button color="primary" onClick={() => {}} size="large" variant="text">
+                Previous
+              </Button>
+              <Box sx={{ flexGrow: 1 }} />
+              <Button color="primary" type="submit" size="large" variant="contained">
+                Complete
+              </Button>
+            </Box>
           </Card>
         </Grid>
       ))}
@@ -103,4 +122,4 @@ const ProcessList: React.FC<ProcessListProps> = ({ processes, isLoading }) => {
   );
 };
 
-export default ProcessList;
+export default JobList;

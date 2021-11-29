@@ -257,7 +257,6 @@ const ProfessionalInformation: React.FC = (props) => {
                   <LoadingButton
                     color="primary"
                     loading={isLoading}
-                    loadingPosition="end"
                     type="submit"
                     size="large"
                     variant="contained"

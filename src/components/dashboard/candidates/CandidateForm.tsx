@@ -7,7 +7,7 @@ import { Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 import { Box, Card, CardContent, CardHeader, FormHelperText, Grid, TextField, MenuItem } from '@mui/material';
 import useMounted from '../../../hooks/useMounted';
-import { MobileDatePicker } from '@mui/lab';
+import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import MultipleSelectChip from '../../MultipleSelectChip';
@@ -254,7 +254,6 @@ const CandidateForm: React.FC = (props) => {
                       <MobileDatePicker
                         label="Date of Birth"
                         value={values.user.dateOfBirth}
-                        inputFormat="YYYY/MM/DD"
                         onChange={(newValue) => setFieldValue('user.dateOfBirth', newValue)}
                         renderInput={(params) => (
                           <TextField
@@ -535,7 +534,6 @@ const CandidateForm: React.FC = (props) => {
                 <LoadingButton
                   color="primary"
                   loading={isLoading}
-                  loadingPosition="end"
                   type="submit"
                   size="large"
                   variant="contained"

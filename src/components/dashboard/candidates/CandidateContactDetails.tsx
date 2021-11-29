@@ -12,7 +12,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import dayjs from 'dayjs';
+import { format } from 'date-fns';
 import numeral from 'numeral';
 import parsePhoneNumber from 'libphonenumber-js';
 import { Candidate } from '../../../types/candidate';
@@ -70,7 +70,9 @@ const CandidateContactDetails: React.FC<CandidateContactDetailsProps> = ({ candi
                       Birthday
                     </Typography>
                   </TableCell>
-                  <TableCell>{dayjs(candidate.personalData.dateOfBirth).format('DD/MM/YYYY')}</TableCell>
+                  <TableCell>
+                    {format(new Date(candidate.personalData.dateOfBirth), 'dd MMM yyyy')}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>
@@ -102,7 +104,7 @@ const CandidateContactDetails: React.FC<CandidateContactDetailsProps> = ({ candi
                       Created At
                     </Typography>
                   </TableCell>
-                  <TableCell>{dayjs(candidate.createdAt).format('DD/MM/YYYY HH:mm')}</TableCell>
+                  <TableCell>{format(new Date(candidate.createdAt), 'dd MMM yyyy | HH:mm')}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -204,7 +206,10 @@ const CandidateContactDetails: React.FC<CandidateContactDetailsProps> = ({ candi
                   </TableCell>
                   <TableCell>
                     {candidate.tags.map((tag) => (
-                      <Chip label={tag.name} sx={{ mr: 0.5, mt: 0.5, background: tag.color, color: '#FFFFFF' }} />
+                      <Chip
+                        label={tag.name}
+                        sx={{ mr: 0.5, mt: 0.5, background: tag.color, color: '#FFFFFF' }}
+                      />
                     ))}
                   </TableCell>
                 </TableRow>

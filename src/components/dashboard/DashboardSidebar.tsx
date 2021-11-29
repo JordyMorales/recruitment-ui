@@ -229,8 +229,8 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          {sections.map((section) => (
-            <Guard roles={section.roles} key={section.title}>
+          {sections.map((section, index) => (
+            <Guard roles={section.roles} key={index}>
               <NavSection
                 pathname={location.pathname}
                 sx={{

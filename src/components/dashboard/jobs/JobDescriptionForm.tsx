@@ -8,6 +8,7 @@ import useMounted from '../../../hooks/useMounted';
 import { RootState } from '../../../store/rootReducer';
 import { jobActions } from '../../../store/job/actions';
 import { toast } from 'react-toastify';
+
 interface JobDescriptionFormProps {
   onBack?: () => void;
   onComplete?: () => void;
@@ -71,6 +72,7 @@ const JobDescriptionForm: React.FC<JobDescriptionFormProps> = (props) => {
                   sx={{ height: 400 }}
                   value={values.description}
                 />
+                {/* <MarkdownEditor title="Foo" code={values.description} /> */}
               </Paper>
               {Boolean(touched.description && errors.description) && (
                 <Box sx={{ ml: 2 }}>

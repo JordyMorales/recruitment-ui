@@ -21,7 +21,7 @@ import {
 } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import useMounted from '../../../hooks/useMounted';
-import DatePicker from '@mui/lab/DatePicker';
+import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import { CountryRegionData } from 'react-country-region-selector';
 import { toast } from 'react-toastify';
@@ -226,10 +226,9 @@ const GeneralSettings: React.FC = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                      <DatePicker
+                      <MobileDatePicker
                         label="Date of Birth"
                         value={values.dateOfBirth}
-                        inputFormat="YYYY/MM/DD"
                         onChange={(newValue) => setFieldValue('dateOfBirth', newValue)}
                         renderInput={(params) => (
                           <TextField
@@ -313,7 +312,6 @@ const GeneralSettings: React.FC = (props) => {
                   <LoadingButton
                     color="primary"
                     loading={isLoading}
-                    loadingPosition="end"
                     disabled={isEqual(profile, values)}
                     type="submit"
                     size="large"
