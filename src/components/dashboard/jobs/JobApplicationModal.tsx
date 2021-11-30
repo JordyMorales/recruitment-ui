@@ -5,16 +5,23 @@ import { Box, Button, Dialog, TextField, Typography } from '@mui/material';
 import { RootState } from '../../../store/rootReducer';
 import { applicationActions } from '../../../store/application/actions';
 import { candidateActions } from '../../../store/candidate/actions';
+import { processActions } from '../../../store/process/actions';
 
 const JobApplicationModal: React.FC = () => {
   const dispatch = useDispatch();
 
   const { application, shouldClose, isOpen } = useSelector((state: RootState) => state.application);
+  const { process } = useSelector((state: RootState) => state.process);
   const [value, setValue] = useState<string>('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(event.target.value);
   };
+
+  useEffect(() => {
+    if (application.processId)
+      dispatch(processActions.getProcessByIdRequest({ processId: application.processId }));
+  }, [application.processId, dispatch]);
 
   const handleClose = useCallback(() => {
     dispatch(applicationActions.hiModal());
@@ -31,6 +38,7 @@ const JobApplicationModal: React.FC = () => {
       candidateActions.applyForJobRequest({
         ...application,
         otherInfo: value,
+        stepId: process.steps[0].stepId,
       }),
     );
     dispatch(applicationActions.hiModal());

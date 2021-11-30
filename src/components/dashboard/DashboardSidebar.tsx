@@ -50,7 +50,7 @@ const sections = [
           {
             title: 'List',
             path: '/app/candidates',
-            roles: ['ADMIN'] as Role[],
+            roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER'] as Role[],
           },
           {
             title: 'Create',
@@ -58,7 +58,7 @@ const sections = [
             roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER'] as Role[],
           },
         ],
-        roles: ['ADMIN', 'RECRUITER'] as Role[],
+        roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER'] as Role[],
       },
       {
         title: 'Job Listings',
@@ -73,10 +73,10 @@ const sections = [
           {
             title: 'Create',
             path: '/app/jobs/new',
-            roles: ['ADMIN', 'RECRUITER',] as Role[],
+            roles: ['ADMIN', 'RECRUITER'] as Role[],
           },
         ],
-        roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER', 'CANDIDATE'] as Role[],
+        roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER', 'EMPLOYEE', 'CANDIDATE'] as Role[],
       },
       {
         title: 'Interviews',
@@ -86,7 +86,7 @@ const sections = [
           {
             title: 'List',
             path: '/app/interviews',
-            roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER',] as Role[],
+            roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER'] as Role[],
           },
           {
             title: 'Create',
@@ -94,7 +94,7 @@ const sections = [
             roles: ['ADMIN', 'RECRUITER'] as Role[],
           },
         ],
-        roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER',] as Role[],
+        roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER'] as Role[],
       },
     ],
   },
@@ -117,13 +117,13 @@ const sections = [
         title: 'Technologies',
         path: '/app/technologies',
         icon: <CodeIcon fontSize="small" />,
-        roles: ['ADMIN', 'RECRUITER'] as Role[],
+        roles: ['ADMIN'] as Role[],
       },
       {
         title: 'Tags',
         path: '/app/tags',
         icon: <TagsIcon fontSize="small" />,
-        roles: ['ADMIN', 'RECRUITER'] as Role[],
+        roles: ['ADMIN'] as Role[],
       },
     ],
     roles: ['ADMIN', 'RECRUITER'] as Role[],

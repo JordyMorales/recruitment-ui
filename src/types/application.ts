@@ -9,4 +9,5 @@ export interface Application {
   state?: ApplicationState;
   appliedAt?: Date;
   updatedAt?: Date;
+  processId?: string;
 }

@@ -17,6 +17,7 @@ const Applications: React.FC = () => {
   const { user } = useAuth();
 
   const { isLoading, applications } = useSelector((state: RootState) => state.candidate);
+  console.log("🚀 ~ file: Applications.tsx ~ line 20 ~ applications", applications)
 
   useEffect(() => {
     if (mounted) {

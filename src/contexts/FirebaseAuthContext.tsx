@@ -13,6 +13,9 @@ interface AuthContextValue extends State {
   createUserWithEmailAndPassword: (email: string, password: string) => Promise<any>;
   signInWithEmailAndPassword: (email: string, password: string) => Promise<any>;
   logout: () => Promise<void>;
+  uploadPhotoUrl: (file: File) => Promise<void>;
+  updatePassword: (newPassword: string) => Promise<boolean>;
+  sendPasswordResetEmail: (email: string) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -55,6 +58,9 @@ const AuthContext = createContext<AuthContextValue>({
   createUserWithEmailAndPassword: () => Promise.resolve(),
   signInWithEmailAndPassword: () => Promise.resolve(),
   logout: () => Promise.resolve(),
+  uploadPhotoUrl: () => Promise.resolve(),
+  updatePassword: () => Promise.resolve(false),
+  sendPasswordResetEmail: () => Promise.resolve(),
 });
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
@@ -101,6 +107,87 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     await firebase.auth().signOut();
   };
 
+  const uploadPhotoUrl = async (file: File): Promise<void> => {
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+    const uploadTask = storageRef.child(`images/${file.name}`).put(file);
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED:
+            console.log('Upload is paused');
+            break;
+          case firebase.storage.TaskState.RUNNING:
+            console.log('Upload is running');
+            break;
+        }
+      },
+      (error) => {
+        console.log('🚀 ~ file: FirebaseAuthContext.tsx ~ line 128 ~ uploadPhotoUrl ~ error', error);
+        // Handle unsuccessful uploads
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          console.log('File available at', downloadURL);
+          const user = firebase.auth().currentUser;
+
+          user
+            .updateProfile({ photoURL: downloadURL })
+            .then(async () => {
+              const { claims } = await user.getIdTokenResult();
+              dispatch({
+                type: 'AUTH_STATE_CHANGED',
+                payload: {
+                  isAuthenticated: true,
+                  user: {
+                    userId: user.uid,
+                    photoUrl: downloadURL,
+                    email: user.email,
+                    firstName: user.displayName,
+                    role: claims.role,
+                  },
+                },
+              });
+            })
+            .catch((error) => {
+              console.log(
+                '🚀 ~ file: FirebaseAuthContext.tsx ~ line 145 ~ uploadTask.snapshot.ref.getDownloadURL ~ error',
+                error,
+              );
+              // An error occurred
+              // ...
+            });
+        });
+      },
+    );
+  };
+
+  const updatePassword = async (newPassword: string): Promise<boolean> => {
+    try {
+      const user = firebase.auth().currentUser;
+      await user.updatePassword(newPassword);
+      return true;
+    } catch (error) {
+      switch (error.code) {
+        case 'auth/requires-recent-login':
+          throw new Error(
+            'This operation is sensitive and requires recent authentication. Log in again before retrying this request.',
+          );
+
+        default:
+          throw new Error('Could not change password');
+      }
+    }
+  };
+
+  const sendPasswordResetEmail = async (email: string): Promise<void> => {
+    await firebase.auth().sendPasswordResetEmail(email);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -108,6 +195,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         createUserWithEmailAndPassword,
         signInWithEmailAndPassword,
         logout,
+        uploadPhotoUrl,
+        updatePassword,
+        sendPasswordResetEmail,
       }}
     >
       {children}

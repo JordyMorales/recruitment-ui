@@ -20,6 +20,7 @@ interface JobListProps {
 }
 
 const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
+  console.log('🚀 ~ file: JobList.tsx ~ line 23 ~ jobs', jobs);
   const dispatch = useDispatch();
   const { user } = useAuth();
 
@@ -115,6 +116,7 @@ const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
                       appliedBy: user.userId,
                       jobId: job.jobId,
                       state: 'APPLIED',
+                      processId: job.processId,
                     }),
                   );
                   dispatch(applicationActions.showModal());

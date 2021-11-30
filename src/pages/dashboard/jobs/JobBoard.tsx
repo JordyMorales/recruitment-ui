@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { DragDropContext } from 'react-beautiful-dnd';
 import type { DropResult } from 'react-beautiful-dnd';
 import { toast } from 'react-toastify';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import CalendarIcon from '../../../icons/Calendar';
 import useMounted from '../../../hooks/useMounted';
 import { jobActions } from '../../../store/job/actions';
@@ -14,7 +14,6 @@ import { RootState } from '../../../store/rootReducer';
 import { boardActions } from '../../../store/board/actions';
 import { BoardColumn } from '../../../components/dashboard/board';
 import { Column } from '../../../store/board/type';
-import AnimatedLogo from '../../../icons/AnimatedLogo';
 
 const JobBoard: React.FC = () => {
   const params = useParams();
@@ -22,7 +21,7 @@ const JobBoard: React.FC = () => {
   const dispatch = useDispatch();
 
   const { job } = useSelector((state: RootState) => state.job);
-  const { isLoading, columns } = useSelector((state: RootState) => state.board);
+  const { columns } = useSelector((state: RootState) => state.board);
 
   useEffect(() => {
     if (mounted && params.jobId) {
@@ -62,25 +61,6 @@ const JobBoard: React.FC = () => {
       toast.error('Something went wrong!');
     }
   };
-
-  if (isLoading)
-    return (
-      <Grid container sx={{ height: '100vh' }}>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-          }}
-        >
-          <AnimatedLogo />
-        </Box>
-      </Grid>
-    );
-
 
   return (
     <>

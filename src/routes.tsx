@@ -58,7 +58,7 @@ const routes = [
             // path: '',
             index: true,
             element: (
-              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER', 'EMPLOYEE', 'CANDIDATE']}>
+              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
                 <CandidateList />
               </RoleBasedGuard>
             ),
@@ -74,7 +74,7 @@ const routes = [
           {
             path: ':candidateId',
             element: (
-              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER', 'EMPLOYEE']}>
+              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
                 <CandidateDetails />
               </RoleBasedGuard>
             ),
@@ -103,7 +103,7 @@ const routes = [
           {
             path: 'new',
             element: (
-              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
+              <RoleBasedGuard roles={['ADMIN', 'RECRUITER']}>
                 <JobCreate />
               </RoleBasedGuard>
             ),
@@ -168,7 +168,7 @@ const routes = [
       {
         path: 'technologies',
         element: (
-          <RoleBasedGuard roles={['ADMIN', 'RECRUITER']}>
+          <RoleBasedGuard roles={['ADMIN']}>
             <TechnologyList />
           </RoleBasedGuard>
         ),
@@ -176,7 +176,7 @@ const routes = [
       {
         path: 'tags',
         element: (
-          <RoleBasedGuard roles={['ADMIN', 'RECRUITER']}>
+          <RoleBasedGuard roles={['ADMIN']}>
             <TagList />
           </RoleBasedGuard>
         ),

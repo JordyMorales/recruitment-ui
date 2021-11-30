@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { isEqual } from 'lodash';
-
+import Dropzone from 'react-dropzone';
 import {
   Avatar,
   Box,
@@ -30,11 +30,13 @@ import { getRegionOptions } from '../../../utils';
 import { RootState } from '../../../store/rootReducer';
 import { userActions } from '../../../store/user/actions';
 import ScreenLoader from '../../ScreenLoader';
+import useAuth from '../../../hooks/useAuth';
 
 const GeneralSettings: React.FC = (props) => {
   const mounted = useMounted();
-
   const dispatch = useDispatch();
+  const { user, uploadPhotoUrl } = useAuth();
+  console.log('🚀 ~ file: GeneralSettings.tsx ~ line 39 ~ user', user);
 
   const { isLoading, profile } = useSelector((state: RootState) => state.user);
 
@@ -43,6 +45,12 @@ const GeneralSettings: React.FC = (props) => {
       dispatch(userActions.getCurrentUserRequest());
     }
   }, [dispatch, mounted, profile]);
+
+  useEffect(() => {
+    if (mounted && user && user.photoUrl !== profile.photoUrl) {
+      dispatch(userActions.updateCurrentUserRequest({ ...profile, photoUrl: user.photoUrl }));
+    }
+  }, [dispatch, mounted, profile, user, user.photoUrl]);
 
   if (isLoading) {
     return <ScreenLoader />;
@@ -68,13 +76,16 @@ const GeneralSettings: React.FC = (props) => {
                   borderRadius: '50%',
                 }}
               >
-                <Avatar
-                  src={profile.photoUrl}
-                  sx={{
-                    height: 100,
-                    width: 100,
-                  }}
-                />
+                <Dropzone onDrop={(acceptedFiles) => uploadPhotoUrl(acceptedFiles[0])}>
+                  {({ getRootProps, getInputProps }) => (
+                    <section>
+                      <div {...getRootProps()}>
+                        <Avatar src={profile.photoUrl} sx={{ height: 100, width: 100 }} />
+                        <input {...getInputProps()} />
+                      </div>
+                    </section>
+                  )}
+                </Dropzone>
               </Box>
               <Typography color="textPrimary" sx={{ mt: 1 }} variant="subtitle2">
                 {`${profile.firstName} ${profile.lastName}`}
@@ -129,7 +140,7 @@ const GeneralSettings: React.FC = (props) => {
           })}
           onSubmit={async (values, { setErrors, setStatus, setSubmitting }): Promise<void> => {
             try {
-              await dispatch(userActions.updateCurrentUserRequest(values));
+              dispatch(userActions.updateCurrentUserRequest(values));
               setStatus({ success: true });
               setSubmitting(false);
               toast.success('Profile updated!');
