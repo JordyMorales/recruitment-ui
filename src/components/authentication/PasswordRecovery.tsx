@@ -5,10 +5,11 @@ import { Formik } from 'formik';
 import { Box, Button, FormHelperText, TextField } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
 import useMounted from '../../hooks/useMounted';
+import { toast } from 'react-toastify';
 
 const PasswordRecovery: React.FC = () => {
   const mounted = useMounted();
-  const { passwordRecovery } = useAuth() as any;
+  const { passwordRecovery } = useAuth();
 
   const navigate = useNavigate();
 
@@ -24,12 +25,8 @@ const PasswordRecovery: React.FC = () => {
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }): Promise<void> => {
         try {
           await passwordRecovery(values.email);
-
-          navigate('/authentication/password-reset', {
-            state: {
-              username: values.email,
-            },
-          });
+          toast.success('Reset link was sent successfully.');
+          navigate('/login');
         } catch (err) {
           console.error(err);
           if (mounted.current) {

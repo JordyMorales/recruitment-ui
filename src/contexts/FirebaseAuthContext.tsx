@@ -15,7 +15,7 @@ interface AuthContextValue extends State {
   logout: () => Promise<void>;
   uploadPhotoUrl: (file: File) => Promise<void>;
   updatePassword: (newPassword: string) => Promise<boolean>;
-  sendPasswordResetEmail: (email: string) => Promise<void>;
+  passwordRecovery: (email: string) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -60,7 +60,7 @@ const AuthContext = createContext<AuthContextValue>({
   logout: () => Promise.resolve(),
   uploadPhotoUrl: () => Promise.resolve(),
   updatePassword: () => Promise.resolve(false),
-  sendPasswordResetEmail: () => Promise.resolve(),
+  passwordRecovery: () => Promise.resolve(),
 });
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
@@ -184,7 +184,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const sendPasswordResetEmail = async (email: string): Promise<void> => {
+  const passwordRecovery = async (email: string): Promise<void> => {
     await firebase.auth().sendPasswordResetEmail(email);
   };
 
@@ -197,7 +197,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         logout,
         uploadPhotoUrl,
         updatePassword,
-        sendPasswordResetEmail,
+        passwordRecovery,
       }}
     >
       {children}

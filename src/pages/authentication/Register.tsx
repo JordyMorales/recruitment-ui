@@ -6,6 +6,7 @@ import { RegisterFirebase } from '../../components/authentication';
 import Logo from '../../components/Logo';
 
 const Register: React.FC = () => {
+  
   return (
     <>
       <Helmet>

@@ -16,15 +16,18 @@ const Register: React.FC = (props) => {
         lastName: '',
         email: '',
         password: '',
-        policy: true,
         submit: null,
       }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string().max(255).required('First Name is required'),
         lastName: Yup.string().max(255).required('Last Name is required'),
         email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-        password: Yup.string().min(7).max(255).required('Password is required'),
-        policy: Yup.boolean().oneOf([true], 'This field must be checked'),
+        password: Yup.string()
+          .required('Please Enter your password')
+          .matches(
+            /^(?=.{6,}$)(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\u0021-\u002b\u003c-\u0040])/,
+            'Must Contain 6 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
+          ),
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }): Promise<void> => {
         try {
@@ -98,28 +101,6 @@ const Register: React.FC = (props) => {
             value={values.password}
             variant="outlined"
           />
-          <Box
-            sx={{
-              alignItems: 'center',
-              display: 'flex',
-              ml: -1,
-              mt: 2,
-            }}
-          >
-            <Checkbox checked={values.policy} color="primary" name="policy" onChange={handleChange} />
-            <Typography color="textSecondary" variant="body2">
-              I have read the
-              <Link color="primary" component="a" href="#">
-                Terms and Conditions
-              </Link>
-            </Typography>
-          </Box>
-          {Boolean(touched.policy && errors.policy) && <FormHelperText error>{errors.policy}</FormHelperText>}
-          {errors.submit && (
-            <Box sx={{ mt: 3 }}>
-              <FormHelperText error>{errors.submit}</FormHelperText>
-            </Box>
-          )}
           <Box sx={{ mt: 2 }}>
             <Button
               color="primary"
