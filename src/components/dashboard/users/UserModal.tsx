@@ -15,6 +15,7 @@ import {
   Grid,
   TextField,
   MenuItem,
+  Divider,
 } from '@mui/material';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import { RootState } from '../../../store/rootReducer';
@@ -103,6 +104,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
           <form onSubmit={handleSubmit}>
             <Box sx={{ p: 3 }}>
               <DialogTitle id="form-dialog-title">User</DialogTitle>
+              <Divider />
               <DialogContent>
                 <Grid container spacing={3} sx={{ mt: 1 }}>
                     <Grid item lg={7} md={7} sm={7} xs={12}>
@@ -174,7 +176,6 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                     <MobileDatePicker
                       label="Date of Birth"
                       value={values.dateOfBirth}
-                      inputFormat="YYYY/MM/DD"
                       onChange={(newValue) => setFieldValue('dateOfBirth', newValue)}
                       renderInput={(params) => <TextField {...params} variant="outlined" fullWidth />}
                     />
@@ -279,6 +280,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                   </Grid>
                 </Grid>
               </DialogContent>
+              <Divider />
               <Box sx={{ display: 'flex', mx: 3, mt: 1 }}>
                 <Box sx={{ mt: 2 }}>
                   <Button color="primary" variant="text" size="large" onClick={props.handleClose}>

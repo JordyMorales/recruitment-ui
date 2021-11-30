@@ -13,6 +13,7 @@ import {
   TextField,
   Switch,
   Typography,
+  Divider,
 } from '@mui/material';
 import { RootState } from '../../../store/rootReducer';
 import { technologyActions } from '../../../store/technology/actions';
@@ -61,6 +62,7 @@ const TechnologyModal: React.FC<TechnologyModalProps> = (props) => {
           <form onSubmit={handleSubmit}>
             <Box sx={{ p: 3 }}>
               <DialogTitle id="form-dialog-title">Technology</DialogTitle>
+              <Divider />
               <DialogContent>
                 <Grid container spacing={3} sx={{ mt: 1 }}>
                   <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -89,6 +91,7 @@ const TechnologyModal: React.FC<TechnologyModalProps> = (props) => {
                   </Grid>
                 </Grid>
               </DialogContent>
+              <Divider />
               <Box sx={{ display: 'flex', mx: 3, mt: 1 }}>
                 <Box sx={{ mt: 2 }}>
                   <Button color="primary" variant="text" size="large" onClick={props.handleClose}>

@@ -50,7 +50,7 @@ const sections = [
           {
             title: 'List',
             path: '/app/candidates',
-            roles: ['ADMIN', 'CANDIDATE'] as Role[],
+            roles: ['ADMIN'] as Role[],
           },
           {
             title: 'Create',
@@ -58,7 +58,7 @@ const sections = [
             roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER'] as Role[],
           },
         ],
-        roles: ['ADMIN', 'RECRUITER', 'CANDIDATE'] as Role[],
+        roles: ['ADMIN', 'RECRUITER'] as Role[],
       },
       {
         title: 'Job Listings',
@@ -68,15 +68,15 @@ const sections = [
           {
             title: 'Browse',
             path: '/app/jobs',
-            roles: ['ADMIN'] as Role[],
+            roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER', 'CANDIDATE'] as Role[],
           },
           {
             title: 'Create',
             path: '/app/jobs/new',
-            roles: ['ADMIN'] as Role[],
+            roles: ['ADMIN', 'RECRUITER',] as Role[],
           },
         ],
-        roles: ['ADMIN'] as Role[],
+        roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER', 'CANDIDATE'] as Role[],
       },
       {
         title: 'Interviews',
@@ -86,15 +86,15 @@ const sections = [
           {
             title: 'List',
             path: '/app/interviews',
-            roles: ['ADMIN', 'CANDIDATE'] as Role[],
+            roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER',] as Role[],
           },
           {
             title: 'Create',
             path: '/app/interviews/new',
-            roles: ['ADMIN'] as Role[],
+            roles: ['ADMIN', 'RECRUITER'] as Role[],
           },
         ],
-        roles: ['ADMIN', 'CANDIDATE'] as Role[],
+        roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER',] as Role[],
       },
     ],
   },

@@ -110,7 +110,7 @@ const JobDetailsForm: React.FC<ProcessFormProps> = (props) => {
                         error={Boolean(touched.name && errors.name)}
                         fullWidth
                         helperText={touched.name && errors.name}
-                        label="Job Name"
+                        label="Job Title"
                         name="name"
                         onBlur={handleBlur}
                         onChange={handleChange}

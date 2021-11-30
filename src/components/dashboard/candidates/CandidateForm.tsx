@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
-import { Box, Card, CardContent, CardHeader, FormHelperText, Grid, TextField, MenuItem } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, FormHelperText, Grid, TextField, MenuItem, Divider } from '@mui/material';
 import useMounted from '../../../hooks/useMounted';
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -185,6 +185,7 @@ const CandidateForm: React.FC = (props) => {
             <Grid item lg={5} md={5} sm={12} xs={12}>
               <Card>
                 <CardHeader title="Personal Information" />
+                <Divider />
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item lg={7} md={7} sm={7} xs={12}>
@@ -365,6 +366,7 @@ const CandidateForm: React.FC = (props) => {
             <Grid item lg={7} md={7} sm={12} xs={12}>
               <Card>
                 <CardHeader title="Professional Information" />
+                <Divider />
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item lg={4} md={4} sm={4} xs={12}>

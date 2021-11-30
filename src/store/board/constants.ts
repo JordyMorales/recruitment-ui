@@ -1,0 +1,11 @@
+export const getBoardTypes = {
+  REQUEST: 'GET_BOARD_REQUEST',
+  SUCCESS: 'GET_BOARD_SUCCESS',
+  FAILURE: 'GET_BOARD_FAILURE',
+};
+
+export const moveCardTypes = {
+  REQUEST: 'MOVE_CARD_REQUEST',
+  SUCCESS: 'MOVE_CARD_SUCCESS',
+  FAILURE: 'MOVE_CARD_FAILURE',
+};

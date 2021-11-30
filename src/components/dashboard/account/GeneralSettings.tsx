@@ -13,6 +13,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Divider,
   Grid,
   Link,
   MenuItem,
@@ -154,6 +155,7 @@ const GeneralSettings: React.FC = (props) => {
             <form onSubmit={handleSubmit}>
               <Card>
                 <CardHeader title="Personal Information" />
+                <Divider />
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -302,6 +304,8 @@ const GeneralSettings: React.FC = (props) => {
                     )}
                   </Grid>
                 </CardContent>
+
+                <Divider />
                 <Box
                   sx={{
                     display: 'flex',

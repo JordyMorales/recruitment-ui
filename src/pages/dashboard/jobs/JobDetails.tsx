@@ -16,7 +16,7 @@ import ChevronRightIcon from '../../../icons/ChevronRight';
 import CalendarIcon from '../../../icons/Calendar';
 import ScreenLoader from '../../../components/ScreenLoader';
 import JobApplicationModal from '../../../components/dashboard/jobs/JobApplicationModal';
-import RoleBasedGuard from '../../../components/RoleBasedGuard';
+import Guard from '../../../components/Guard';
 import { applicationActions } from '../../../store/application/actions';
 
 const JobDetails: React.FC = () => {
@@ -85,11 +85,17 @@ const JobDetails: React.FC = () => {
             </Grid>
             <Grid item>
               <Box sx={{ m: -1 }}>
-                <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
-                  <Button color="primary" sx={{ m: 1 }} variant="text">
-                    View on panel
-                  </Button>
-                </RoleBasedGuard>
+                <Guard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
+                <Button
+                  color="primary"
+                  component={RouterLink}
+                  sx={{ m: 1 }}
+                  to={`/app/jobs/${params.jobId}/board`}
+                  variant="text"
+                >
+                  View board
+                </Button>
+                </Guard>
                 <Button
                   color="primary"
                   onClick={() => {

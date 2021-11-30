@@ -62,7 +62,7 @@ class Job {
 
   getJobApplications = async (payload: any): Promise<any> => {
     try {
-      const res = await this.axios.get(`/jobs/${payload.applicationId}/applications`);
+      const res = await this.axios.get(`/jobs/${payload.jobId}/applications`);
       return res.data.applications;
     } catch (error) {
       throw error.response.data.message;

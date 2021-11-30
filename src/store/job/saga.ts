@@ -73,7 +73,6 @@ function* updateApplication({ payload }: AnyAction): any {
   try {
     yield call([services.job, 'updateApplication'], payload);
     yield put(jobActions.updateApplicationSuccess(payload));
-    toast.success('Your application updated successfully.'); 
   } catch (error: any) {
     console.error('function*updateApplication -> error', error);
     toast.error(error);

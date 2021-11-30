@@ -7,7 +7,6 @@ import { Formik } from 'formik';
 import useMounted from '../../../hooks/useMounted';
 import { RootState } from '../../../store/rootReducer';
 import { jobActions } from '../../../store/job/actions';
-import { toast } from 'react-toastify';
 
 interface JobDescriptionFormProps {
   onBack?: () => void;

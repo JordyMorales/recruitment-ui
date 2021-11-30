@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, Card, CardContent, CardHeader, FormHelperText, Grid, TextField } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, Divider, FormHelperText, Grid, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import useMounted from '../../../hooks/useMounted';
 import { processActions } from '../../../store/process/actions';
@@ -70,6 +70,7 @@ const ProcessForm: React.FC = (props) => {
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <Card>
                 <CardHeader title="Process Information" />
+                <Divider />
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item lg={8} md={8} sm={8} xs={12}>

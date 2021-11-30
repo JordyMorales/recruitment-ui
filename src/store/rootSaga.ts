@@ -6,7 +6,8 @@ import candidate from './candidate/saga';
 import process from './process/saga';
 import job from './job/saga';
 import application from './application/saga';
+import board from './board/saga';
 
 export default function* rootSaga() {
-  yield all([user(), technology(), tag(), candidate(), process(), job(), application()]);
+  yield all([user(), technology(), tag(), candidate(), process(), job(), application(), board()]);
 }

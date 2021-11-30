@@ -19,26 +19,20 @@ const CandidateListView: React.FC<CandidateListProps> = ({ candidates, isLoading
 
   if (isLoading)
     return (
-      <div>
+      <Grid container sx={{ height: '55vh' }}>
         <Box
           sx={{
-            alignItems: 'center',
-            // backgroundColor: 'background.default',
             display: 'flex',
+            alignItems: 'center',
             flexDirection: 'column',
-            height: '100%',
             justifyContent: 'center',
-            left: 0,
-            p: 3,
-            position: 'fixed',
-            top: 0,
             width: '100%',
-            zIndex: 2000,
+            height: '100%',
           }}
         >
           <AnimatedLogo />
         </Box>
-      </div>
+      </Grid>
     );
 
   return (

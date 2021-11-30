@@ -6,6 +6,7 @@ import candidateReducer from './candidate/reducer';
 import processReducer from './process/reducer';
 import jobReducer from './job/reducer';
 import applicationReducer from './application/reducer';
+import boardReducer from './board/reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   process: processReducer,
   job: jobReducer,
   application: applicationReducer,
+  board: boardReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

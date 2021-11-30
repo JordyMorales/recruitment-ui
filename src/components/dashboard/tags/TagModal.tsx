@@ -13,6 +13,7 @@ import {
   TextField,
   Switch,
   Typography,
+  Divider,
 } from '@mui/material';
 import { SketchPicker } from 'react-color';
 import { RootState } from '../../../store/rootReducer';
@@ -75,6 +76,7 @@ const TagModal: React.FC<TagModalProps> = (props) => {
           <form onSubmit={handleSubmit}>
             <Box sx={{ p: 3 }}>
               <DialogTitle id="form-dialog-title">Tag</DialogTitle>
+              <Divider />
               <DialogContent>
                 <Grid container spacing={3} sx={{ mt: 1 }}>
                   <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -129,6 +131,7 @@ const TagModal: React.FC<TagModalProps> = (props) => {
                   </Grid>
                 </Grid>
               </DialogContent>
+              <Divider />
               <Box sx={{ display: 'flex', mx: 3, mt: 1 }}>
                 <Button color="primary" variant="text" size="large" onClick={props.handleClose}>
                   Cancel

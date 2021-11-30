@@ -21,6 +21,7 @@ const CandidateDetails = Loadable(lazy(() => import('./pages/dashboard/candidate
 const Jobs = Loadable(lazy(() => import('./pages/dashboard/jobs/Jobs')));
 const JobCreate = Loadable(lazy(() => import('./pages/dashboard/jobs/JobCreate')));
 const JobDetails = Loadable(lazy(() => import('./pages/dashboard/jobs/JobDetails')));
+const JobBoard = Loadable(lazy(() => import('./pages/dashboard/jobs/JobBoard')));
 
 const Interviews = Loadable(lazy(() => import('./pages/dashboard/interviews/Interviews')));
 
@@ -112,6 +113,14 @@ const routes = [
             element: (
               <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER', 'EMPLOYEE', 'CANDIDATE']}>
                 <JobDetails />
+              </RoleBasedGuard>
+            ),
+          },
+          {
+            path: ':jobId/board',
+            element: (
+              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
+                <JobBoard />
               </RoleBasedGuard>
             ),
           },

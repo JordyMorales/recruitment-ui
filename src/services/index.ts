@@ -7,6 +7,7 @@ import Candidate from './candidateServices';
 import Process from './processServices';
 import Job from './jobServices';
 import Application from './applicationServices';
+import Step from './stepServices';
 
 const axios = Axios.create({
   baseURL: window.__RUNTIME_CONFIG__?.REACT_APP_SERVER_URI || process.env.REACT_APP_SERVER_URI,
@@ -35,6 +36,7 @@ const services = {
   process: new Process(axios),
   job: new Job(axios),
   application: new Application(axios),
+  step: new Step(axios),
 };
 
 export default services;

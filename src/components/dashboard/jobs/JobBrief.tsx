@@ -26,7 +26,7 @@ const JobBrief: React.FC<JobBriefProps> = (props) => {
         <Grid container spacing={3}>
           <Grid item md={6} xs={12}>
             <Typography color="textSecondary" variant="overline">
-              Job Name
+              Job Title
             </Typography>
             <Typography color="textPrimary" variant="subtitle2">
               {name}

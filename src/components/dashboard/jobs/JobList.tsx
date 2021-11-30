@@ -6,13 +6,13 @@ import { Job } from '../../../types/job';
 import IconButton from '@mui/material/IconButton';
 import ArrowRightIcon from '../../../icons/ArrowRight';
 import { jobActions } from '../../../store/job/actions';
-import ScreenLoader from '../../ScreenLoader';
+import AnimatedLogo from '../../../icons/AnimatedLogo';
 import { formatDistanceToNowStrict } from 'date-fns';
 import SendIcon from '../../../icons/Send';
 import { applicationActions } from '../../../store/application/actions';
 import useAuth from '../../../hooks/useAuth';
 import JobApplicationModal from './JobApplicationModal';
-import RoleBasedGuard from '../../RoleBasedGuard';
+import Guard from '../../Guard';
 
 interface JobListProps {
   jobs: Job[];
@@ -25,26 +25,20 @@ const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
 
   if (isLoading)
     return (
-      <div>
+      <Grid container sx={{ height: '55vh' }}>
         <Box
           sx={{
-            alignItems: 'center',
-            // backgroundColor: 'background.default',
             display: 'flex',
+            alignItems: 'center',
             flexDirection: 'column',
-            height: '100%',
             justifyContent: 'center',
-            left: 0,
-            p: 3,
-            position: 'fixed',
-            top: 0,
             width: '100%',
-            zIndex: 2000,
+            height: '100%',
           }}
         >
-          <ScreenLoader />
+          <AnimatedLogo />
         </Box>
-      </div>
+      </Grid>
     );
 
   return (
@@ -98,12 +92,18 @@ const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
                 />
               ))}
             </CardContent>
-            <Box sx={{ display: 'flex', mx: 2, mb: 1 }}>
-              <RoleBasedGuard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
-                <Button color="primary" sx={{ m: 1 }} variant="text">
-                  View on panel
+            <Box sx={{ display: 'flex', mx: 1, mb: 1 }}>
+              <Guard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
+                <Button
+                  color="primary"
+                  component={RouterLink}
+                  sx={{ m: 1 }}
+                  to={`/app/jobs/${job.jobId}/board`}
+                  variant="text"
+                >
+                  View board
                 </Button>
-              </RoleBasedGuard>
+              </Guard>
               <Box sx={{ flexGrow: 1 }} />
               <Button
                 color="primary"

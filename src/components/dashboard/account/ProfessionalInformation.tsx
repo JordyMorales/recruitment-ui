@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { Box, Card, CardContent, CardHeader, FormHelperText, Grid, TextField } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, Divider, FormHelperText, Grid, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
 import useMounted from '../../../hooks/useMounted';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -122,6 +122,7 @@ const ProfessionalInformation: React.FC = (props) => {
               <Grid item lg={12} md={12} sm={12} xs={12}>
                 <Card>
                   <CardHeader title="Professional Information" />
+                  <Divider />
                   <CardContent>
                     <Grid container spacing={3}>
                       <Grid item md={12} xs={12}>
