@@ -68,7 +68,7 @@ const sections = [
           {
             title: 'Browse',
             path: '/app/jobs',
-            roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER', 'CANDIDATE'] as Role[],
+            roles: ['ADMIN', 'RECRUITER', 'INTERVIEWER', 'EMPLOYEE', 'CANDIDATE'] as Role[],
           },
           {
             title: 'Create',
@@ -185,7 +185,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
       >
         <RouterLink to="/">
           <Logo
-            textColor={palette.text.primary}
+            textcolor={palette.text.primary}
             sx={{
               display: 'flex',
               height: 'auto',

@@ -62,12 +62,7 @@ const CandidateListView: React.FC<CandidateListProps> = ({ candidates, isLoading
                   {`${candidate.personalData?.firstName} ${candidate.personalData?.lastName}`}
                 </Typography>
               }
-              subheader={
-                candidate.personalData?.email
-                // <Typography variant="caption" sx={{ fontSize: { lg: 15, md: 14, sm: 13, xs: 12 } }}>
-                //   {candidate.personalData?.email}
-                // </Typography>
-              }
+              subheader={candidate.personalData?.email}
             />
             <CardContent
               sx={{

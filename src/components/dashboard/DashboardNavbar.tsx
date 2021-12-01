@@ -46,7 +46,7 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
         <Box sx={{ width: 232, display: 'flex', justifyContent: 'center' }}>
           <RouterLink to="/">
             <Logo
-              textColor={palette.text.secondary}
+              textcolor={palette.text.secondary}
               sx={{
                 display: { lg: 'flex', xs: 'none' },
                 height: 'auto',

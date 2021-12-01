@@ -11,6 +11,7 @@ import { jobActions } from '../../../store/job/actions';
 
 import ChevronRightIcon from '../../../icons/ChevronRight';
 import PlusIcon from '../../../icons/Plus';
+import Guard from '../../../components/Guard';
 
 const Jobs: React.FC = () => {
   const dispatch = useDispatch();
@@ -46,20 +47,22 @@ const Jobs: React.FC = () => {
                 Jobs
               </Typography>
             </Grid>
-            <Grid item>
-              <Box sx={{ m: -1 }}>
-                <Button
-                  color="primary"
-                  component={RouterLink}
-                  startIcon={<PlusIcon />}
-                  sx={{ m: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
-                  to="/app/jobs/new"
-                  variant="contained"
-                >
-                  New Job
-                </Button>
-              </Box>
-            </Grid>
+            <Guard roles={['ADMIN', 'RECRUITER']}>
+              <Grid item>
+                <Box sx={{ m: -1 }}>
+                  <Button
+                    color="primary"
+                    component={RouterLink}
+                    startIcon={<PlusIcon />}
+                    sx={{ m: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
+                    to="/app/jobs/new"
+                    variant="contained"
+                  >
+                    New Job
+                  </Button>
+                </Box>
+              </Grid>
+            </Guard>
           </Grid>
           <Box>
             <Breadcrumbs

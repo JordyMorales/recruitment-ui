@@ -21,7 +21,7 @@ const SlashScreen: React.FC = () => {
         zIndex: 2000,
       }}
     >
-      <NearshoreCode textColor={palette.text.primary} />
+      <NearshoreCode textcolor={palette.text.primary} />
     </Box>
   );
 };

@@ -11,6 +11,7 @@ import useMounted from '../../../hooks/useMounted';
 import useSettings from '../../../hooks/useSettings';
 import ChevronRightIcon from '../../../icons/ChevronRight';
 import PlusIcon from '../../../icons/Plus';
+import Guard from '../../../components/Guard';
 
 const CandidateList: React.FC = () => {
   const dispatch = useDispatch();
@@ -46,21 +47,23 @@ const CandidateList: React.FC = () => {
                 Candidates
               </Typography>
             </Grid>
-            <Grid item>
-              <Box sx={{ m: -1 }}>
-                <Button
-                  color="primary"
-                  component={RouterLink}
-                  startIcon={<PlusIcon fontSize="small" />}
-                  sx={{ m: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
-                  to="/app/candidates/new"
-                  variant="contained"
-                  onClick={() => dispatch(candidateActions.clearCandidate())}
-                >
-                  New Candidate
-                </Button>
-              </Box>
-            </Grid>
+            <Guard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
+              <Grid item>
+                <Box sx={{ m: -1 }}>
+                  <Button
+                    color="primary"
+                    component={RouterLink}
+                    startIcon={<PlusIcon fontSize="small" />}
+                    sx={{ m: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
+                    to="/app/candidates/new"
+                    variant="contained"
+                    onClick={() => dispatch(candidateActions.clearCandidate())}
+                  >
+                    New Candidate
+                  </Button>
+                </Box>
+              </Grid>
+            </Guard>
           </Grid>
           <Box>
             <Breadcrumbs

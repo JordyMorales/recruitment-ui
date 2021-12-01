@@ -3,7 +3,7 @@ import { Theme, styled } from '@mui/material';
 import type { SxProps } from '@mui/system';
 
 interface LogoProps {
-  textColor: string;
+  textcolor: string;
   sx?: SxProps<Theme>;
 }
 
@@ -42,7 +42,7 @@ const NearshoreCode: React.FC<LogoProps> = (props) => (
         <text fill="rgb(78, 191, 139)" fontFamily="Arial, sans-serif" fontSize="30px" x="96.483" y="139.154">
           Nearshore
         </text>
-        <text fill={props.textColor} fontFamily="Arial, sans-serif" fontSize="30px" x="247.533" y="139.277">
+        <text fill={props.textcolor} fontFamily="Arial, sans-serif" fontSize="30px" x="247.533" y="139.277">
           &lt;Code/&gt;
         </text>
       </g>

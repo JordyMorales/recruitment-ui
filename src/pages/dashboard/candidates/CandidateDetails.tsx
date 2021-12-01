@@ -27,6 +27,7 @@ import useMounted from '../../../hooks/useMounted';
 import useSettings from '../../../hooks/useSettings';
 import PencilAltIcon from '../../../icons/PencilAlt';
 import ChevronRightIcon from '../../../icons/ChevronRight';
+import Guard from '../../../components/Guard';
 
 const tabs = [
   { label: 'Details', value: 'details' },
@@ -80,20 +81,22 @@ const CandidateDetails = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item>
-              <Box sx={{ m: -1 }}>
-                <Button
-                  color="primary"
-                  component={RouterLink}
-                  startIcon={<PencilAltIcon />}
-                  sx={{ mt: 2, ml: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
-                  to={`/app/candidates/${params.candidateId}/edit`}
-                  variant="contained"
-                >
-                  Edit
-                </Button>
-              </Box>
-            </Grid>
+            <Guard roles={['ADMIN', 'RECRUITER']}>
+              <Grid item>
+                <Box sx={{ m: -1 }}>
+                  <Button
+                    color="primary"
+                    component={RouterLink}
+                    startIcon={<PencilAltIcon />}
+                    sx={{ mt: 2, ml: 1, fontSize: { lg: 14, md: 13, sm: 12, xs: 11 } }}
+                    to={`/app/candidates/${params.candidateId}/edit`}
+                    variant="contained"
+                  >
+                    Edit
+                  </Button>
+                </Box>
+              </Grid>
+            </Guard>
           </Grid>
 
           <Box sx={{ mt: 1 }}>
