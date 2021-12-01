@@ -3,10 +3,9 @@ import { Helmet } from 'react-helmet-async';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Card, CardContent, Container, Divider, Link, Typography } from '@mui/material';
 import { RegisterFirebase } from '../../components/authentication';
-import Logo from '../../components/Logo';
+import StaticLogo from '../../icons/StaticLogo';
 
 const Register: React.FC = () => {
-  
   return (
     <>
       <Helmet>
@@ -21,22 +20,6 @@ const Register: React.FC = () => {
         }}
       >
         <Container maxWidth="sm" sx={{ py: '80px' }}>
-          <Box
-            sx={{
-              mb: 8,
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <RouterLink to="/">
-              <Logo
-                sx={{
-                  height: 40,
-                  width: 40,
-                }}
-              />
-            </RouterLink>
-          </Box>
           <Card>
             <CardContent
               sx={{
@@ -58,9 +41,19 @@ const Register: React.FC = () => {
                     Register
                   </Typography>
                   <Typography color="textSecondary" variant="body2">
-                    Register on the internal platform
+                    Register on the recruiting platform
                   </Typography>
                 </div>
+                <Box>
+                  <RouterLink to="/">
+                    <StaticLogo
+                      sx={{
+                        height: { sx: '70px', md: '80px', lg: '90px', xl: '100px' },
+                        width: { sx: '70px', md: '80px', lg: '90px', xl: '100px' },
+                      }}
+                    />
+                  </RouterLink>
+                </Box>
               </Box>
               <Box
                 sx={{

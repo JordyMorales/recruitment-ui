@@ -48,6 +48,7 @@ const CandidateComments: React.FC = () => {
               <CardContent>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   <TextField
+                    autoFocus
                     error={Boolean(touched.comment && errors.comment)}
                     fullWidth
                     multiline
@@ -64,23 +65,23 @@ const CandidateComments: React.FC = () => {
                 </Grid>
               </CardContent>
             </Card>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  p: 2,
-                }}
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                p: 2,
+              }}
+            >
+              <LoadingButton
+                color="primary"
+                loading={isSubmitting}
+                type="submit"
+                size="large"
+                variant="contained"
               >
-                <LoadingButton
-                  color="primary"
-                  loading={isSubmitting}
-                  type="submit"
-                  size="large"
-                  variant="contained"
-                >
-                  Add Comment
-                </LoadingButton>
-              </Box>
+                Add Comment
+              </LoadingButton>
+            </Box>
           </form>
         )}
       </Formik>

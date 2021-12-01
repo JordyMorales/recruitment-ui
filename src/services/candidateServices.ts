@@ -44,7 +44,6 @@ class Candidate {
   };
 
   getCandidateApplications = async (payload: any): Promise<any> => {
-    console.log("🚀 ~ file: candidateServices.ts ~ line 47 ~ Candidate ~ getCandidateApplications= ~ payload", payload)
     try {
       const res = await this.axios.get(`/candidates/${payload.candidateId}/applications`);
       return res.data.applications;

@@ -1,18 +1,22 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { formatDistanceToNowStrict } from 'date-fns';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Box, Card, CardHeader, CardContent, Chip, Grid, Typography, Button } from '@mui/material';
 import { Job } from '../../../types/job';
 import IconButton from '@mui/material/IconButton';
 import ArrowRightIcon from '../../../icons/ArrowRight';
 import { jobActions } from '../../../store/job/actions';
 import AnimatedLogo from '../../../icons/AnimatedLogo';
-import { formatDistanceToNowStrict } from 'date-fns';
 import SendIcon from '../../../icons/Send';
 import { applicationActions } from '../../../store/application/actions';
 import useAuth from '../../../hooks/useAuth';
 import JobApplicationModal from './JobApplicationModal';
 import Guard from '../../Guard';
+import { RootState } from '../../../store/rootReducer';
+import { toast } from 'react-toastify';
+import { candidateActions } from '../../../store/candidate/actions';
+import useMounted from '../../../hooks/useMounted';
 
 interface JobListProps {
   jobs: Job[];
@@ -20,9 +24,19 @@ interface JobListProps {
 }
 
 const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
-  console.log('🚀 ~ file: JobList.tsx ~ line 23 ~ jobs', jobs);
-  const dispatch = useDispatch();
   const { user } = useAuth();
+  const mounted = useMounted();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const { profile } = useSelector((state: RootState) => state.user);
+  const { account } = useSelector((state: RootState) => state.candidate);
+
+  useEffect(() => {
+    if (mounted && profile.userId) {
+      dispatch(candidateActions.getCandidateProfileRequest({ candidateId: profile.userId }));
+    }
+  }, [dispatch, mounted, profile]);
 
   if (isLoading)
     return (
@@ -109,17 +123,28 @@ const JobList: React.FC<JobListProps> = ({ jobs, isLoading }) => {
               <Button
                 color="primary"
                 onClick={() => {
-                  dispatch(
-                    applicationActions.setApplication({
-                      dateOfApplication: new Date(),
-                      otherInfo: '',
-                      appliedBy: user.userId,
-                      jobId: job.jobId,
-                      state: 'APPLIED',
-                      processId: job.processId,
-                    }),
-                  );
-                  dispatch(applicationActions.showModal());
+                  if (account.candidateId) {
+                    dispatch(
+                      applicationActions.setApplication({
+                        dateOfApplication: new Date(),
+                        otherInfo: '',
+                        appliedBy: user.userId,
+                        jobId: job.jobId,
+                        state: 'APPLIED',
+                        processId: job.processId,
+                      }),
+                    );
+                    dispatch(applicationActions.showModal());
+                  } else {
+                    toast.warning('Fill in your professional information. Click on me to go there!', {
+                      onClick: () =>
+                        navigate('/app/account', {
+                          state: {
+                            tab: 'professionalInformation',
+                          },
+                        }),
+                    });
+                  }
                 }}
                 startIcon={<SendIcon fontSize="small" />}
                 sx={{ m: 1 }}

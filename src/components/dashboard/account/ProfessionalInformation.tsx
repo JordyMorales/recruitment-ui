@@ -95,7 +95,7 @@ const ProfessionalInformation: React.FC = (props) => {
             try {
               values.candidateId
                 ? dispatch(candidateActions.updateCandidateProfileRequest(values))
-                : dispatch(candidateActions.createCandidateRequest({ ...values, userId: profile.userId }));
+                : dispatch(candidateActions.createCandidateProfileRequest({ ...values, userId: profile.userId }));
 
               setStatus({ success: true });
               setSubmitting(false);
@@ -127,6 +127,7 @@ const ProfessionalInformation: React.FC = (props) => {
                     <Grid container spacing={3}>
                       <Grid item md={12} xs={12}>
                         <MultipleSelectChip
+                          autoFocus
                           id="technologyId"
                           label="Technologies"
                           defaultValue={values.technologies}

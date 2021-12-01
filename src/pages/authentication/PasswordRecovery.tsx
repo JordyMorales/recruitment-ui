@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Card, CardContent, Container, Typography } from '@mui/material';
+import { Box, Card, CardContent, Container, Divider, Link, Typography } from '@mui/material';
 import { PasswordRecoveryFirebase } from '../../components/authentication';
-import Logo from '../../components/Logo';
+import StaticLogo from '../../icons/StaticLogo';
 
 const PasswordRecovery: React.FC = () => {
   return (
@@ -20,21 +20,6 @@ const PasswordRecovery: React.FC = () => {
         }}
       >
         <Container maxWidth="sm" sx={{ py: 10 }}>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <RouterLink to="/">
-              <Logo
-                sx={{
-                  height: 40,
-                  width: 40,
-                }}
-              />
-            </RouterLink>
-          </Box>
           <Box
             sx={{
               display: 'flex',
@@ -66,6 +51,16 @@ const PasswordRecovery: React.FC = () => {
                     Tell us your email so we can send you a reset link
                   </Typography>
                 </div>
+                <Box>
+                  <RouterLink to="/">
+                    <StaticLogo
+                      sx={{
+                        height: { sx: '70px', md: '80px', lg: '90px', xl: '100px' },
+                        width: { sx: '70px', md: '80px', lg: '90px', xl: '100px' },
+                      }}
+                    />
+                  </RouterLink>
+                </Box>
               </Box>
               <Box
                 sx={{
@@ -74,6 +69,23 @@ const PasswordRecovery: React.FC = () => {
                 }}
               >
                 <PasswordRecoveryFirebase />
+              </Box>
+              <Divider sx={{ my: 3 }} />
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  mb: 3,
+                }}
+              >
+                <Link color="textSecondary" component={RouterLink} to="/login" variant="body2">
+                  Having an account
+                </Link>
+                <Link color="textSecondary" component={RouterLink} to="/register" variant="body2">
+                  Create new account
+                </Link>
               </Box>
             </CardContent>
           </Card>

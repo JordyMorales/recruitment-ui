@@ -61,6 +61,7 @@ const SecuritySettings: React.FC = (props) => {
               <Grid container spacing={3}>
                 <Grid item md={4} sm={6} xs={12}>
                   <TextField
+                    autoFocus
                     error={Boolean(touched.password && errors.password)}
                     fullWidth
                     helperText={touched.password && errors.password}

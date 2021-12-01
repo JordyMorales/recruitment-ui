@@ -36,7 +36,6 @@ const GeneralSettings: React.FC = (props) => {
   const mounted = useMounted();
   const dispatch = useDispatch();
   const { user, uploadPhotoUrl } = useAuth();
-  console.log('🚀 ~ file: GeneralSettings.tsx ~ line 39 ~ user', user);
 
   const { isLoading, profile } = useSelector((state: RootState) => state.user);
 

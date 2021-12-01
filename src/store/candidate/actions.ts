@@ -5,6 +5,7 @@ import {
   getCandidateByIdTypes,
   getCandidateProfileTypes,
   updateCandidateTypes,
+  createCandidateProfileTypes,
   updateCandidateProfileTypes,
   applyForJobTypes,
   updateApplicationTypes,
@@ -78,6 +79,20 @@ export const candidateActions = {
     type: updateCandidateTypes.FAILURE,
     payload: error,
   }),
+
+  createCandidateProfileRequest: (payload: any) => ({
+    type: createCandidateProfileTypes.REQUEST,
+    payload,
+  }),
+  createCandidateProfileSuccess: (payload: any) => ({
+    type: createCandidateProfileTypes.SUCCESS,
+    payload,
+  }),
+  createCandidateProfileFailure: (error: string) => ({
+    type: createCandidateProfileTypes.FAILURE,
+    payload: error,
+  }),
+
   updateCandidateProfileRequest: (payload: any) => ({
     type: updateCandidateProfileTypes.REQUEST,
     payload,

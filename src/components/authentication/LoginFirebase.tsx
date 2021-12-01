@@ -13,8 +13,8 @@ const LoginFirebase: React.FC = (props) => {
     <div {...props}>
       <Formik
         initialValues={{
-          email: 'demo@devias.io',
-          password: 'Password123!',
+          email: '',
+          password: '',
           submit: null,
         }}
         validationSchema={Yup.object().shape({
@@ -42,6 +42,7 @@ const LoginFirebase: React.FC = (props) => {
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }): JSX.Element => (
           <form noValidate onSubmit={handleSubmit} {...props}>
             <TextField
+              autoFocus
               error={Boolean(touched.email && errors.email)}
               fullWidth
               helperText={touched.email && errors.email}

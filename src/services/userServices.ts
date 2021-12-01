@@ -45,8 +45,8 @@ class User {
 
   register = async (payload: any): Promise<any> => {
     try {
-      const res = await this.axios.post('/users', payload);
-      return res.data.users;
+      const res = await this.axios.post('/register', payload);
+      return res.data.user;
     } catch (error) {
       throw error.response.data.message;
     }

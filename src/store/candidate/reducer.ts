@@ -5,6 +5,7 @@ import {
   getCandidateByIdTypes,
   getCandidateProfileTypes,
   updateCandidateTypes,
+  createCandidateProfileTypes,
   updateCandidateProfileTypes,
   applyForJobTypes,
   updateApplicationTypes,
@@ -171,6 +172,32 @@ const candidateReducer = (state = initialState, action: any) => {
       };
 
     case updateCandidateTypes.FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: payload,
+      };
+
+    case createCandidateProfileTypes.REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case createCandidateProfileTypes.SUCCESS:
+      return {
+        ...state,
+        account: payload,
+        list: {
+          ...state.list,
+          totalItems: state.list.totalItems + 1,
+          candidates: [payload, ...state.list.candidates],
+        },
+        isLoading: false,
+        isSuccessful: true,
+      };
+
+    case createCandidateProfileTypes.FAILURE:
       return {
         ...state,
         isLoading: false,

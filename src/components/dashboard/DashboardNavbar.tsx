@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, AppBarProps, Box, IconButton, Toolbar } from '@mui/material';
+import { AppBar, AppBarProps, Box, IconButton, Toolbar, useTheme } from '@mui/material';
 import AccountPopover from './AccountPopover';
 import MenuIcon from '../../icons/Menu';
 import Logo from '../Logo';
@@ -27,6 +27,8 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
   const { onSidebarMobileOpen, ...other } = props;
 
+  const { palette } = useTheme();
+
   return (
     <DashboardNavbarRoot {...other}>
       <Toolbar sx={{ minHeight: 64 }}>
@@ -44,11 +46,9 @@ const DashboardNavbar: React.FC<DashboardNavbarProps> = (props) => {
         <Box sx={{ width: 232, display: 'flex', justifyContent: 'center' }}>
           <RouterLink to="/">
             <Logo
+              textColor={palette.text.secondary}
               sx={{
-                display: {
-                  lg: 'flex',
-                  xs: 'none',
-                },
+                display: { lg: 'flex', xs: 'none' },
                 height: 'auto',
                 width: 200,
               }}

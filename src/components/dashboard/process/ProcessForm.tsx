@@ -75,6 +75,7 @@ const ProcessForm: React.FC = (props) => {
                   <Grid container spacing={3}>
                     <Grid item lg={8} md={8} sm={8} xs={12}>
                       <TextField
+                        autoFocus
                         error={Boolean(touched.name && errors.name)}
                         fullWidth
                         helperText={touched.name && errors.name}

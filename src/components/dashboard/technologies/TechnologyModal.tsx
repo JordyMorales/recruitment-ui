@@ -67,6 +67,7 @@ const TechnologyModal: React.FC<TechnologyModalProps> = (props) => {
                 <Grid container spacing={3} sx={{ mt: 1 }}>
                   <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
+                      autoFocus
                       error={Boolean(touched.name && errors.name)}
                       fullWidth
                       helperText={touched.name && errors.name}

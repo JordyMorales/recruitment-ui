@@ -1,13 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { Box, Button, Checkbox, FormHelperText, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import useMounted from '../../hooks/useMounted';
-import useAuth from '../../hooks/useAuth';
+import { userActions } from '../../store/user/actions';
 
 const Register: React.FC = (props) => {
   const mounted = useMounted();
-  const { createUserWithEmailAndPassword } = useAuth() as any;
+  const dispatch = useDispatch();
 
   return (
     <Formik
@@ -31,7 +33,8 @@ const Register: React.FC = (props) => {
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }): Promise<void> => {
         try {
-          await createUserWithEmailAndPassword(values.email, values.password);
+          // await createUserWithEmailAndPassword(values.email, values.password);
+          dispatch(userActions.registerRequest({ ...values, userId: uuidv4() }));
 
           if (mounted.current) {
             setStatus({ success: true });
@@ -50,6 +53,7 @@ const Register: React.FC = (props) => {
       {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }): JSX.Element => (
         <form noValidate onSubmit={handleSubmit} {...props}>
           <TextField
+            autoFocus
             error={Boolean(touched.firstName && errors.firstName)}
             fullWidth
             helperText={touched.firstName && errors.firstName}

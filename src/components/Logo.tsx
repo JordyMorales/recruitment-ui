@@ -4,6 +4,7 @@ import { Theme } from '@mui/material';
 import type { SxProps } from '@mui/system';
 
 interface LogoProps {
+  textColor: string;
   sx?: SxProps<Theme>;
 }
 
@@ -41,7 +42,7 @@ const Logo: React.FC<LogoProps> = (props) => (
       <text fill="rgba(78,186,137,255)" fontFamily="Arial, sans-serif" fontSize="35px" x="90.483" y="149.154">
         Nearshore
       </text>
-      <text fill="rgba(255, 255, 255, 255)" fontFamily="Arial, sans-serif" fontSize="35px" x="258.533" y="149.277">
+      <text fill={props.textColor} fontFamily="Arial, sans-serif" fontSize="35px" x="258.533" y="149.277">
         &lt;Code/&gt;
       </text>
     </g>

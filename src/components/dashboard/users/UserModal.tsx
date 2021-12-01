@@ -107,8 +107,9 @@ const UserModal: React.FC<UserModalProps> = (props) => {
               <Divider />
               <DialogContent>
                 <Grid container spacing={3} sx={{ mt: 1 }}>
-                    <Grid item lg={7} md={7} sm={7} xs={12}>
+                  <Grid item lg={7} md={7} sm={7} xs={12}>
                     <TextField
+                      autoFocus
                       error={Boolean(touched.firstName && errors.firstName)}
                       fullWidth
                       helperText={touched.firstName && errors.firstName}
@@ -121,7 +122,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       variant="outlined"
                     />
                   </Grid>
-                    <Grid item lg={5} md={5} sm={5} xs={12}>
+                  <Grid item lg={5} md={5} sm={5} xs={12}>
                     <TextField
                       error={Boolean(touched.middleName && errors.middleName)}
                       fullWidth
@@ -134,7 +135,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       variant="outlined"
                     />
                   </Grid>
-                    <Grid item lg={12} md={12} sm={12} xs={12}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.lastName && errors.lastName)}
                       fullWidth
@@ -148,7 +149,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       variant="outlined"
                     />
                   </Grid>
-                    <Grid item lg={12} md={12} sm={12} xs={12}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.email && errors.email)}
                       fullWidth
@@ -162,7 +163,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       variant="outlined"
                     />
                   </Grid>
-                    <Grid item lg={7} md={7} sm={7} xs={12}>
+                  <Grid item lg={7} md={7} sm={7} xs={12}>
                     <MuiPhoneNumber
                       label="Phone"
                       fullWidth
@@ -172,7 +173,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       onChange={(newValue) => setFieldValue('phone', newValue)}
                     />
                   </Grid>
-                    <Grid item lg={5} md={5} sm={5} xs={12}>
+                  <Grid item lg={5} md={5} sm={5} xs={12}>
                     <MobileDatePicker
                       label="Date of Birth"
                       value={values.dateOfBirth}
@@ -180,7 +181,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       renderInput={(params) => <TextField {...params} variant="outlined" fullWidth />}
                     />
                   </Grid>
-                    <Grid item lg={12} md={12} sm={12} xs={12}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.country && errors.country)}
                       fullWidth
@@ -202,7 +203,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                       })}
                     </TextField>
                   </Grid>
-                      <Grid item lg={12} md={12} sm={12} xs={12}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.city && errors.city)}
                       fullWidth
@@ -223,7 +224,7 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                         ))}
                     </TextField>
                   </Grid>
-                    <Grid item lg={12} md={12} sm={12} xs={12}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
                     <TextField
                       error={Boolean(touched.address && errors.address)}
                       fullWidth
@@ -289,7 +290,13 @@ const UserModal: React.FC<UserModalProps> = (props) => {
                 </Box>
                 <Box sx={{ flexGrow: 1 }} />
                 <Box sx={{ mt: 2 }}>
-                  <Button color="primary" disabled={isSubmitting} type="submit" variant="contained" size="large">
+                  <Button
+                    color="primary"
+                    disabled={isSubmitting}
+                    type="submit"
+                    variant="contained"
+                    size="large"
+                  >
                     Save
                   </Button>
                 </Box>

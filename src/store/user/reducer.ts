@@ -178,11 +178,6 @@ const userReducer = (state = initialState, action: any) => {
     case registerTypes.SUCCESS:
       return {
         ...state,
-        list: {
-          ...state.list,
-          users: state.list.users.unshift(payload),
-          totalItems: state.list.totalItems + 1,
-        },
         isLoading: false,
       };
 

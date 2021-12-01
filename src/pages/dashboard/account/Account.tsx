@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link as RouterLink } from 'react-router-dom';
-import {
-  Box,
-  Breadcrumbs,
-  Container,
-  Divider,
-  Grid,
-  Link,
-  Tab,
-  Tabs,
-  Typography,
-} from '@mui/material';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Box, Breadcrumbs, Container, Divider, Grid, Link, Tab, Tabs, Typography } from '@mui/material';
 import {
   Applications,
   GeneralSettings,
@@ -33,8 +23,12 @@ const tabs = [
 ];
 
 const Account: React.FC = () => {
+  let location = useLocation();
   const { settings } = useSettings();
-  const [currentTab, setCurrentTab] = useState<string>('general');
+
+  let { tab } = location.state || { tab: 'general' };
+
+  const [currentTab, setCurrentTab] = useState<string>(tab);
 
   const { profile } = useSelector((state: RootState) => state.user);
 

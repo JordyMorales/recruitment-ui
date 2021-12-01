@@ -69,12 +69,12 @@ function* getUserById({ payload }: any): any {
 function* register({ payload }: AnyAction): any {
   try {
     const res = yield call([services.user, 'register'], payload);
-    yield put(userActions.createUserSuccess(res));
-    toast.success('You have created a new User!');
+    yield put(userActions.registerSuccess(res));
+    toast.success('Successful registration, well done!');
   } catch (error: any) {
-    console.error('function*createUser -> error', error);
+    console.error('function*register -> error', error);
     toast.error(error);
-    yield put(userActions.createUserFailure(error));
+    yield put(userActions.registerFailure(error));
   }
 }
 

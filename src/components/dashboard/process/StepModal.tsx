@@ -3,15 +3,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Button,
-  Box,
-  Grid,
-  TextField,
-} from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Button, Box, Grid, TextField } from '@mui/material';
 
 export interface StepModalProps {
   isOpen: boolean;
@@ -54,6 +46,7 @@ const StepModal: React.FC<StepModalProps> = (props) => {
                 <Grid container spacing={3} sx={{ mt: 1 }}>
                   <Grid item md={12} xs={12}>
                     <TextField
+                      autoFocus
                       error={Boolean(touched.name && errors.name)}
                       fullWidth
                       helperText={touched.name && errors.name}

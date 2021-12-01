@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { Avatar, Box, Divider, Drawer, Link, Typography, Theme, useMediaQuery } from '@mui/material';
+import { Avatar, Box, Divider, Drawer, Link, Typography, Theme, useMediaQuery, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import { RootState } from '../../store/rootReducer';
 import { userActions } from '../../store/user/actions';
@@ -144,6 +144,7 @@ const CustomBox = styled(Box)(({ theme }) => ({
 }));
 
 const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
+  const { palette } = useTheme();
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
   const dispatch = useDispatch();
@@ -184,6 +185,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = (props) => {
       >
         <RouterLink to="/">
           <Logo
+            textColor={palette.text.primary}
             sx={{
               display: 'flex',
               height: 'auto',

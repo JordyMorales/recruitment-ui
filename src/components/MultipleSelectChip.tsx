@@ -12,6 +12,7 @@ export interface MultipleSelectChipProps {
   onChange: any;
   withColor?: boolean;
   error?: boolean;
+  autoFocus?: boolean;
 }
 
 const MultipleSelectChip: React.FC<MultipleSelectChipProps> = ({
@@ -23,6 +24,7 @@ const MultipleSelectChip: React.FC<MultipleSelectChipProps> = ({
   onChange,
   withColor = false,
   error,
+  autoFocus = false,
 }) => {
   return (
     <Autocomplete
@@ -61,6 +63,7 @@ const MultipleSelectChip: React.FC<MultipleSelectChipProps> = ({
           label={label}
           placeholder={placeholder}
           error={error}
+          autoFocus={autoFocus}
         />
       )}
     />

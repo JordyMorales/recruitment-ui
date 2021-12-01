@@ -13,7 +13,6 @@ const JobCreateWizard: React.FC = (props) => {
   const [completed, setCompleted] = useState<boolean>(false);
 
   const { job } = useSelector((state: RootState) => state.job);
-  console.log("🚀 ~ file: JobCreateWizard.tsx ~ line 16 ~ job", job)
 
   const handleNext = (): void => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

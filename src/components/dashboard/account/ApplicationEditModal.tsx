@@ -10,7 +10,6 @@ const JobApplicationEditModal: React.FC = () => {
   const dispatch = useDispatch();
 
   const { application, shouldClose, isOpen } = useSelector((state: RootState) => state.application);
-  console.log('🚀 ~ file: ApplicationEditModal.tsx ~ line 13 ~ application', application);
   const [value, setValue] = useState<string>(application.otherInfo);
 
   useEffect(() => {

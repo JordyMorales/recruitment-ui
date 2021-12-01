@@ -81,6 +81,7 @@ const TagModal: React.FC<TagModalProps> = (props) => {
                 <Grid container spacing={3} sx={{ mt: 1 }}>
                   <Grid item lg={6} md={6} sm={12} xs={12}>
                     <TextField
+                      autoFocus
                       error={Boolean(touched.name && errors.name)}
                       fullWidth
                       helperText={touched.name && errors.name}
@@ -137,7 +138,13 @@ const TagModal: React.FC<TagModalProps> = (props) => {
                   Cancel
                 </Button>
                 <Box sx={{ flexGrow: 1 }} />
-                <Button color="primary" disabled={isSubmitting} type="submit" variant="contained" size="large">
+                <Button
+                  color="primary"
+                  disabled={isSubmitting}
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                >
                   Save
                 </Button>
               </Box>

@@ -5,7 +5,17 @@ import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
-import { Box, Card, CardContent, CardHeader, FormHelperText, Grid, TextField, MenuItem, Divider } from '@mui/material';
+import {
+  Box,
+  Card,
+  CardContent,
+  CardHeader,
+  FormHelperText,
+  Grid,
+  TextField,
+  MenuItem,
+  Divider,
+} from '@mui/material';
 import useMounted from '../../../hooks/useMounted';
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -30,7 +40,6 @@ const CandidateForm: React.FC = (props) => {
   const params = useParams();
 
   const { isLoading, isSuccessful, candidate } = useSelector((state: RootState) => state.candidate);
-  console.log('🚀 ~ file: CandidateForm.tsx ~ line 33 ~ candidate', candidate);
 
   const {
     list: { tags },
@@ -190,6 +199,7 @@ const CandidateForm: React.FC = (props) => {
                   <Grid container spacing={3}>
                     <Grid item lg={7} md={7} sm={7} xs={12}>
                       <TextField
+                        autoFocus
                         error={Boolean(touched.user?.firstName && errors.user?.firstName)}
                         fullWidth
                         helperText={touched.user?.firstName && errors.user?.firstName}

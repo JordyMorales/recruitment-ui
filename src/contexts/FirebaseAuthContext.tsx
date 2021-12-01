@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import firebase from '../lib/firebase';
 import type { User } from '../types/user';
+import { toast } from 'react-toastify';
 
 interface State {
   isInitialized: boolean;
@@ -115,8 +116,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
         switch (snapshot.state) {
           case firebase.storage.TaskState.PAUSED:
             console.log('Upload is paused');
@@ -126,41 +127,38 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             break;
         }
       },
-      (error) => {
-        console.log('🚀 ~ file: FirebaseAuthContext.tsx ~ line 128 ~ uploadPhotoUrl ~ error', error);
-        // Handle unsuccessful uploads
-      },
+      (error) => {},
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
           console.log('File available at', downloadURL);
           const user = firebase.auth().currentUser;
 
-          user
-            .updateProfile({ photoURL: downloadURL })
-            .then(async () => {
-              const { claims } = await user.getIdTokenResult();
-              dispatch({
-                type: 'AUTH_STATE_CHANGED',
-                payload: {
-                  isAuthenticated: true,
-                  user: {
-                    userId: user.uid,
-                    photoUrl: downloadURL,
-                    email: user.email,
-                    firstName: user.displayName,
-                    role: claims.role,
+          toast.promise(
+            user
+              .updateProfile({ photoURL: downloadURL })
+              .then(async () => {
+                const { claims } = await user.getIdTokenResult();
+                dispatch({
+                  type: 'AUTH_STATE_CHANGED',
+                  payload: {
+                    isAuthenticated: true,
+                    user: {
+                      userId: user.uid,
+                      photoUrl: downloadURL,
+                      email: user.email,
+                      firstName: user.displayName,
+                      role: claims.role,
+                    },
                   },
-                },
-              });
-            })
-            .catch((error) => {
-              console.log(
-                '🚀 ~ file: FirebaseAuthContext.tsx ~ line 145 ~ uploadTask.snapshot.ref.getDownloadURL ~ error',
-                error,
-              );
-              // An error occurred
-              // ...
-            });
+                });
+              })
+              .catch((error) => {}),
+            {
+              pending: 'Image upload is pending',
+              success: 'Image uploaded successfully. 👌',
+              error: 'Image upload failed 🤯',
+            },
+          );
         });
       },
     );

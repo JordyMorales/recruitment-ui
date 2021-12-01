@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Card, CardContent, Container, Divider, Link, Typography } from '@mui/material';
 import { LoginFirebase } from '../../components/authentication';
+import StaticLogo from '../../icons/StaticLogo';
 
 const Login: React.FC = () => {
   return (
@@ -40,6 +41,16 @@ const Login: React.FC = () => {
                     Log in
                   </Typography>
                 </div>
+                <Box>
+                  <RouterLink to="/">
+                    <StaticLogo
+                      sx={{
+                        height: { sx: '70px', md: '80px', lg: '90px', xl: '100px' },
+                        width: { sx: '70px', md: '80px', lg: '90px', xl: '100px' },
+                      }}
+                    />
+                  </RouterLink>
+                </Box>
               </Box>
               <Box
                 sx={{

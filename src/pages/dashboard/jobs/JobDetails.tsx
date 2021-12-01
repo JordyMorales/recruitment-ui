@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
 import { formatDistanceToNowStrict } from 'date-fns';
-import { Link as RouterLink, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link as RouterLink, useParams, useNavigate } from 'react-router-dom';
 import { Box, Breadcrumbs, Button, Container, Grid, Link, Typography } from '@mui/material';
 import { JobOverview } from '../../../components/dashboard/jobs';
 import { RootState } from '../../../store/rootReducer';
@@ -18,16 +19,26 @@ import ScreenLoader from '../../../components/ScreenLoader';
 import JobApplicationModal from '../../../components/dashboard/jobs/JobApplicationModal';
 import Guard from '../../../components/Guard';
 import { applicationActions } from '../../../store/application/actions';
+import { candidateActions } from '../../../store/candidate/actions';
 
 const JobDetails: React.FC = () => {
   const mounted = useMounted();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const { user } = useAuth();
 
   const { settings } = useSettings();
 
+  const { profile } = useSelector((state: RootState) => state.user);
+  const { account } = useSelector((state: RootState) => state.candidate);
   const { isLoading, job } = useSelector((state: RootState) => state.job);
+
+  useEffect(() => {
+    if (mounted && profile.userId) {
+      dispatch(candidateActions.getCandidateProfileRequest({ candidateId: profile.userId }));
+    }
+  }, [dispatch, mounted, profile]);
 
   useEffect(() => {
     if (mounted && params.jobId && !job.jobId) {
@@ -86,29 +97,41 @@ const JobDetails: React.FC = () => {
             <Grid item>
               <Box sx={{ m: -1 }}>
                 <Guard roles={['ADMIN', 'RECRUITER', 'INTERVIEWER']}>
-                <Button
-                  color="primary"
-                  component={RouterLink}
-                  sx={{ m: 1 }}
-                  to={`/app/jobs/${params.jobId}/board`}
-                  variant="text"
-                >
-                  View board
-                </Button>
+                  <Button
+                    color="primary"
+                    component={RouterLink}
+                    sx={{ m: 1 }}
+                    to={`/app/jobs/${params.jobId}/board`}
+                    variant="text"
+                  >
+                    View board
+                  </Button>
                 </Guard>
                 <Button
                   color="primary"
                   onClick={() => {
-                    dispatch(
-                      applicationActions.setApplication({
-                        dateOfApplication: new Date(),
-                        otherInfo: '',
-                        appliedBy: user.userId,
-                        jobId: job.jobId,
-                        state: 'APPLIED',
-                      }),
-                    );
-                    dispatch(applicationActions.showModal());
+                    if (account.candidateId) {
+                      dispatch(
+                        applicationActions.setApplication({
+                          dateOfApplication: new Date(),
+                          otherInfo: '',
+                          appliedBy: user.userId,
+                          jobId: job.jobId,
+                          state: 'APPLIED',
+                          processId: job.processId,
+                        }),
+                      );
+                      dispatch(applicationActions.showModal());
+                    } else {
+                      toast.warning('Fill in your professional information. Click on me to go there!', {
+                        onClick: () =>
+                          navigate('/app/account', {
+                            state: {
+                              tab: 'professionalInformation',
+                            },
+                          }),
+                      });
+                    }
                   }}
                   startIcon={<SendIcon fontSize="small" />}
                   sx={{ m: 1 }}

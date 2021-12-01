@@ -10,6 +10,7 @@ import {
   getCandidateByIdTypes,
   getCandidateProfileTypes,
   updateCandidateTypes,
+  createCandidateProfileTypes,
   updateCandidateProfileTypes,
   applyForJobTypes,
   updateApplicationTypes,
@@ -84,6 +85,17 @@ function* updateCandidate({ payload }: AnyAction): any {
   }
 }
 
+function* createCandidateProfile({ payload }: AnyAction): any {
+  try {
+    const candidateCreated = yield call([services.candidate, 'createCandidate'], payload);
+    yield put(candidateActions.createCandidateProfileSuccess(candidateCreated));
+  } catch (error: any) {
+    console.error('function*createCandidateProfile -> error', error);
+    toast.error(error);
+    yield put(candidateActions.createCandidateProfileFailure(error));
+  }
+}
+
 function* updateCandidateProfile({ payload }: AnyAction): any {
   try {
     yield call([services.candidate, 'updateCandidate'], payload);
@@ -135,6 +147,7 @@ function* CandidateSaga() {
   yield takeLatest(getCandidateByIdTypes.REQUEST, getCandidateById);
   yield takeLatest(getCandidateProfileTypes.REQUEST, getCandidateProfile);
   yield takeLatest(updateCandidateTypes.REQUEST, updateCandidate);
+  yield takeLatest(createCandidateProfileTypes.REQUEST, createCandidateProfile);
   yield takeLatest(updateCandidateProfileTypes.REQUEST, updateCandidateProfile);
   yield takeLatest(applyForJobTypes.REQUEST, applyForJob);
   yield takeLatest(updateApplicationTypes.REQUEST, updateApplication);
